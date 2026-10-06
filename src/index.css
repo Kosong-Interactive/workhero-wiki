@@ -110,3 +110,11 @@ label.inline { white-space: nowrap; flex: 0 0 auto; }
 .legend { margin: 0 0 20px; }
 .summary { margin: 4px 0 18px; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
 .table-wrap + .table-wrap { margin-top: 16px; }
+
+.icon-strip { gap: 10px; }
+.strip-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 84px; padding: 10px 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: var(--text); text-align: center; }
+.strip-item:hover { text-decoration: none; border-color: var(--accent); }
+.strip-item small { font-size: 11px; line-height: 1.2; color: var(--muted); }
+.strip-item.soon .icon { opacity: .4; filter: grayscale(1); }
+.strip-item.soon small { opacity: .7; }
+.soon-tag { position: absolute; top: 4px; right: 4px; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: #2a3142; color: var(--muted); }

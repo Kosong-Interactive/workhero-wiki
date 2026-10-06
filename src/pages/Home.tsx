@@ -68,11 +68,21 @@ export default function Home() {
       </ol>
       <h2>{tr('Workplaces', 'Tempat kerja')}</h2>
       <div className="icon-strip">
-        {wiki.workplaces.map((w) => (
-          <Link key={w.id} to={`/workplaces/${w.id}`} title={w.name}>
-            <Icon src={w.icon} size={40} alt={w.name} />
-          </Link>
-        ))}
+        {wiki.workplaces.map((w) => {
+          const soon = isComingSoon(w)
+          return (
+            <Link
+              key={w.id}
+              to={`/workplaces/${w.id}`}
+              className={'strip-item' + (soon ? ' soon' : '')}
+              title={soon ? `${w.name} — ${tr('Coming soon', 'Segera hadir')}` : w.name}
+            >
+              <Icon src={w.icon} size={40} alt={w.name} />
+              <small>{w.name}</small>
+              {soon && <span className="soon-tag">{tr('Soon', 'Segera')}</span>}
+            </Link>
+          )
+        })}
       </div>
     </>
   )
