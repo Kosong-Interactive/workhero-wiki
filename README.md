@@ -14,4 +14,4 @@ Open Graph images must be absolute URLs, so build with the public address of the
 VITE_SITE_URL=https://your-domain.example npm run build
 ```
 
-Routes use the hash (`/#/workplaces`), so any static host works with no rewrite rules.
+Routes are real paths (`/workplaces`), so the host must serve `index.html` for unknown paths. `vercel.json` already does that; old `/#/…` links are redirected to the path form on load.

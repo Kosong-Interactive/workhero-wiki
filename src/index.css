@@ -101,3 +101,12 @@ button.sort.on { color: var(--accent); }
 .legend summary { cursor: pointer; } .legend b { color: var(--text); }
 .legend .table-wrap { margin-top: 10px; }
 .legend-table { min-width: 0; }
+
+/* Calculator spacing */
+.lead { margin: 8px 0 20px; }
+.filters { align-items: center; gap: 12px; margin: 0 0 16px; }
+.filters select { flex: 1 1 220px; min-width: 0; max-width: 100%; }
+label.inline { white-space: nowrap; flex: 0 0 auto; }
+.legend { margin: 0 0 20px; }
+.summary { margin: 4px 0 18px; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.table-wrap + .table-wrap { margin-top: 16px; }
