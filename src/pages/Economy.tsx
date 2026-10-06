@@ -2,12 +2,14 @@ import { wiki } from '../data'
 import { full } from '../format'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Economy() {
   const { tr } = useLang()
   const e = wiki.events
-  const totalFame = wiki.workplaces.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.fameReward, 0), 0)
-  const totalEcash = wiki.workplaces.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.ecashReward, 0), 0)
+  const released = wiki.workplaces.filter((w) => !isComingSoon(w))
+  const totalFame = released.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.fameReward, 0), 0)
+  const totalEcash = released.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.ecashReward, 0), 0)
   return (
     <>
       <h1>{tr('Currencies & events', 'Mata Uang & Event')}</h1>

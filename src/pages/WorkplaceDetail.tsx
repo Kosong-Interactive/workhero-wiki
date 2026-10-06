@@ -6,6 +6,7 @@ import { useLang } from '../i18n'
 import { effectId, familyKey } from '../i18nData'
 import Icon from '../components/Icon'
 import Currency from '../components/Currency'
+import WorkplaceImage, { isComingSoon } from '../components/WorkplaceImage'
 
 export default function WorkplaceDetail() {
   const { tr, lang } = useLang()
@@ -30,9 +31,7 @@ export default function WorkplaceDetail() {
     <>
       <p className="crumbs"><Link to="/workplaces">{tr('Workplaces', 'Tempat Kerja')}</Link> / {wp.name}</p>
       <div className="wp-hero">
-        <div className="wp-image big">
-          <img src={wp.image} alt={wp.name} onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')} />
-        </div>
+        <WorkplaceImage w={wp} size="big" />
         <div>
           <h1><Icon src={wp.icon} size={36} /> {wp.name}</h1>
           <dl className="facts">
@@ -46,6 +45,13 @@ export default function WorkplaceDetail() {
         </div>
       </div>
 
+      {isComingSoon(wp) ? (
+        <div className="callout">
+          <h2>{tr('Coming soon', 'Segera hadir')}</h2>
+          <p className="muted">{tr('The upgrade items and milestones for this workplace are still being built.', 'Item upgrade dan milestone untuk tempat kerja ini masih dalam pengerjaan.')}</p>
+        </div>
+      ) : (
+        <>
       <h2>Milestone ({wp.milestones.length})</h2>
       <div className="table-wrap">
         <table>
@@ -96,6 +102,8 @@ export default function WorkplaceDetail() {
           </tbody>
         </table>
       </div>
+        </>
+      )}
 
       <div className="pager">
         {prev ? <Link to={`/workplaces/${prev.id}`}>← {prev.name}</Link> : <span />}

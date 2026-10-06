@@ -4,6 +4,7 @@ import { wiki } from '../data'
 import { compact, full } from '../format'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import { isComingSoon } from '../components/WorkplaceImage'
 
 const maxCost = (i: { baseCost: number; costGrowth: number; maxLevel: number }) =>
   i.costGrowth === 1 ? i.baseCost * i.maxLevel : (i.baseCost * (Math.pow(i.costGrowth, i.maxLevel) - 1)) / (i.costGrowth - 1)
@@ -12,20 +13,25 @@ export default function Compare() {
   const { tr } = useLang()
   const rows = useMemo(
     () =>
-      wiki.workplaces.map((w) => ({
-        w,
-        levels: w.items.reduce((n, i) => n + i.maxLevel, 0),
-        itemCost: w.items.reduce((n, i) => n + maxCost(i), 0),
-        fame: w.milestones.reduce((n, m) => n + m.fameReward, 0),
-        ecash: w.milestones.reduce((n, m) => n + m.ecashReward, 0),
-        finalCash: w.milestones[w.milestones.length - 1]?.requiredCash ?? 0,
-      })),
+      wiki.workplaces.map((w) => {
+        const soon = isComingSoon(w)
+        return {
+          w,
+          soon,
+          items: soon ? 0 : w.items.length,
+          levels: soon ? 0 : w.items.reduce((n, i) => n + i.maxLevel, 0),
+          itemCost: soon ? 0 : w.items.reduce((n, i) => n + maxCost(i), 0),
+          fame: soon ? 0 : w.milestones.reduce((n, m) => n + m.fameReward, 0),
+          ecash: soon ? 0 : w.milestones.reduce((n, m) => n + m.ecashReward, 0),
+          finalCash: soon ? 0 : (w.milestones[w.milestones.length - 1]?.requiredCash ?? 0),
+        }
+      }),
     [],
   )
   const [sort, setSort] = useState<'order' | 'items' | 'itemCost' | 'finalCash' | 'fame'>('order')
   const sorted = [...rows].sort((a, b) => {
     if (sort === 'order') return a.w.order - b.w.order
-    if (sort === 'items') return b.w.items.length - a.w.items.length
+    if (sort === 'items') return b.items - a.items
     if (sort === 'itemCost') return b.itemCost - a.itemCost
     if (sort === 'finalCash') return b.finalCash - a.finalCash
     return b.fame - a.fame
@@ -50,14 +56,20 @@ export default function Compare() {
             </tr>
           </thead>
           <tbody>
-            {sorted.map(({ w, levels, itemCost, fame, ecash, finalCash }) => (
+            {sorted.map(({ w, soon, items, levels, itemCost, fame, ecash, finalCash }) => (
               <tr key={w.id}>
                 <td><Link to={`/workplaces/${w.id}`} className="with-icon"><Icon src={w.icon} size={22} /> {w.order}. {w.name}</Link></td>
                 <td>{w.baseAutoLocPerSecond}</td><td>{w.usersPerLoc}</td><td>{w.revenuePerUser}</td><td>{w.stressPerSecond}%</td>
-                <td>{w.items.length}</td><td>{levels}</td>
-                <td title={full(itemCost)}>{compact(itemCost)}</td>
-                <td title={full(finalCash)}>{compact(finalCash)}</td>
-                <td>{full(fame)}</td><td>{ecash}</td>
+                {soon ? (
+                  <td colSpan={6} className="muted">— {tr('Coming soon', 'Segera hadir')}</td>
+                ) : (
+                  <>
+                    <td>{items}</td><td>{levels}</td>
+                    <td title={full(itemCost)}>{compact(itemCost)}</td>
+                    <td title={full(finalCash)}>{compact(finalCash)}</td>
+                    <td>{full(fame)}</td><td>{ecash}</td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>

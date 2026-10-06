@@ -13,16 +13,16 @@ const META: Record<Lang, { title: string; description: string; ogDescription: st
   en: {
     title: 'WorkHero Wiki — Upgrades, Servers, Shop & Milestones',
     description:
-      'Complete reference for WorkHero: Career Idle — 20 workplaces, 864 upgrade items, server tiers, shop items and milestones, with a cost calculator and glossary in English and Indonesian.',
+      'Complete reference for WorkHero: Career Idle — workplaces, upgrade items, server tiers, shop items and milestones, with a cost calculator and glossary in English and Indonesian.',
     ogDescription:
-      'Everything in WorkHero: Career Idle — 20 workplaces, 864 upgrade items, server tiers, shop items and milestones. English & Indonesian.',
+      'Everything in WorkHero: Career Idle — workplaces, upgrade items, server tiers, shop items and milestones. English & Indonesian.',
   },
   id: {
     title: 'WorkHero Wiki — Upgrade, Server, Toko & Milestone',
     description:
-      'Referensi lengkap WorkHero: Career Idle — 20 tempat kerja, 864 item upgrade, tier server, item toko, dan milestone, lengkap dengan kalkulator biaya dan glosarium dalam bahasa Indonesia dan Inggris.',
+      'Referensi lengkap WorkHero: Career Idle — tempat kerja, item upgrade, tier server, item toko, dan milestone, lengkap dengan kalkulator biaya dan glosarium dalam bahasa Indonesia dan Inggris.',
     ogDescription:
-      'Semua isi WorkHero: Career Idle — 20 tempat kerja, 864 item upgrade, tier server, item toko, dan milestone. Bahasa Indonesia & Inggris.',
+      'Semua isi WorkHero: Career Idle — tempat kerja, item upgrade, tier server, item toko, dan milestone. Bahasa Indonesia & Inggris.',
   },
 }
 

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { wiki } from '../data'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import WorkplaceImage, { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Workplaces() {
   const { tr } = useLang()
@@ -12,9 +13,7 @@ export default function Workplaces() {
       <div className="card-grid">
         {wiki.workplaces.map((w) => (
           <Link key={w.id} to={`/workplaces/${w.id}`} className="wp-card">
-            <div className="wp-image">
-              <img src={w.image} alt={w.name} loading="lazy" onError={(e) => ((e.target as HTMLImageElement).style.visibility = 'hidden')} />
-            </div>
+            <WorkplaceImage w={w} />
             <div className="wp-meta">
               <Icon src={w.icon} size={28} />
               <div>
@@ -22,7 +21,7 @@ export default function Workplaces() {
                   {w.order}. {w.name}
                 </strong>
                 <small>
-                  {w.items.length} {tr('items', 'item')} · {w.milestones.length} milestone
+                  {isComingSoon(w) ? '—' : `${w.items.length} ${tr('items', 'item')} · ${w.milestones.length} milestone`}
                 </small>
               </div>
             </div>

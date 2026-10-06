@@ -94,3 +94,6 @@ button.sort.on { color: var(--accent); }
   main { padding-top: 16px; }
   h1 { font-size: 26px; }
 }
+.wp-image.soon { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: repeating-linear-gradient(135deg, #12151d, #12151d 14px, #161a24 14px, #161a24 28px); color: var(--muted); }
+.wp-image.soon .icon { opacity: .55; }
+.wp-image.soon b { letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }

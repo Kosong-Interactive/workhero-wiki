@@ -4,6 +4,7 @@ import { compact, full, perLevel } from '../format'
 import { useLang } from '../i18n'
 import { effectId } from '../i18nData'
 import Icon from '../components/Icon'
+import { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Calculator() {
   const { tr, lang } = useLang()
@@ -40,7 +41,7 @@ export default function Calculator() {
       </p>
       <div className="filters">
         <select value={wpId} onChange={(e) => changeWorkplace(e.target.value)}>
-          {wiki.workplaces.map((w) => <option key={w.id} value={w.id}>{w.order}. {w.name}</option>)}
+          {wiki.workplaces.filter((w) => !isComingSoon(w)).map((w) => <option key={w.id} value={w.id}>{w.order}. {w.name}</option>)}
         </select>
         <select value={item.id} onChange={(e) => { setItemId(e.target.value); setFrom(0) }}>
           {wp.items.map((i) => <option key={i.id} value={i.id}>{i.name} — {i.effect}</option>)}

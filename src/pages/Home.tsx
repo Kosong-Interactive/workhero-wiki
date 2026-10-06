@@ -3,11 +3,13 @@ import { wiki } from '../data'
 import { PLAY_URL } from '../config'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Home() {
   const { tr } = useLang()
-  const items = wiki.workplaces.reduce((n, w) => n + w.items.length, 0)
-  const milestones = wiki.workplaces.reduce((n, w) => n + w.milestones.length, 0)
+  const released = wiki.workplaces.filter((w) => !isComingSoon(w))
+  const items = released.reduce((n, w) => n + w.items.length, 0)
+  const milestones = released.reduce((n, w) => n + w.milestones.length, 0)
   const stats: [string, number, string][] = [
     [tr('Workplaces', 'Tempat kerja'), wiki.workplaces.length, '/workplaces'],
     [tr('Upgrade items', 'Item upgrade'), items, '/workplaces'],
