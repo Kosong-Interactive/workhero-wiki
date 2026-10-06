@@ -3,6 +3,7 @@ import { wiki } from '../data'
 import { PLAY_URL } from '../config'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import NumberLegend from '../components/NumberLegend'
 import { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Home() {
@@ -46,6 +47,8 @@ export default function Home() {
         </ul>
         <Link to="/glossary">{tr('See the full glossary →', 'Lihat glosarium lengkap →')}</Link>
       </div>
+
+      <NumberLegend />
 
       <div className="stat-row">
         {stats.map(([label, n, to]) => (

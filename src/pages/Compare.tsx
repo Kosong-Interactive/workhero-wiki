@@ -4,6 +4,8 @@ import { wiki } from '../data'
 import { compact, full } from '../format'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import Num from '../components/Num'
+import NumberLegend from '../components/NumberLegend'
 import { isComingSoon } from '../components/WorkplaceImage'
 
 const maxCost = (i: { baseCost: number; costGrowth: number; maxLevel: number }) =>
@@ -43,6 +45,7 @@ export default function Compare() {
     <>
       <h1>{tr('Compare workplaces', 'Bandingkan Tempat Kerja')}</h1>
       <p className="lead">{tr('Click a column header to sort. "Cost to max everything" assumes every item is bought to its maximum level.', 'Klik header kolom untuk mengurutkan. "Biaya max semua" mengasumsikan setiap item dibeli sampai level maksimum.')}</p>
+      <NumberLegend />
       <div className="table-wrap">
         <table>
           <thead>
@@ -59,7 +62,7 @@ export default function Compare() {
             {sorted.map(({ w, soon, items, levels, itemCost, fame, ecash, finalCash }) => (
               <tr key={w.id}>
                 <td><Link to={`/workplaces/${w.id}`} className="with-icon"><Icon src={w.icon} size={22} /> {w.order}. {w.name}</Link></td>
-                <td>{w.baseAutoLocPerSecond}</td><td>{w.usersPerLoc}</td><td>{w.revenuePerUser}</td><td>{w.stressPerSecond}%</td>
+                <td><Num v={w.baseAutoLocPerSecond} /></td><td><Num v={w.usersPerLoc} /></td><td><Num v={w.revenuePerUser} /></td><td>{w.stressPerSecond}%</td>
                 {soon ? (
                   <td colSpan={6} className="muted">— {tr('Coming soon', 'Segera hadir')}</td>
                 ) : (
@@ -67,7 +70,7 @@ export default function Compare() {
                     <td>{items}</td><td>{levels}</td>
                     <td title={full(itemCost)}>{compact(itemCost)}</td>
                     <td title={full(finalCash)}>{compact(finalCash)}</td>
-                    <td>{full(fame)}</td><td>{ecash}</td>
+                    <td><Num v={fame} /></td><td><Num v={ecash} /></td>
                   </>
                 )}
               </tr>

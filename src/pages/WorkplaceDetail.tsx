@@ -6,6 +6,8 @@ import { useLang } from '../i18n'
 import { effectId, familyKey } from '../i18nData'
 import Icon from '../components/Icon'
 import Currency from '../components/Currency'
+import Num from '../components/Num'
+import NumberLegend from '../components/NumberLegend'
 import WorkplaceImage, { isComingSoon } from '../components/WorkplaceImage'
 
 export default function WorkplaceDetail() {
@@ -36,11 +38,11 @@ export default function WorkplaceDetail() {
           <h1><Icon src={wp.icon} size={36} /> {wp.name}</h1>
           <dl className="facts">
             <dt>{tr('Order', 'Urutan')}</dt><dd>#{wp.order} {tr('of', 'dari')} {wiki.workplaces.length}</dd>
-            <dt>Base Auto LoC/s</dt><dd>{wp.baseAutoLocPerSecond}</dd>
-            <dt>{tr('Users per LoC', 'User per LoC')}</dt><dd>{wp.usersPerLoc}</dd>
-            <dt>{tr('Revenue per User', 'Pendapatan per User')}</dt><dd>{wp.revenuePerUser}</dd>
+            <dt>Base Auto LoC/s</dt><dd><Num v={wp.baseAutoLocPerSecond} /></dd>
+            <dt>{tr('Users per LoC', 'User per LoC')}</dt><dd><Num v={wp.usersPerLoc} /></dd>
+            <dt>{tr('Revenue per User', 'Pendapatan per User')}</dt><dd><Num v={wp.revenuePerUser} /></dd>
             <dt>{tr('Stress per second', 'Stress per detik')}</dt><dd>{wp.stressPerSecond}%</dd>
-            <dt>{tr('Fame to unlock next', 'Fame untuk membuka berikutnya')}</dt><dd>{full(wp.fameToUnlockNext)}</dd>
+            <dt>{tr('Fame to unlock next', 'Fame untuk membuka berikutnya')}</dt><dd><Num v={wp.fameToUnlockNext} /></dd>
           </dl>
         </div>
       </div>
@@ -52,6 +54,7 @@ export default function WorkplaceDetail() {
         </div>
       ) : (
         <>
+      <NumberLegend />
       <h2>Milestone ({wp.milestones.length})</h2>
       <div className="table-wrap">
         <table>

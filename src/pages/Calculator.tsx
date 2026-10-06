@@ -4,6 +4,7 @@ import { compact, full, perLevel } from '../format'
 import { useLang } from '../i18n'
 import { effectId } from '../i18nData'
 import Icon from '../components/Icon'
+import NumberLegend from '../components/NumberLegend'
 import { isComingSoon } from '../components/WorkplaceImage'
 
 export default function Calculator() {
@@ -51,6 +52,7 @@ export default function Calculator() {
           <input type="number" min={0} max={item.maxLevel} value={from} onChange={(e) => setFrom(Math.max(0, Number(e.target.value) || 0))} />
         </label>
       </div>
+      <NumberLegend />
       <div className="summary">
         <Icon src={item.effectIcon} size={36} alt={item.effect} />
         <div>
@@ -67,7 +69,7 @@ export default function Calculator() {
                 <td>{r.level}</td>
                 <td title={full(r.cost)}>{compact(r.cost)}</td>
                 <td title={full(r.total)}>{compact(r.total)}</td>
-                <td>{item.kind === 'flat' ? `+${r.effect.toFixed(2).replace(/\.?0+$/, '')} ${item.unit}` : `+${r.effect}%`}</td>
+                <td>{item.kind === 'flat' ? `+${compact(r.effect)} ${item.unit}` : `+${r.effect}%`}</td>
               </tr>
             ))}
           </tbody>

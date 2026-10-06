@@ -1,4 +1,5 @@
 import { useLang } from '../i18n'
+import { NumberTable } from '../components/NumberLegend'
 
 const terms: [string, string, string, string, string][] = [
   ['LoC', 'Lines of Code', 'The number of lines of code written. The core resource of the game.', 'Jumlah baris kode yang ditulis. Sumber daya inti game.', 'core'],
@@ -52,6 +53,16 @@ export default function Glossary() {
           </dl>
         </section>
       ))}
+      <section id="numbers">
+        <h2>{tr('Number notation (K, M, B…)', 'Notasi angka (K, M, B…)')}</h2>
+        <p className="lead">
+          {tr(
+            'The game and this wiki shorten big numbers. K means thousand — 1K = 1,000, which is 10³ (a 1 followed by three zeros). Each next letter is another ×1,000: M = 10⁶, B = 10⁹, T = 10¹², and so on up to Dc = 10³³. Numbers are rounded; hover one for its exact value.',
+            'Game dan wiki ini menyingkat angka besar. K artinya ribu — 1K = 1.000, yaitu 10³ (angka 1 diikuti tiga nol). Tiap huruf berikutnya dikali 1.000 lagi: M = 10⁶, B = 10⁹, T = 10¹², dan seterusnya sampai Dc = 10³³. Angka dibulatkan; arahkan kursor ke angka untuk nilai persisnya.',
+          )}
+        </p>
+        <NumberTable />
+      </section>
     </>
   )
 }

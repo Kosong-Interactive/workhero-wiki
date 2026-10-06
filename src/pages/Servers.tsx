@@ -2,6 +2,7 @@ import { wiki } from '../data'
 import { compact, full } from '../format'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
+import NumberLegend from '../components/NumberLegend'
 import Currency from '../components/Currency'
 
 export default function Servers() {
@@ -15,6 +16,7 @@ export default function Servers() {
           'Satu tangga yang sama untuk semua tempat kerja. Satu tier menaikkan Capacity LoC, Bandwidth, dan User Growth/s sekaligus — hanya tab SERVER yang bisa menaikkan Capacity.',
         )}
       </p>
+      <NumberLegend />
       <div className="table-wrap">
         <table>
           <thead>
