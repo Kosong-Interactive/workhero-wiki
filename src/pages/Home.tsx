@@ -4,7 +4,8 @@ import { PLAY_URL } from '../config'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
 import NumberLegend from '../components/NumberLegend'
-import { isComingSoon } from '../components/WorkplaceImage'
+import { isComingSoon, workplacePath } from '../components/WorkplaceImage'
+import ComingSoonCard from '../components/ComingSoonCard'
 
 export default function Home() {
   const { tr } = useLang()
@@ -12,7 +13,7 @@ export default function Home() {
   const items = released.reduce((n, w) => n + w.items.length, 0)
   const milestones = released.reduce((n, w) => n + w.milestones.length, 0)
   const stats: [string, number, string][] = [
-    [tr('Workplaces', 'Tempat kerja'), wiki.workplaces.length, '/workplaces'],
+    [tr('Workplaces', 'Tempat kerja'), released.length, '/workplaces'],
     [tr('Upgrade items', 'Item upgrade'), items, '/workplaces'],
     [tr('Milestones', 'Milestone'), milestones, '/workplaces'],
     [tr('Server tiers', 'Tier server'), wiki.serverTiers.length, '/servers'],
@@ -68,21 +69,13 @@ export default function Home() {
       </ol>
       <h2>{tr('Workplaces', 'Tempat kerja')}</h2>
       <div className="icon-strip">
-        {wiki.workplaces.map((w) => {
-          const soon = isComingSoon(w)
-          return (
-            <Link
-              key={w.id}
-              to={`/workplaces/${w.id}`}
-              className={'strip-item' + (soon ? ' soon' : '')}
-              title={soon ? `${w.name} — ${tr('Coming soon', 'Segera hadir')}` : w.name}
-            >
-              <Icon src={w.icon} size={40} alt={w.name} />
-              <small>{w.name}</small>
-              {soon && <span className="soon-tag">{tr('Soon', 'Segera')}</span>}
-            </Link>
-          )
-        })}
+        {released.map((w) => (
+          <Link key={w.id} to={workplacePath(w)} className="strip-item" title={w.name}>
+            <Icon src={w.icon} size={40} alt={w.name} />
+            <small>{w.name}</small>
+          </Link>
+        ))}
+        <ComingSoonCard compact />
       </div>
     </>
   )

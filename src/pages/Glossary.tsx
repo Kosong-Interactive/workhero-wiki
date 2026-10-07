@@ -22,7 +22,7 @@ const terms: [string, string, string, string, string][] = [
   ['ITEM', 'Upgrade tab', 'Upgrades bought with Cash that boost production, Users, income or Stress. Local to each workplace.', 'Upgrade yang dibeli dengan Cash untuk menaikkan produksi, User, pendapatan, atau Stress. Berlaku per tempat kerja.', 'ui'],
   ['SERVER', 'Upgrade tab', 'Buys the next Server tier: bigger Capacity, Bandwidth and User Growth/s.', 'Membeli tier Server berikutnya: Capacity, Bandwidth, dan User Growth/s lebih besar.', 'ui'],
   ['Milestone', 'Goal', 'Reached by earning enough Cash in a workplace. Grants Fame and ECash.', 'Dicapai dengan mengumpulkan cukup Cash di sebuah tempat kerja. Memberi Fame dan ECash.', 'ui'],
-  ['Workplace', 'Stage', 'One of 20 careers, played in order. Each starts from scratch.', 'Salah satu dari 20 karier, dimainkan berurutan. Masing-masing mulai dari nol.', 'ui'],
+  ['Workplace', 'Stage', 'One of the careers, played in order. Each starts from scratch.', 'Salah satu karier, dimainkan berurutan. Masing-masing mulai dari nol.', 'ui'],
   ['Package', 'Delivery', 'A parcel that arrives every 10 minutes: Cash, or sometimes ECash.', 'Paket yang datang tiap 10 menit: Cash, atau kadang ECash.', 'ui'],
   ['Cat', 'Bonus', 'A cat that visits the room. Tap it for a quick Cash bonus.', 'Kucing yang berkunjung ke ruangan. Tap untuk bonus Cash cepat.', 'ui'],
 ]

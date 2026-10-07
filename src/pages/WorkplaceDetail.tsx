@@ -8,17 +8,17 @@ import Icon from '../components/Icon'
 import Currency from '../components/Currency'
 import Num from '../components/Num'
 import NumberLegend from '../components/NumberLegend'
-import WorkplaceImage, { isComingSoon } from '../components/WorkplaceImage'
+import WorkplaceImage, { isComingSoon, workplacePath } from '../components/WorkplaceImage'
 
 export default function WorkplaceDetail() {
   const { tr, lang } = useLang()
   const { id = '' } = useParams()
-  const wp = workplaceById(id)
+  const wp = workplaceById(id) ?? wiki.workplaces.find((w) => String(w.order) === id)
   const [family, setFamily] = useState('All')
   const [query, setQuery] = useState('')
 
   const families = useMemo(() => ['All', ...Array.from(new Set(wp?.items.map((i) => i.family) ?? []))], [wp])
-  if (!wp) return <p>{tr('Workplace not found.', 'Tempat kerja tidak ditemukan.')} <Link to="/workplaces">{tr('Back to workplaces', 'Kembali')}</Link></p>
+  if (!wp || isComingSoon(wp)) return <p>{tr('Workplace not found.', 'Tempat kerja tidak ditemukan.')} <Link to="/workplaces">{tr('Back to workplaces', 'Kembali')}</Link></p>
 
   const q = query.trim().toLowerCase()
   const items = wp.items.filter(
@@ -27,7 +27,8 @@ export default function WorkplaceDetail() {
       (!q || i.name.toLowerCase().includes(q) || i.description.toLowerCase().includes(q) || i.effect.toLowerCase().includes(q)),
   )
   const prev = wiki.workplaces[wp.order - 2]
-  const next = wiki.workplaces[wp.order]
+  const candidate = wiki.workplaces[wp.order]
+  const next = candidate && !isComingSoon(candidate) ? candidate : undefined
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function WorkplaceDetail() {
         <div>
           <h1><Icon src={wp.icon} size={36} /> {wp.name}</h1>
           <dl className="facts">
-            <dt>{tr('Order', 'Urutan')}</dt><dd>#{wp.order} {tr('of', 'dari')} {wiki.workplaces.length}</dd>
+            <dt>{tr('Order', 'Urutan')}</dt><dd>#{wp.order}</dd>
             <dt>Base Auto LoC/s</dt><dd><Num v={wp.baseAutoLocPerSecond} /></dd>
             <dt>{tr('Users per LoC', 'User per LoC')}</dt><dd><Num v={wp.usersPerLoc} /></dd>
             <dt>{tr('Revenue per User', 'Pendapatan per User')}</dt><dd><Num v={wp.revenuePerUser} /></dd>
@@ -47,13 +48,7 @@ export default function WorkplaceDetail() {
         </div>
       </div>
 
-      {isComingSoon(wp) ? (
-        <div className="callout">
-          <h2>{tr('Coming soon', 'Segera hadir')}</h2>
-          <p className="muted">{tr('The upgrade items and milestones for this workplace are still being built.', 'Item upgrade dan milestone untuk tempat kerja ini masih dalam pengerjaan.')}</p>
-        </div>
-      ) : (
-        <>
+      <>
       <NumberLegend />
       <h2>Milestone ({wp.milestones.length})</h2>
       <div className="table-wrap">
@@ -68,7 +63,13 @@ export default function WorkplaceDetail() {
                 <td><Currency kind="cash" value={m.requiredCash} /></td>
                 <td><Currency kind="fame" value={m.fameReward} /></td>
                 <td><Currency kind="ecash" value={m.ecashReward} /></td>
-                <td>{m.unlocksWorkplace ? <Link to={`/workplaces/${m.unlocksWorkplace}`}>{wiki.workplaces.find((w) => w.id === m.unlocksWorkplace)?.name ?? m.unlocksWorkplace}</Link> : '—'}</td>
+                <td>{m.unlocksWorkplace ? (() => {
+                  const target = wiki.workplaces.find((w) => w.id === m.unlocksWorkplace)
+                  if (!target) return m.unlocksWorkplace
+                  return isComingSoon(target)
+                    ? tr('Coming soon', 'Segera hadir')
+                    : <Link to={workplacePath(target)}>{target.name}</Link>
+                })() : '—'}</td>
               </tr>
             ))}
           </tbody>
@@ -105,12 +106,11 @@ export default function WorkplaceDetail() {
           </tbody>
         </table>
       </div>
-        </>
-      )}
+      </>
 
       <div className="pager">
-        {prev ? <Link to={`/workplaces/${prev.id}`}>← {prev.name}</Link> : <span />}
-        {next ? <Link to={`/workplaces/${next.id}`}>{next.name} →</Link> : <span />}
+        {prev ? <Link to={workplacePath(prev)}>← {prev.name}</Link> : <span />}
+        {next ? <Link to={workplacePath(next)}>{next.name} →</Link> : <span />}
       </div>
     </>
   )

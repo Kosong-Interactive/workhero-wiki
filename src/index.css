@@ -118,3 +118,11 @@ label.inline { white-space: nowrap; flex: 0 0 auto; }
 .strip-item.soon .icon { opacity: .4; filter: grayscale(1); }
 .strip-item.soon small { opacity: .7; }
 .soon-tag { position: absolute; top: 4px; right: 4px; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: #2a3142; color: var(--muted); }
+
+.more-mark { font-size: 28px; font-weight: 800; color: var(--muted); opacity: .6; line-height: 1; }
+.more-mark.big { font-size: 64px; }
+.wp-card.more { border-style: dashed; cursor: default; }
+.wp-card.more:hover { border-color: var(--line); }
+.wp-card.more .wp-meta { min-height: 48px; }
+.strip-item.more { cursor: default; border-style: dashed; justify-content: center; }
+.strip-item.more:hover { border-color: var(--line); }

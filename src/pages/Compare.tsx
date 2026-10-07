@@ -6,7 +6,7 @@ import { useLang } from '../i18n'
 import Icon from '../components/Icon'
 import Num from '../components/Num'
 import NumberLegend from '../components/NumberLegend'
-import { isComingSoon } from '../components/WorkplaceImage'
+import { displayName, isComingSoon, workplacePath } from '../components/WorkplaceImage'
 
 const maxCost = (i: { baseCost: number; costGrowth: number; maxLevel: number }) =>
   i.costGrowth === 1 ? i.baseCost * i.maxLevel : (i.baseCost * (Math.pow(i.costGrowth, i.maxLevel) - 1)) / (i.costGrowth - 1)
@@ -15,7 +15,7 @@ export default function Compare() {
   const { tr } = useLang()
   const rows = useMemo(
     () =>
-      wiki.workplaces.map((w) => {
+      wiki.workplaces.filter((w) => !isComingSoon(w)).map((w) => {
         const soon = isComingSoon(w)
         return {
           w,
@@ -61,7 +61,7 @@ export default function Compare() {
           <tbody>
             {sorted.map(({ w, soon, items, levels, itemCost, fame, ecash, finalCash }) => (
               <tr key={w.id}>
-                <td><Link to={`/workplaces/${w.id}`} className="with-icon"><Icon src={w.icon} size={22} /> {w.order}. {w.name}</Link></td>
+                <td><Link to={workplacePath(w)} className="with-icon"><Icon src={w.icon} size={22} /> {w.order}. {displayName(w)}</Link></td>
                 <td><Num v={w.baseAutoLocPerSecond} /></td><td><Num v={w.usersPerLoc} /></td><td><Num v={w.revenuePerUser} /></td><td>{w.stressPerSecond}%</td>
                 {soon ? (
                   <td colSpan={6} className="muted">— {tr('Coming soon', 'Segera hadir')}</td>
