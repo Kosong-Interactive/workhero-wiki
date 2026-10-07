@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { wiki } from '../data'
-import { PLAY_URL } from '../config'
+import PlayButton from '../components/PlayButton'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
 import NumberLegend from '../components/NumberLegend'
@@ -28,9 +28,7 @@ export default function Home() {
           'Referensi lengkap isi WorkHero: Career Idle — tempat kerja, item upgrade, tier server, item toko, dan milestone. Kode ditulis otomatis, User membayarnya, dan Stress menumpuk sampai Burnout.',
         )}
       </p>
-      <a className="play-btn big" href={PLAY_URL} target="_blank" rel="noopener noreferrer">
-        ▶ {tr('Play WorkHero: Career Idle', 'Main WorkHero: Career Idle')}
-      </a>
+      <PlayButton big>▶ {tr('Play WorkHero: Career Idle', 'Main WorkHero: Career Idle')}</PlayButton>
 
       <div className="callout">
         <h2>{tr('What is LoC?', 'Apa itu LoC?')}</h2>

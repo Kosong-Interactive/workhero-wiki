@@ -126,3 +126,10 @@ label.inline { white-space: nowrap; flex: 0 0 auto; }
 .wp-card.more .wp-meta { min-height: 48px; }
 .strip-item.more { cursor: default; border-style: dashed; justify-content: center; }
 .strip-item.more:hover { border-color: var(--line); }
+
+button.play-btn { border: 0; font: inherit; font-weight: 700; cursor: pointer; color: #111; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(5, 7, 12, .72); backdrop-filter: blur(3px); }
+.modal { width: min(420px, 100%); background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 28px 24px 24px; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+.modal h2 { margin: 8px 0 8px; font-size: 20px; }
+.modal p { margin: 0 0 20px; color: var(--muted); }
+.modal-emoji { font-size: 44px; line-height: 1; }

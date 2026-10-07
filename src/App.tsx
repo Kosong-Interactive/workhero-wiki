@@ -1,5 +1,5 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
-import { PLAY_URL } from './config'
+import PlayButton from './components/PlayButton'
 import { useLang } from './i18n'
 import Home from './pages/Home'
 import Workplaces from './pages/Workplaces'
@@ -45,9 +45,7 @@ export default function App() {
           <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
           <button className={lang === 'id' ? 'on' : ''} onClick={() => setLang('id')}>ID</button>
         </div>
-        <a className="play-btn" href={PLAY_URL} target="_blank" rel="noopener noreferrer">
-          ▶ {tr('Play', 'Main')}
-        </a>
+        <PlayButton>▶ {tr('Play', 'Main')}</PlayButton>
       </header>
       <main>
         <Routes>
