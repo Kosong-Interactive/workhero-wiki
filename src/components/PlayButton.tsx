@@ -42,8 +42,8 @@ export default function PlayButton({ big = false, children }: { big?: boolean; c
             <h2 id="play-modal-title">{tr('Game under development', 'Game masih dalam pengembangan')}</h2>
             <p>
               {tr(
-                'WorkHero: Career Idle is not ready to play yet. Check back soon!',
-                'WorkHero: Career Idle belum bisa dimainkan. Nantikan segera ya!',
+                'WorkHero: Idle RPG is still under development. Check back soon!',
+                'WorkHero: Idle RPG masih dalam pengembangan. Nantikan segera ya!',
               )}
             </p>
             <button ref={closeRef} type="button" className="play-btn" onClick={() => setOpen(false)}>

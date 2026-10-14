@@ -1,0 +1,760 @@
+{
+  "tuning": {
+    "StepsPerRelease": 10,
+    "ReleasesPerMajor": 25,
+    "HpBase": 10,
+    "HpGrowth": 1.03,
+    "CashBase": 6,
+    "CashGrowth": 1.03,
+    "ReleaseHpMultiplier": 3,
+    "MajorHpMultiplier": 10,
+    "ReleaseCashMultiplier": 5,
+    "MajorCashMultiplier": 20,
+    "PatchTimeLimitSeconds": 60,
+    "ReleaseTimeLimitSeconds": 50,
+    "MajorTimeLimitSeconds": 200,
+    "RetreatStages": 1,
+    "FarmClearsAfterRetreat": 3,
+    "PackageEveryStages": 500,
+    "FameStageScale": 20,
+    "FameExponent": 1.3,
+    "BaseAutoLocPerSecond": 1,
+    "MaxStress": 100,
+    "StressPerSecond": 8,
+    "BurnoutLockSeconds": 2,
+    "RecoveryBaseSeconds": 3,
+    "RecoveryFloorSeconds": 0.5,
+    "GearStressFloorPerSecond": 1,
+    "BaseLevelCap": 100,
+    "AutoLocDivisor": 4,
+    "AutoLocExponent": 1.45,
+    "CashPerTaskDivisor": 4,
+    "CashPerTaskExponent": 1.45,
+    "StressResistancePerLevel": 0.04,
+    "RecoverySpeedPerLevel": 0.03,
+    "BossDamagePerLevel": 0.02,
+    "BossTimerPerLevel": 0.005,
+    "AutoLocCostBase": 80,
+    "AutoLocCostGrowth": 1.11,
+    "CashPerTaskCostBase": 80,
+    "CashPerTaskCostGrowth": 1.11,
+    "StressResistanceCostBase": 480,
+    "StressResistanceCostGrowth": 1.12,
+    "RecoverySpeedCostBase": 480,
+    "RecoverySpeedCostGrowth": 1.12,
+    "BossDamageCostBase": 960,
+    "BossDamageCostGrowth": 1.12,
+    "BossTimerCostBase": 960,
+    "BossTimerCostGrowth": 1.12,
+    "SubStepSeconds": 0.25
+  },
+  "stats": [
+    {
+      "id": "AutoLoc",
+      "name": "Auto LoC",
+      "nameId": "Auto LoC",
+      "description": "Damage per second to a stage.",
+      "descriptionId": "Damage per detik ke stage.",
+      "icon": "/icons/icon-effect-auto-loc-flat.png",
+      "baseCost": 80,
+      "costGrowth": 1.11
+    },
+    {
+      "id": "CashPerTask",
+      "name": "Cash per Task",
+      "nameId": "Cash per Task",
+      "description": "More Cash for each stage cleared.",
+      "descriptionId": "Lebih banyak Cash tiap stage selesai.",
+      "icon": "/icons/icon-stat-cash-per-task.png",
+      "baseCost": 80,
+      "costGrowth": 1.11
+    },
+    {
+      "id": "StressResistance",
+      "name": "Stress Resistance",
+      "nameId": "Ketahanan Stress",
+      "description": "Slows the rate at which Stress rises.",
+      "descriptionId": "Memperlambat kenaikan Stress.",
+      "icon": "/icons/icon-effect-stress-resistance.png",
+      "baseCost": 480,
+      "costGrowth": 1.12
+    },
+    {
+      "id": "RecoverySpeed",
+      "name": "Recovery Speed",
+      "nameId": "Kecepatan Pemulihan",
+      "description": "Shortens Recovery after the fixed Burnout lock.",
+      "descriptionId": "Memperpendek Recovery setelah lock Burnout tetap.",
+      "icon": "/icons/icon-effect-recovery-speed.png",
+      "baseCost": 480,
+      "costGrowth": 1.12
+    },
+    {
+      "id": "BossDamage",
+      "name": "Boss Damage",
+      "nameId": "Boss Damage",
+      "description": "Extra damage against Releases and Major Releases.",
+      "descriptionId": "Damage tambahan ke Release dan Major Release.",
+      "icon": "/icons/icon-stat-boss-damage.png",
+      "baseCost": 960,
+      "costGrowth": 1.12
+    },
+    {
+      "id": "BossTimer",
+      "name": "Boss Timer",
+      "nameId": "Boss Timer",
+      "description": "More time to finish a boss.",
+      "descriptionId": "Lebih banyak waktu untuk menyelesaikan boss.",
+      "icon": "/icons/icon-stat-boss-timer.png",
+      "baseCost": 960,
+      "costGrowth": 1.12
+    }
+  ],
+  "permanent": [
+    {
+      "id": "GlobalAutoLoc",
+      "name": "Global Auto LoC",
+      "nameId": "Auto LoC Global",
+      "description": "Adds to the global Auto LoC bonus pool.",
+      "descriptionId": "Menambah pool bonus Auto LoC global.",
+      "icon": "/icons/icon-effect-auto-loc-percent.png",
+      "baseCost": 2,
+      "costGrowth": 1.3,
+      "maxLevel": null
+    },
+    {
+      "id": "GlobalCashPerTask",
+      "name": "Global Cash per Task",
+      "nameId": "Cash per Task Global",
+      "description": "Adds to the global Cash per Task bonus pool.",
+      "descriptionId": "Menambah pool bonus Cash per Task global.",
+      "icon": "/icons/icon-stat-cash-per-task.png",
+      "baseCost": 2,
+      "costGrowth": 1.3,
+      "maxLevel": null
+    },
+    {
+      "id": "HeadStart",
+      "name": "Head Start",
+      "nameId": "Head Start",
+      "description": "Bank the Cash of early stage clears at the start of each run; the run still starts at stage 1.",
+      "descriptionId": "Mulai setiap run dengan Cash senilai clear stage awal; run tetap mulai di stage 1.",
+      "icon": "/icons/icon-retry.png",
+      "baseCost": 3,
+      "costGrowth": 1.35,
+      "maxLevel": null
+    },
+    {
+      "id": "StatLevelCap",
+      "name": "Core Stat Level Cap",
+      "nameId": "Batas Level Core Stat",
+      "description": "Raises the maximum level of every Core Stat.",
+      "descriptionId": "Menaikkan batas level semua Core Stat.",
+      "icon": "/icons/icon-mission-stat.png",
+      "baseCost": 4,
+      "costGrowth": 1.35,
+      "maxLevel": null
+    },
+    {
+      "id": "OfflineHoursCap",
+      "name": "Offline Hours Cap",
+      "nameId": "Batas Waktu Offline",
+      "description": "Extends the time credited while away.",
+      "descriptionId": "Memperpanjang waktu yang dihitung saat offline.",
+      "icon": "/icons/icon-clock.png",
+      "baseCost": 5,
+      "costGrowth": 1.15,
+      "maxLevel": 80
+    }
+  ],
+  "permanentNumbers": {
+    "PoolPerLevel": 0.4,
+    "HeadStartStagesPerLevel": 15,
+    "StatCapPerLevel": 10,
+    "BaseOfflineMinutes": 240,
+    "OfflineMinutesPerLevel": 6,
+    "OfflineMaxLevel": 80
+  },
+  "gear": [
+    {
+      "id": "LaptopSetup",
+      "name": "Laptop Setup",
+      "nameId": "Laptop Setup",
+      "effect": "Auto LoC",
+      "effectId": "Auto LoC",
+      "icon": "/icons/icon-gear-laptop.png",
+      "tiers": [
+        {
+          "name": "Common",
+          "bonus": 10,
+          "sellClears": 0.3,
+          "icon": "/icons/icon-gear-laptop-common.png"
+        },
+        {
+          "name": "Uncommon",
+          "bonus": 14,
+          "sellClears": 0.7,
+          "icon": "/icons/icon-gear-laptop-common.png"
+        },
+        {
+          "name": "Rare",
+          "bonus": 18,
+          "sellClears": 1.5,
+          "icon": "/icons/icon-gear-laptop-rare.png"
+        },
+        {
+          "name": "Epic",
+          "bonus": 30,
+          "sellClears": 3.5,
+          "icon": "/icons/icon-gear-laptop-epic.png"
+        },
+        {
+          "name": "Legendary",
+          "bonus": 50,
+          "sellClears": 7.5,
+          "icon": "/icons/icon-gear-laptop-legendary.png"
+        }
+      ]
+    },
+    {
+      "id": "Outfit",
+      "name": "Outfit",
+      "nameId": "Outfit",
+      "effect": "Cash per Task",
+      "effectId": "Cash per Task",
+      "icon": "/icons/icon-gear-outfit.png",
+      "tiers": [
+        {
+          "name": "Common",
+          "bonus": 10,
+          "sellClears": 0.3,
+          "icon": "/icons/icon-gear-outfit-common.png"
+        },
+        {
+          "name": "Uncommon",
+          "bonus": 14,
+          "sellClears": 0.7,
+          "icon": "/icons/icon-gear-outfit-common.png"
+        },
+        {
+          "name": "Rare",
+          "bonus": 18,
+          "sellClears": 1.5,
+          "icon": "/icons/icon-gear-outfit-rare.png"
+        },
+        {
+          "name": "Epic",
+          "bonus": 30,
+          "sellClears": 3.5,
+          "icon": "/icons/icon-gear-outfit-epic.png"
+        },
+        {
+          "name": "Legendary",
+          "bonus": 50,
+          "sellClears": 7.5,
+          "icon": "/icons/icon-gear-outfit-legendary.png"
+        }
+      ]
+    },
+    {
+      "id": "Chair",
+      "name": "Chair",
+      "nameId": "Kursi",
+      "effect": "Stress rate",
+      "effectId": "Kenaikan Stress",
+      "icon": "/icons/icon-gear-chair.png",
+      "tiers": [
+        {
+          "name": "Common",
+          "bonus": -5,
+          "sellClears": 0.3,
+          "icon": "/icons/icon-gear-chair-common.png"
+        },
+        {
+          "name": "Uncommon",
+          "bonus": -7,
+          "sellClears": 0.7,
+          "icon": "/icons/icon-gear-chair-common.png"
+        },
+        {
+          "name": "Rare",
+          "bonus": -9,
+          "sellClears": 1.5,
+          "icon": "/icons/icon-gear-chair-rare.png"
+        },
+        {
+          "name": "Epic",
+          "bonus": -15,
+          "sellClears": 3.5,
+          "icon": "/icons/icon-gear-chair-epic.png"
+        },
+        {
+          "name": "Legendary",
+          "bonus": -25,
+          "sellClears": 7.5,
+          "icon": "/icons/icon-gear-chair-legendary.png"
+        }
+      ]
+    },
+    {
+      "id": "Desk",
+      "name": "Desk",
+      "nameId": "Meja",
+      "effect": "Boss time",
+      "effectId": "Waktu boss",
+      "icon": "/icons/icon-gear-desk.png",
+      "tiers": [
+        {
+          "name": "Common",
+          "bonus": 5,
+          "sellClears": 0.3,
+          "icon": "/icons/icon-gear-desk-common.png"
+        },
+        {
+          "name": "Uncommon",
+          "bonus": 7,
+          "sellClears": 0.7,
+          "icon": "/icons/icon-gear-desk-common.png"
+        },
+        {
+          "name": "Rare",
+          "bonus": 9,
+          "sellClears": 1.5,
+          "icon": "/icons/icon-gear-desk-rare.png"
+        },
+        {
+          "name": "Epic",
+          "bonus": 15,
+          "sellClears": 3.5,
+          "icon": "/icons/icon-gear-desk-epic.png"
+        },
+        {
+          "name": "Legendary",
+          "bonus": 25,
+          "sellClears": 7.5,
+          "icon": "/icons/icon-gear-desk-legendary.png"
+        }
+      ]
+    }
+  ],
+  "packages": {
+    "cost": 50,
+    "meterSize": 10,
+    "tiers": [
+      {
+        "name": "Common",
+        "odds": [
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "icon": "/icons/icon-package-common.png"
+      },
+      {
+        "name": "Uncommon",
+        "odds": [
+          80,
+          20,
+          0,
+          0,
+          0
+        ],
+        "icon": "/icons/icon-package-uncommon.png"
+      },
+      {
+        "name": "Rare",
+        "odds": [
+          50,
+          40,
+          10,
+          0,
+          0
+        ],
+        "icon": "/icons/icon-package-rare.png"
+      },
+      {
+        "name": "Epic",
+        "odds": [
+          0,
+          20,
+          50,
+          30,
+          0
+        ],
+        "icon": "/icons/icon-package-epic.png"
+      },
+      {
+        "name": "Legendary",
+        "odds": [
+          0,
+          0,
+          50,
+          30,
+          20
+        ],
+        "icon": "/icons/icon-package-legendary.png"
+      }
+    ]
+  },
+  "missions": [
+    {
+      "id": "ClearTasks",
+      "name": "Clear Tasks",
+      "nameId": "Selesaikan Task",
+      "description": "Lifetime patch-stage clears, including farming.",
+      "descriptionId": "Total clear patch stage sepanjang permainan, termasuk farming.",
+      "icon": "/icons/icon-mission-stat.png",
+      "steps": [
+        {
+          "goal": 10,
+          "reward": 305
+        },
+        {
+          "goal": 100,
+          "reward": 5
+        },
+        {
+          "goal": 1000,
+          "reward": 10
+        },
+        {
+          "goal": 10000,
+          "reward": 20
+        },
+        {
+          "goal": 100000,
+          "reward": 40
+        },
+        {
+          "goal": 1000000,
+          "reward": 10
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "ClearReleases",
+      "name": "Clear Releases",
+      "nameId": "Selesaikan Release",
+      "description": "Total Release mini-boss clears.",
+      "descriptionId": "Total clear mini boss Release.",
+      "icon": "/icons/icon-mission-boss.png",
+      "steps": [
+        {
+          "goal": 1,
+          "reward": 5
+        },
+        {
+          "goal": 5,
+          "reward": 5
+        },
+        {
+          "goal": 25,
+          "reward": 10
+        },
+        {
+          "goal": 100,
+          "reward": 20
+        },
+        {
+          "goal": 500,
+          "reward": 40
+        },
+        {
+          "goal": 2500,
+          "reward": 80
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "ClearMajorReleases",
+      "name": "Clear Major Releases",
+      "nameId": "Selesaikan Major Release",
+      "description": "Total Major Release boss clears.",
+      "descriptionId": "Total clear boss Major Release.",
+      "icon": "/icons/icon-mission-boss.png",
+      "steps": [
+        {
+          "goal": 1,
+          "reward": 10
+        },
+        {
+          "goal": 2,
+          "reward": 15
+        },
+        {
+          "goal": 5,
+          "reward": 20
+        },
+        {
+          "goal": 10,
+          "reward": 30
+        },
+        {
+          "goal": 25,
+          "reward": 50
+        },
+        {
+          "goal": 50,
+          "reward": 100
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "UpgradeStats",
+      "name": "Upgrade Stats",
+      "nameId": "Upgrade Stat",
+      "description": "Lifetime Core Stat levels purchased.",
+      "descriptionId": "Total level Core Stat yang dibeli sepanjang permainan.",
+      "icon": "/icons/icon-mission-stat.png",
+      "steps": [
+        {
+          "goal": 10,
+          "reward": 5
+        },
+        {
+          "goal": 50,
+          "reward": 5
+        },
+        {
+          "goal": 250,
+          "reward": 10
+        },
+        {
+          "goal": 1000,
+          "reward": 20
+        },
+        {
+          "goal": 5000,
+          "reward": 40
+        },
+        {
+          "goal": 25000,
+          "reward": 80
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "OwnFameUpgrades",
+      "name": "Own Fame Upgrades",
+      "nameId": "Miliki Upgrade Fame",
+      "description": "Highest number of permanent upgrade levels held at once; refunds do not lower mission progress.",
+      "descriptionId": "Jumlah level upgrade permanen terbanyak yang dimiliki sekaligus; refund tidak menurunkan progres misi.",
+      "icon": "/icons/icon-fame-star.png",
+      "steps": [
+        {
+          "goal": 3,
+          "reward": 5
+        },
+        {
+          "goal": 10,
+          "reward": 10
+        },
+        {
+          "goal": 25,
+          "reward": 15
+        },
+        {
+          "goal": 50,
+          "reward": 25
+        },
+        {
+          "goal": 100,
+          "reward": 30
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "BuySkins",
+      "name": "Buy Offices",
+      "nameId": "Beli Office",
+      "description": "Purchased offices, excluding the free basic office.",
+      "descriptionId": "Office yang dibeli, selain office dasar gratis.",
+      "icon": "/icons/icon-shop-light.png",
+      "steps": [
+        {
+          "goal": 1,
+          "reward": 20
+        },
+        {
+          "goal": 3,
+          "reward": 30
+        }
+      ],
+      "moreSteps": true
+    },
+    {
+      "id": "BuyShopItems",
+      "name": "Buy Shop Items",
+      "nameId": "Beli Item Toko",
+      "description": "Purchases of boosts and Common Packages.",
+      "descriptionId": "Pembelian boost dan Package Common.",
+      "icon": "/icons/icon-shop-light.png",
+      "steps": [
+        {
+          "goal": 1,
+          "reward": 5
+        },
+        {
+          "goal": 10,
+          "reward": 10
+        },
+        {
+          "goal": 50,
+          "reward": 20
+        },
+        {
+          "goal": 250,
+          "reward": 40
+        },
+        {
+          "goal": 1000,
+          "reward": 10
+        }
+      ],
+      "moreSteps": false
+    },
+    {
+      "id": "Ascend",
+      "name": "Ascend",
+      "nameId": "Ascend",
+      "description": "Total Ascensions completed.",
+      "descriptionId": "Total Ascension yang dilakukan.",
+      "icon": "/icons/icon-retry.png",
+      "steps": [
+        {
+          "goal": 1,
+          "reward": 10
+        },
+        {
+          "goal": 5,
+          "reward": 10
+        },
+        {
+          "goal": 10,
+          "reward": 20
+        },
+        {
+          "goal": 25,
+          "reward": 40
+        },
+        {
+          "goal": 50,
+          "reward": 60
+        },
+        {
+          "goal": 100,
+          "reward": 100
+        }
+      ],
+      "moreSteps": false
+    }
+  ],
+  "shop": [
+    {
+      "id": "Coffee",
+      "name": "Coffee",
+      "nameId": "Kopi",
+      "description": "Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.",
+      "descriptionId": "Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.",
+      "icon": "/icons/icon-coffee.png",
+      "cost": 15,
+      "duration": 60
+    },
+    {
+      "id": "DoubleCash",
+      "name": "Double Cash",
+      "nameId": "Double Cash",
+      "description": "Cash from stage clears ×2.",
+      "descriptionId": "Cash dari clear stage ×2.",
+      "icon": "/icons/icon-cash-banknote-green.png",
+      "cost": 15,
+      "duration": 60
+    },
+    {
+      "id": "Overclock",
+      "name": "Overclock",
+      "nameId": "Overclock",
+      "description": "Auto LoC damage ×2.",
+      "descriptionId": "Damage Auto LoC ×2.",
+      "icon": "/icons/icon-code-monitor.png",
+      "cost": 15,
+      "duration": 60
+    }
+  ],
+  "offices": [
+    {
+      "id": "freelance",
+      "name": "Freelance",
+      "icon": "/icons/icon-workplace-freelance.png",
+      "image": "/workplaces/freelance.png",
+      "price": 0,
+      "multiplier": 1
+    },
+    {
+      "id": "compas-news",
+      "name": "Compas News",
+      "icon": "/icons/icon-workplace-compas-news.png",
+      "image": "/workplaces/compas-news.png",
+      "price": 300,
+      "multiplier": 2
+    },
+    {
+      "id": "farmhub",
+      "name": "FarmHub",
+      "icon": "/icons/icon-workplace-farmhub.png",
+      "image": "/workplaces/farmhub.png",
+      "price": 360,
+      "multiplier": 4
+    },
+    {
+      "id": "brexa",
+      "name": "Brexa",
+      "icon": "/icons/icon-workplace-brexa.png",
+      "image": "/workplaces/brexa.png",
+      "price": 432,
+      "multiplier": 8
+    }
+  ],
+  "officePricing": {
+    "FirstSkinFame": 300,
+    "PriceFactor": 1.2,
+    "MultiplierFactor": 2
+  },
+  "events": {
+    "catInterval": 600,
+    "catChance": 30,
+    "catReward": 5,
+    "catCashClears": 30,
+    "releaseReward": 3,
+    "majorReward": 25,
+    "adLimit": 4,
+    "adDuration": 3600,
+    "adMultiplier": 2,
+    "daily": [
+      5,
+      5,
+      8,
+      8,
+      12,
+      12
+    ]
+  },
+  "icons": {
+    "cash": "/icons/icon-cash-banknote-green.png",
+    "ecash": "/icons/icon-ecash-credit-card-blue.png",
+    "fame": "/icons/icon-fame-star.png",
+    "code": "/icons/icon-code.png",
+    "stress": "/icons/icon-stress-brain.png",
+    "ascend": "/icons/icon-retry.png",
+    "bag": "/icons/icon-bag.png",
+    "missions": "/icons/icon-missions.png",
+    "daily": "/icons/icon-daily-checkin.png"
+  }
+}

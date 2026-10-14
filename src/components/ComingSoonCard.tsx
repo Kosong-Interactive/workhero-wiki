@@ -1,9 +1,9 @@
 import { useLang } from '../i18n'
 
-/** The only hint that more workplaces exist: one card, no count, no names. */
+/** One teaser for future offices, with no unreleased names or catalog count. */
 export default function ComingSoonCard({ compact = false }: { compact?: boolean }) {
   const { tr } = useLang()
-  const text = tr('More workplaces are under development', 'Tempat kerja lainnya sedang dikembangkan')
+  const text = tr('More career offices are under development', 'Office karier lainnya sedang dikembangkan')
   if (compact) {
     return (
       <div className="strip-item soon more" title={text}>

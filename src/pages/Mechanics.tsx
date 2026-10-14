@@ -1,38 +1,37 @@
+import { Link } from 'react-router-dom'
+import { wiki } from '../data'
+import { stageInfo } from '../rpg'
 import { useLang } from '../i18n'
+import Num from '../components/Num'
+import Currency from '../components/Currency'
+import NumberLegend from '../components/NumberLegend'
 
 export default function Mechanics() {
   const { tr } = useLang()
-  const phases: [string, string][] = [
-    [tr('Producing', 'Berproduksi'), tr('Automatic LoC is accepted while the Server has room. Stress rises toward 100%. Users and Cash run as normal.', 'LoC otomatis diterima selama Server masih muat. Stress naik menuju 100%. User dan Cash berjalan normal.')],
-    [tr('Burnout lock', 'Kunci Burnout'), tr('Fixed 2.0s. Stress is pinned at 100%, no LoC is produced. Nothing can shorten it. Users still earn.', 'Tetap 2,0 detik. Stress terkunci 100%, tidak ada LoC diproduksi. Tidak ada yang bisa memperpendeknya. User tetap menghasilkan.')],
-    [tr('Burnout recovery', 'Pemulihan Burnout'), tr('3.0s linear drain from 100% to 0%. Recovery Speed shortens this part only, down to 0.5s. Production resumes at 0%.', 'Penurunan linear 3,0 detik dari 100% ke 0%. Recovery Speed hanya memperpendek bagian ini, sampai 0,5 detik. Produksi lanjut di 0%.')],
-    [tr('Server full', 'Server penuh'), tr('Total LoC reached capacity so LoC production stops. Stress drains to 0% and holds. Users keep growing and earning. Only a bigger Server tier resumes production.', 'Total LoC mencapai kapasitas sehingga produksi LoC berhenti. Stress turun ke 0% dan bertahan. User terus bertambah dan menghasilkan. Hanya tier Server lebih besar yang melanjutkan produksi.')],
-  ]
-  return (
-    <>
-      <h1>{tr('How it works', 'Cara Kerja')}</h1>
-      <p className="lead">{tr('There is no player input. Everything runs by itself; you decide what to buy.', 'Tidak ada input pemain. Semuanya berjalan otomatis; kamu yang menentukan apa yang dibeli.')}</p>
-      <h2>{tr('The loop', 'Alur permainan')}</h2>
-      <p className="flow">Auto LoC/s → Total LoC ({tr('in Server', 'di Server')}) → Users → Cash → {tr('Upgrades', 'Upgrade')} → Milestones → Fame → {tr('next Workplace', 'Tempat Kerja berikutnya')}</p>
-      <ul className="bullets">
-        <li>{tr('Total LoC is permanent and never drains. There is no deploy step.', 'Total LoC permanen dan tidak pernah berkurang. Tidak ada langkah deploy.')}</li>
-        <li><b>{tr('User ceiling', 'Batas User')}</b> = min(Total LoC × {tr('Users per LoC', 'User per LoC')}, Bandwidth). {tr('Users grow toward it at User Growth/s and never fall.', 'User bertambah menuju batas itu sebesar User Growth/s dan tidak pernah turun.')}</li>
-        <li>{tr('Moving to a new workplace resets Cash, item levels and the Server tier to their start.', 'Pindah ke tempat kerja baru mereset Cash, level item, dan tier Server ke awal.')}</li>
-        <li>{tr('Menus (Shop, Upgrades, Milestones, Settings) never pause the simulation.', 'Menu (Toko, Upgrade, Milestone, Pengaturan) tidak pernah menjeda simulasi.')}</li>
-      </ul>
-      <h2>Stress &amp; Burnout</h2>
-      <p className="lead">{tr('Stress only rises while LoC is being produced, toward a fixed 100% ceiling. Freelance and Compas News gain 4 Stress/s (25 productive seconds); later workplaces gain 8/s or the value on their page.', 'Stress hanya naik saat LoC diproduksi, menuju batas tetap 100%. Freelance dan Compas News menambah 4 Stress/detik (25 detik produktif); tempat kerja berikutnya 8/detik atau sesuai nilai di halamannya.')}</p>
-      <div className="card-grid shop">
-        {phases.map(([n, d]) => (
-          <div key={n} className="shop-card"><h3>{n}</h3><p>{d}</p></div>
-        ))}
-      </div>
-      <h2>Bottleneck</h2>
-      <ul className="bullets">
-        <li><b>Server full</b> — {tr('raise Capacity with a SERVER tier.', 'naikkan Capacity dengan tier SERVER.')}</li>
-        <li><b>Bandwidth full</b> — {tr('Users hit the ceiling; Bandwidth items soften it, a SERVER tier raises it.', 'User mencapai batas; item Bandwidth melonggarkannya, tier SERVER menaikkannya.')}</li>
-        <li><b>{tr('Demand-limited', 'Dibatasi permintaan')}</b> — {tr('more Auto LoC or Users per LoC.', 'tambah Auto LoC atau User per LoC.')}</li>
-      </ul>
-    </>
-  )
+  const t = wiki.tuning
+  const stages = [1, t.StepsPerRelease, t.StepsPerRelease * t.ReleasesPerMajor]
+  return <>
+    <h1>{tr('How it works', 'Cara kerja')}</h1>
+    <p className="lead">{tr('WorkHero is now an idle RPG built around tasks, releases, and repeatable runs. Coding is automatic; you choose upgrades, gear, and when to Ascend.', 'WorkHero kini idle RPG dengan task, release, dan run yang bisa diulang. Coding otomatis; kamu memilih upgrade, gear, dan kapan Ascend.')}</p>
+    <div className="flow">{tr('Auto LoC/s → stage HP falls → clear → Cash → Core Stats → deeper versions → Ascension → Fame', 'Auto LoC/s → HP stage turun → selesai → Cash → Core Stat → versi lebih tinggi → Ascension → Fame')}</div>
+    <h2>{tr('Tasks and the version ladder', 'Task dan tangga versi')}</h2>
+    <p>{tr('Each stage has HP: the amount of code needed to finish it. Auto LoC/s is damage per second. Clear a stage to receive Cash and advance. Every', 'Setiap stage punya HP: jumlah kode yang diperlukan untuk menyelesaikannya. Auto LoC/s adalah damage per detik. Selesaikan stage untuk mendapat Cash dan lanjut. Setiap')} <Num v={t.StepsPerRelease} /> {tr('stages is a Release mini boss; every', 'stage ada mini boss Release; setiap')} <Num v={t.ReleasesPerMajor} /> {tr('Releases is a Major Release boss.', 'Release ada boss Major Release.')}</p>
+    <NumberLegend />
+    <div className="table-wrap"><table><thead><tr><th>{tr('Stage', 'Stage')}</th><th>{tr('Version', 'Versi')}</th><th>{tr('Kind', 'Jenis')}</th><th>{tr('Base HP', 'HP dasar')}</th><th>{tr('Base Cash', 'Cash dasar')}</th><th>{tr('Time limit', 'Batas waktu')}</th><th>{tr('First-clear ECash', 'ECash clear pertama')}</th></tr></thead><tbody>{stages.map(n => { const s = stageInfo(n); return <tr key={n}><td><Num v={n} /></td><td>{s.version}</td><td>{s.kind}</td><td><Num v={s.hp} /></td><td><Currency kind="cash" value={s.cash} /></td><td>{s.time}s</td><td>{s.ecash ? <Currency kind="ecash" value={s.ecash} /> : '—'}</td></tr> })}</tbody></table></div>
+    <p className="muted">{tr('Base patch HP =', 'HP dasar patch =')} <code>{t.HpBase} × {t.HpGrowth}^(stage − 1)</code> · {tr('base patch Cash =', 'Cash dasar patch =')} <code>{t.CashBase} × {t.CashGrowth}^(stage − 1)</code>. Release: HP ×{t.ReleaseHpMultiplier}, Cash ×{t.ReleaseCashMultiplier}; Major Release: HP ×{t.MajorHpMultiplier}, Cash ×{t.MajorCashMultiplier}.</p>
+    <h2>{tr('Retreat and farming', 'Mundur dan farming')}</h2>
+    <p>{tr('If the time limit expires, retreat one stage and farm it. After three farm clears, retry the failed stage automatically. Only time is lost. Boss timers keep running through Burnout.', 'Jika waktu habis, mundur satu stage dan farming di sana. Setelah tiga clear farming, stage yang gagal otomatis dicoba lagi. Hanya waktu yang hilang. Timer boss terus berjalan selama Burnout.')}</p>
+    <h2>Stress & Burnout</h2>
+    <div className="card-grid shop">
+      <div className="shop-card"><h3>{tr('Producing', 'Berproduksi')}</h3><p>{tr('Stress rises while coding. At the base', 'Stress naik selama coding. Dengan rate dasar')} {t.StressPerSecond}%/s, {tr('a fresh run produces for', 'run baru berproduksi selama')} {t.MaxStress / t.StressPerSecond}s {tr('before reaching 100%.', 'sebelum mencapai 100%.')}</p></div>
+      <div className="shop-card"><h3>Burnout</h3><p>{tr('A fixed lock lasts', 'Lock tetap berlangsung')} {t.BurnoutLockSeconds}s. {tr('Damage stops, so stages cannot clear and no stage Cash is paid.', 'Damage berhenti, sehingga stage tidak bisa selesai dan tidak ada Cash dari clear stage.')}</p></div>
+      <div className="shop-card"><h3>Recovery</h3><p>{tr('Stress drains to 0% over a base', 'Stress turun ke 0% selama durasi dasar')} {t.RecoveryBaseSeconds}s. {tr('Recovery Speed shortens this part only, to a minimum of', 'Recovery Speed hanya memperpendek bagian ini, dengan minimum')} {t.RecoveryFloorSeconds}s.</p></div>
+    </div>
+    <h2>Ascension</h2>
+    <p>{tr('Ascend banks Fame from the highest stage reached this run, then starts again. You can Ascend once the reward is above zero. Each run pays its full reward, even if you reached that version in an earlier run.', 'Ascend memberikan Fame dari stage tertinggi yang dicapai dalam run ini, lalu memulai lagi. Ascend tersedia saat reward lebih dari nol. Setiap run memberi reward penuh, walau versi itu sudah dicapai pada run sebelumnya.')}</p>
+    <p><code>Fame = floor((best stage / {t.FameStageScale})^{t.FameExponent})</code></p>
+    <div className="table-wrap"><table><thead><tr><th>{tr('Resets', 'Direset')}</th><th>{tr('Keeps', 'Tetap dimiliki')}</th></tr></thead><tbody><tr><td>{tr('Cash, Core Stat levels, stage progress, Stress', 'Cash, level Core Stat, progres stage, Stress')}</td><td>{tr('Current/Total Fame, ECash, permanent upgrades, owned offices, gear, Bag, mission progress, best-version record', 'Current/Total Fame, ECash, upgrade permanen, office milikmu, gear, Bag, progres misi, rekor versi tertinggi')}</td></tr></tbody></table></div>
+    <h2>Offline</h2><p>{tr('Offline play clears patch stages but never starts a boss. At a boss, it farms the previous stage for the rest of the absence. The base credited cap is 4 hours, extendable to 12 hours with Fame. The return receipt shows the credited progress.', 'Saat offline, patch stage bisa selesai tetapi boss tidak dimulai. Saat mencapai boss, game farming stage sebelumnya selama sisa waktu offline. Batas waktu yang dihitung mulai 4 jam, bisa diperpanjang sampai 12 jam dengan Fame. Ringkasan saat kembali menunjukkan progres yang dihitung.')}</p>
+    <div className="callout"><h2>{tr('The Career Idle loop has changed', 'Alur Career Idle sudah berubah')}</h2><p>{tr('Servers, Users, Capacity, Bandwidth, workplace ITEM catalogs, and Milestones are retired. Workplaces are now offices, Missions reward ECash, and Ascension is the source of Fame.', 'Server, User, Capacity, Bandwidth, katalog ITEM per tempat kerja, dan Milestone sudah diganti. Tempat kerja kini menjadi office, Misi memberi ECash, dan Ascension menjadi sumber Fame.')}</p><Link to="/upgrades">{tr('Explore the new upgrades →', 'Lihat upgrade baru →')}</Link></div>
+  </>
 }

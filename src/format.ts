@@ -14,11 +14,13 @@ export const NUMBER_SUFFIXES: { suffix: string; power: number; en: string; id: s
 ]
 
 export function compact(n: number): string {
-  if (n < 1000) return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/\.?0+$/, '')
-  const tier = Math.min(Math.floor(Math.log10(n) / 3), NUMBER_SUFFIXES.length)
+  if (!Number.isFinite(n)) return '—'
+  if (Math.abs(n) >= 1e36) return n.toExponential(2)
+  if (Math.abs(n) < 1000) return Number.isInteger(n) ? String(n) : String(Number(n.toFixed(2)))
+  const tier = Math.min(Math.floor(Math.log10(Math.abs(n)) / 3), NUMBER_SUFFIXES.length)
   const scaled = n / Math.pow(1000, tier)
   const text = scaled >= 100 ? scaled.toFixed(0) : scaled >= 10 ? scaled.toFixed(1) : scaled.toFixed(2)
-  return text.replace(/\.?0+$/, '') + NUMBER_SUFFIXES[tier - 1].suffix
+  return text.includes('.') ? text.replace(/\.?0+$/, '') + NUMBER_SUFFIXES[tier - 1].suffix : text + NUMBER_SUFFIXES[tier - 1].suffix
 }
 
 export function full(n: number): string {

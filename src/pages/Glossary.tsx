@@ -1,68 +1,38 @@
 import { useLang } from '../i18n'
 import { NumberTable } from '../components/NumberLegend'
 
-const terms: [string, string, string, string, string][] = [
-  ['LoC', 'Lines of Code', 'The number of lines of code written. The core resource of the game.', 'Jumlah baris kode yang ditulis. Sumber daya inti game.', 'core'],
-  ['Auto LoC/s', 'Lines per second', 'Lines of code written automatically each second. There is no tapping or holding.', 'Baris kode yang ditulis otomatis tiap detik. Tidak ada tap atau tahan.', 'core'],
-  ['Total LoC', 'Stored code', 'All code written in the current workplace. It is permanent and never drains.', 'Seluruh kode yang ditulis di tempat kerja saat ini. Permanen dan tidak pernah berkurang.', 'core'],
-  ['Server', 'Storage', 'Holds Total LoC. Its tier decides Capacity, Bandwidth and User Growth/s.', 'Menyimpan Total LoC. Tier-nya menentukan Capacity, Bandwidth, dan User Growth/s.', 'server'],
-  ['Capacity', 'LoC limit', 'The most LoC the Server can hold. When Total LoC reaches it the Server is Full and writing stops.', 'Batas LoC yang muat di Server. Saat Total LoC mencapainya, Server Penuh dan penulisan berhenti.', 'server'],
-  ['Bandwidth', 'User limit', 'The most Users the Server can serve at once. It caps the User ceiling.', 'Jumlah User maksimum yang bisa dilayani Server sekaligus. Membatasi batas atas User.', 'server'],
-  ['User Growth/s', 'Arrival rate', 'How fast Users move toward their ceiling each second.', 'Seberapa cepat User bergerak menuju batas atasnya tiap detik.', 'server'],
-  ['Users', 'Audience', 'People using your code. They earn Cash continuously and never leave.', 'Orang yang memakai kodemu. Mereka menghasilkan Cash terus-menerus dan tidak pernah pergi.', 'economy'],
-  ['Users per LoC', 'Demand', 'How many Users each line of code attracts. User ceiling = min(Total LoC × Users per LoC, Bandwidth).', 'Berapa banyak User yang ditarik tiap baris kode. Batas User = min(Total LoC × User per LoC, Bandwidth).', 'economy'],
-  ['Revenue per User', 'Income', 'Cash each User pays per second.', 'Cash yang dibayar tiap User per detik.', 'economy'],
-  ['Cash', 'Local currency', 'Earned from Users. Buys upgrades. Resets in every new workplace.', 'Didapat dari User. Dipakai membeli upgrade. Direset di setiap tempat kerja baru.', 'economy'],
-  ['ECash', 'Global currency', 'Spendable in the Shop. Comes from Milestones and some Packages.', 'Bisa dipakai di Toko. Didapat dari Milestone dan sebagian Package.', 'economy'],
-  ['Fame', 'Reputation', 'Global score from Milestones. Not spendable; unlocks the next workplace.', 'Skor global dari Milestone. Tidak bisa dibelanjakan; membuka tempat kerja berikutnya.', 'economy'],
-  ['Stress', 'Strain', 'Rises while code is being written, up to 100%.', 'Naik saat kode ditulis, hingga 100%.', 'stress'],
-  ['Burnout', 'Forced pause', 'At 100% Stress, writing stops for a 2s lock, then Stress drains back to 0% (Recovery). Users still earn.', 'Pada Stress 100%, penulisan berhenti 2 detik, lalu Stress turun kembali ke 0% (Recovery). User tetap menghasilkan.', 'stress'],
-  ['Recovery', 'Cool-down', 'The 3s drain after the lock. Recovery Speed items shorten it (min 0.5s).', 'Penurunan 3 detik setelah lock. Item Recovery Speed memperpendeknya (min 0,5 detik).', 'stress'],
-  ['Server Full', 'Bottleneck', 'Total LoC reached Capacity. Buy a bigger SERVER tier to continue writing.', 'Total LoC mencapai Capacity. Beli tier SERVER lebih besar untuk lanjut menulis.', 'stress'],
-  ['ITEM', 'Upgrade tab', 'Upgrades bought with Cash that boost production, Users, income or Stress. Local to each workplace.', 'Upgrade yang dibeli dengan Cash untuk menaikkan produksi, User, pendapatan, atau Stress. Berlaku per tempat kerja.', 'ui'],
-  ['SERVER', 'Upgrade tab', 'Buys the next Server tier: bigger Capacity, Bandwidth and User Growth/s.', 'Membeli tier Server berikutnya: Capacity, Bandwidth, dan User Growth/s lebih besar.', 'ui'],
-  ['Milestone', 'Goal', 'Reached by earning enough Cash in a workplace. Grants Fame and ECash.', 'Dicapai dengan mengumpulkan cukup Cash di sebuah tempat kerja. Memberi Fame dan ECash.', 'ui'],
-  ['Workplace', 'Stage', 'One of the careers, played in order. Each starts from scratch.', 'Salah satu karier, dimainkan berurutan. Masing-masing mulai dari nol.', 'ui'],
-  ['Package', 'Delivery', 'A parcel that arrives every 10 minutes: Cash, or sometimes ECash.', 'Paket yang datang tiap 10 menit: Cash, atau kadang ECash.', 'ui'],
-  ['Cat', 'Bonus', 'A cat that visits the room. Tap it for a quick Cash bonus.', 'Kucing yang berkunjung ke ruangan. Tap untuk bonus Cash cepat.', 'ui'],
+const terms = [
+  ['LoC', 'Lines of Code', 'Lines of code. Auto LoC/s is damage per second to stage HP.', 'Baris kode. Auto LoC/s menjadi damage per detik ke HP stage.'],
+  ['Task / Patch', 'Stage', 'An ordinary stage, such as v0.0.1. Clearing it pays Cash.', 'Stage biasa, misalnya v0.0.1. Menyelesaikannya memberi Cash.'],
+  ['HP', 'Health Points', 'The remaining code required to complete a stage. Auto LoC reduces it to zero.', 'Sisa kode yang perlu ditulis untuk menyelesaikan stage. Auto LoC menguranginya sampai nol.'],
+  ['Release', 'Mini boss', 'Every tenth stage. More HP, more Cash, and a boss timer.', 'Setiap stage kesepuluh. HP dan Cash lebih besar, serta timer boss.'],
+  ['Major Release', 'Boss', 'Every 25th Release (250 stages), shown as v1.0.0, v2.0.0, and onward.', 'Setiap Release ke-25 (250 stage), ditampilkan sebagai v1.0.0, v2.0.0, dan seterusnya.'],
+  ['Cash per Task', 'Reward', 'The Cash paid on a stage clear. The HUD Cash/s estimate is not continuous income.', 'Cash yang dibayar saat stage selesai. Estimasi Cash/s di HUD bukan pendapatan terus-menerus.'],
+  ['Core Stats', 'Run upgrades', 'Six stats bought with Cash. Levels reset on Ascension.', 'Enam stat yang dibeli dengan Cash. Level direset saat Ascension.'],
+  ['Stress', 'Burnout meter', 'Rises while coding. At 100%, coding enters Burnout.', 'Naik saat coding. Pada 100%, coding memasuki Burnout.'],
+  ['Burnout', 'Locked pause', 'The fixed 2-second pause before Recovery. No coding damage or stage-clear income.', 'Jeda tetap 2 detik sebelum Recovery. Tidak ada damage coding atau Cash dari clear stage.'],
+  ['Recovery', 'Cool-down', 'Stress drains back to zero. Base 3 seconds; minimum 0.5 seconds with upgrades.', 'Stress turun kembali ke nol. Dasar 3 detik; minimum 0,5 detik dengan upgrade.'],
+  ['Farming', 'Retry loop', 'Clear the previous stage three times after failure, then retry automatically.', 'Selesaikan stage sebelumnya tiga kali setelah gagal, lalu coba lagi otomatis.'],
+  ['Ascension', 'Prestige', 'Restart the run and bank Fame from the highest version reached.', 'Mulai ulang run dan dapatkan Fame dari versi tertinggi yang dicapai.'],
+  ['Current Fame', 'Spendable Fame', 'The Fame balance used for offices and permanent upgrades.', 'Saldo Fame untuk membeli office dan upgrade permanen.'],
+  ['Total Fame', 'Lifetime record', 'All Fame earned from Ascensions. It only increases and ranks the leaderboard.', 'Seluruh Fame dari Ascension. Hanya naik dan menentukan peringkat leaderboard.'],
+  ['ECash', 'Persistent currency', 'Pays for Packages and timed boosts. Missions, boss first clears, Cat, and check-in can grant it.', 'Membeli Package dan boost sementara. Bisa didapat dari misi, clear boss pertama, Cat, dan check-in.'],
+  ['Gear', 'Equipment', 'Persistent bonuses in Laptop Setup, Outfit, Chair, and Desk slots.', 'Bonus permanen pada slot Laptop Setup, Outfit, Chair, dan Desk.'],
+  ['Bag', 'Inventory', 'Unlimited spare gear stacks, separate from the equipped gear.', 'Stack gear cadangan tanpa batas, terpisah dari gear yang dipakai.'],
+  ['Merge', 'Tier upgrade', 'Two gear pieces of the same slot and tier become one next-tier piece.', 'Dua gear dengan slot dan tier yang sama menjadi satu gear tier berikutnya.'],
+  ['Package', 'Gear chest', 'An owned chest opened for random gear. Tier odds are shown in the Package guide.', 'Chest yang dimiliki dan dibuka untuk gear acak. Peluang tier ada di panduan Package.'],
+  ['Office', 'Career appearance', 'A former workplace look with equipped-only Auto LoC and Cash multipliers. Changing it triggers Ascension.', 'Tampilan tempat kerja lama dengan multiplier Auto LoC dan Cash saat dipakai. Menggantinya memicu Ascension.'],
+  ['Mission', 'Lifetime goal', 'A tiered goal whose ECash reward is claimed once per step.', 'Target bertahap dengan reward ECash yang diklaim sekali tiap langkah.'],
+  ['Head Start', 'Starting Cash', 'Banks early-stage rewards as starting Cash. It does not skip stages.', 'Memberi reward stage awal sebagai Cash awal. Tidak melewati stage.'],
 ]
-
 export default function Glossary() {
-  const { tr, lang } = useLang()
-  const groups: [string, string, string][] = [
-    ['core', 'Code', 'Kode'],
-    ['server', 'Server', 'Server'],
-    ['economy', 'Users & money', 'User & uang'],
-    ['stress', 'Stress', 'Stress'],
-    ['ui', 'Game terms', 'Istilah game'],
-  ]
-  return (
-    <>
-      <h1>{tr('Glossary', 'Glosarium')}</h1>
-      <p className="lead">{tr('Every term used in the game and on this wiki.', 'Semua istilah yang dipakai di game dan wiki ini.')}</p>
-      {groups.map(([key, en, id]) => (
-        <section key={key}>
-          <h2>{tr(en, id)}</h2>
-          <dl className="glossary">
-            {terms.filter((t) => t[4] === key).map(([term, sub, d_en, d_id]) => (
-              <div key={term}>
-                <dt>{term} <small>{sub}</small></dt>
-                <dd>{lang === 'id' ? d_id : d_en}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ))}
-      <section id="numbers">
-        <h2>{tr('Number notation (K, M, B…)', 'Notasi angka (K, M, B…)')}</h2>
-        <p className="lead">
-          {tr(
-            'The game and this wiki shorten big numbers. K means thousand — 1K = 1,000, which is 10³ (a 1 followed by three zeros). Each next letter is another ×1,000: M = 10⁶, B = 10⁹, T = 10¹², and so on up to Dc = 10³³. Numbers are rounded; hover one for its exact value.',
-            'Game dan wiki ini menyingkat angka besar. K artinya ribu — 1K = 1.000, yaitu 10³ (angka 1 diikuti tiga nol). Tiap huruf berikutnya dikali 1.000 lagi: M = 10⁶, B = 10⁹, T = 10¹², dan seterusnya sampai Dc = 10³³. Angka dibulatkan; arahkan kursor ke angka untuk nilai persisnya.',
-          )}
-        </p>
-        <NumberTable />
-      </section>
-    </>
-  )
+  const { tr } = useLang()
+  return <>
+    <h1>{tr('Glossary', 'Glosarium')}</h1>
+    <p className="lead">{tr('Terms used in the new WorkHero: Idle RPG mechanics.', 'Istilah dalam mekanik baru WorkHero: Idle RPG.')}</p>
+    <dl className="glossary">{terms.map(([term, sub, en, id]) => <div key={term}><dt>{term} <small>{sub}</small></dt><dd>{tr(en, id)}</dd></div>)}</dl>
+    <h2>{tr('Number notation (K, M, B…)', 'Notasi angka (K, M, B…)')}</h2>
+    <p className="lead">{tr('K = 10³ (1,000), M = 10⁶, B = 10⁹, T = 10¹². Each step is ×1,000. Qa and Qi are different: quadrillion and quintillion. Numbers in tables are rounded; hover a number for its exact value. Beyond Dc, the calculator uses scientific notation.', 'K = 10³ (1.000), M = 10⁶, B = 10⁹, T = 10¹². Tiap langkah dikali 1.000. Qa dan Qi berbeda: kuadriliun dan kuintiliun. Angka di tabel dibulatkan; arahkan kursor ke angka untuk nilai persisnya. Di atas Dc, kalkulator memakai notasi ilmiah.')}</p>
+    <NumberTable />
+  </>
 }

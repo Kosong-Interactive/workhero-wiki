@@ -11,18 +11,18 @@ interface Ctx {
 
 const META: Record<Lang, { title: string; description: string; ogDescription: string }> = {
   en: {
-    title: 'WorkHero Wiki — Upgrades, Servers, Shop & Milestones',
+    title: 'WorkHero Wiki — Idle RPG, Gear, Packages & Ascension',
     description:
-      'Complete reference for WorkHero: Career Idle — workplaces, upgrade items, server tiers, shop items and milestones, with a cost calculator and glossary in English and Indonesian.',
+      'Explore WorkHero: Idle RPG — stages, bosses, Core Stats, Fame upgrades, gear, Packages, missions, offices, and calculators in English and Indonesian.',
     ogDescription:
-      'Everything in WorkHero: Career Idle — workplaces, upgrade items, server tiers, shop items and milestones. English & Indonesian.',
+      'WorkHero: Idle RPG guide — stages, bosses, upgrades, gear, Packages, missions, offices, and Ascension. English & Indonesian.',
   },
   id: {
-    title: 'WorkHero Wiki — Upgrade, Server, Toko & Milestone',
+    title: 'WorkHero Wiki — Idle RPG, Gear, Package & Ascension',
     description:
-      'Referensi lengkap WorkHero: Career Idle — tempat kerja, item upgrade, tier server, item toko, dan milestone, lengkap dengan kalkulator biaya dan glosarium dalam bahasa Indonesia dan Inggris.',
+      'Panduan WorkHero: Idle RPG — stage, boss, Core Stat, upgrade Fame, gear, Package, misi, office, dan kalkulator dalam bahasa Indonesia dan Inggris.',
     ogDescription:
-      'Semua isi WorkHero: Career Idle — tempat kerja, item upgrade, tier server, item toko, dan milestone. Bahasa Indonesia & Inggris.',
+      'Panduan WorkHero: Idle RPG — stage, boss, upgrade, gear, Package, misi, office, dan Ascension. Bahasa Indonesia & Inggris.',
   },
 }
 
@@ -54,6 +54,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
       document.querySelector(selector)?.setAttribute('content', value)
     }
     document.querySelector('meta[property="og:locale"]')?.setAttribute('content', lang === 'id' ? 'id_ID' : 'en_US')
+    document.querySelector('meta[property="og:locale:alternate"]')?.setAttribute('content', lang === 'id' ? 'en_US' : 'id_ID')
     try {
       localStorage.setItem('wiki-lang', lang)
     } catch {

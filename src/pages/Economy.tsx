@@ -1,52 +1,29 @@
 import { wiki } from '../data'
-import { full } from '../format'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
-import { isComingSoon } from '../components/WorkplaceImage'
+import Num from '../components/Num'
+import Currency from '../components/Currency'
 
 export default function Economy() {
   const { tr } = useLang()
   const e = wiki.events
-  const released = wiki.workplaces.filter((w) => !isComingSoon(w))
-  const totalFame = released.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.fameReward, 0), 0)
-  const totalEcash = released.reduce((n, w) => n + w.milestones.reduce((m, x) => m + x.ecashReward, 0), 0)
-  return (
-    <>
-      <h1>{tr('Currencies & events', 'Mata Uang & Event')}</h1>
-      <div className="card-grid shop">
-        <div className="shop-card">
-          <Icon src={wiki.icons.cash} size={48} />
-          <h3>Cash</h3><span className="badge">{tr('Local · spendable', 'Lokal · bisa dibelanjakan')}</span>
-          <p>{tr('Earned continuously from Users. Buys ITEM and SERVER upgrades. Rebuilt from zero in every workplace.', 'Didapat terus-menerus dari User. Membeli upgrade ITEM dan SERVER. Mulai dari nol di setiap tempat kerja.')}</p>
-        </div>
-        <div className="shop-card">
-          <Icon src={wiki.icons.ecash} size={48} />
-          <h3>ECash</h3><span className="badge">{tr('Global · spendable', 'Global · bisa dibelanjakan')}</span>
-          <p>{tr(`Granted by Milestones and some Packages. Buys one-minute Shop consumables. Never converts from Cash. All Milestones together pay ${full(totalEcash)} ECash.`, `Didapat dari Milestone dan sebagian Package. Membeli item Toko satu menit. Tidak bisa ditukar dari Cash. Seluruh Milestone memberi total ${full(totalEcash)} ECash.`)}</p>
-        </div>
-        <div className="shop-card">
-          <Icon src={wiki.icons.fame} size={48} />
-          <h3>Fame</h3><span className="badge">{tr('Global · not spendable', 'Global · tidak bisa dibelanjakan')}</span>
-          <p>{tr(`Granted by Milestones and unlocks the next workplace. All Milestones together pay ${full(totalFame)} Fame.`, `Didapat dari Milestone dan membuka tempat kerja berikutnya. Seluruh Milestone memberi total ${full(totalFame)} Fame.`)}</p>
-        </div>
-      </div>
-
-      <h2>{tr('Secondary events', 'Event sampingan')}</h2>
-      <div className="card-grid shop">
-        <div className="shop-card">
-          <Icon src={wiki.icons.cash} size={40} />
-          <h3>{tr('The Cat', 'Si Kucing')}</h3>
-          <p>{tr(`Wanders the room every ${e.catMinimumIntervalSeconds}–${e.catMaximumIntervalSeconds}s and stays for ${e.catVisibleSeconds}s. Tap it to claim ${e.catEarningsSeconds}s of current Cash/s (minimum ${e.catMinimumCash} Cash).`, `Berkeliling ruangan tiap ${e.catMinimumIntervalSeconds}–${e.catMaximumIntervalSeconds} detik dan bertahan ${e.catVisibleSeconds} detik. Tap untuk mengambil ${e.catEarningsSeconds} detik Cash/s saat ini (minimum ${e.catMinimumCash} Cash).`)}</p>
-        </div>
-        <div className="shop-card">
-          <Icon src={wiki.icons.ecash} size={40} />
-          <h3>{tr('The Package', 'Si Paket')}</h3>
-          <p>{tr(`One arrives every ${e.packageIntervalMinutes} minutes, counted from the last claim. ${Math.round(e.packageECashChance * 100)}% of the time it pays ${e.packageECash} ECash; otherwise ${e.packageEarningsSeconds}s of Cash/s (minimum ${e.packageMinimumCash} Cash). It persists across reloads.`, `Satu paket datang tiap ${e.packageIntervalMinutes} menit, dihitung dari klaim terakhir. ${Math.round(e.packageECashChance * 100)}% kemungkinan memberi ${e.packageECash} ECash; selebihnya ${e.packageEarningsSeconds} detik Cash/s (minimum ${e.packageMinimumCash} Cash). Tetap ada setelah reload.`)}</p>
-        </div>
-      </div>
-
-      <h2>Offline</h2>
-      <p className="lead">{tr('While you are away the game simulates the same state machine, capped at four hours. A welcome-back receipt appears after at least 60 credited seconds.', 'Saat kamu pergi, game mensimulasikan mesin state yang sama, dibatasi empat jam. Ringkasan selamat datang muncul setelah minimal 60 detik terkredit.')}</p>
-    </>
-  )
+  const currency = [
+    ['cash', 'Cash', 'Cash', 'Earned on stage clears and spent on Core Stats. Global to the run; resets on Ascension.', 'Didapat saat stage selesai dan dipakai membeli Core Stat. Berlaku untuk satu run; direset saat Ascension.'],
+    ['fame', 'Current Fame', 'Current Fame', 'Spendable balance earned by Ascension. Buys offices and permanent upgrades; survives resets.', 'Saldo yang bisa dibelanjakan, didapat dari Ascension. Membeli office dan upgrade permanen; bertahan setelah reset.'],
+    ['fame', 'Total Fame', 'Total Fame', 'Lifetime Fame earned. Only rises, ranks the leaderboard, and is unaffected by purchases or refunds.', 'Total Fame sepanjang permainan. Hanya naik, menentukan peringkat leaderboard, dan tidak terpengaruh pembelian atau refund.'],
+    ['ecash', 'ECash', 'ECash', 'Buys Packages and Shop boosts. Earned from missions, boss first clears, some Cat visits, and daily check-ins. Survives Ascension.', 'Membeli Package dan boost Toko. Didapat dari misi, clear boss pertama, sebagian kunjungan Cat, dan check-in harian. Bertahan setelah Ascension.'],
+  ] as const
+  return <>
+    <h1>{tr('Currencies & rewards', 'Mata uang & reward')}</h1>
+    <p className="lead">{tr('One run, one Cash balance. Fame is split into a spendable balance and a lifetime leaderboard record.', 'Satu run, satu saldo Cash. Fame dibagi menjadi saldo yang bisa dibelanjakan dan rekor leaderboard sepanjang permainan.')}</p>
+    <div className="card-grid shop">{currency.map(([key, en, id, desc, descId]) => <div className="shop-card" key={en}><Icon src={wiki.icons[key]} size={44} /><h3>{tr(en, id)}</h3><p>{tr(desc, descId)}</p></div>)}</div>
+    <p className="muted">{tr('Fame is earned only through Ascension and is never sold. Cash does not convert into ECash or Fame.', 'Fame hanya didapat melalui Ascension dan tidak dijual. Cash tidak bisa ditukar menjadi ECash atau Fame.')}</p>
+    <h2>{tr('Boss first clears', 'Clear boss pertama')}</h2><p>{tr('Each Release pays', 'Setiap Release memberi')} <Currency kind="ecash" value={e.releaseReward} />, {tr('each Major Release pays', 'setiap Major Release memberi')} <Currency kind="ecash" value={e.majorReward} />. {tr('Only the first lifetime clear of that boss pays ECash; later runs still earn its Cash.', 'Hanya clear pertama boss itu sepanjang permainan yang memberi ECash; run berikutnya tetap memberi Cash.')}</p>
+    <h2>{tr('The Cat', 'Si Kucing')}</h2><p>{tr('A visit is due every', 'Kunjungan datang setiap')} {e.catInterval / 60} {tr('minutes after the last claim. It waits to be clicked. There is a', 'menit setelah klaim terakhir. Cat menunggu diklik. Ada peluang')} {e.catChance}% {tr('chance of', 'mendapat')} <Currency kind="ecash" value={e.catReward} />; {tr('otherwise it gives Cash worth', 'selebihnya memberi Cash senilai')} <Num v={e.catCashClears} /> {tr('clears of the current stage. The reward is rolled once and kept across reloads.', 'clear stage saat ini. Reward diacak sekali dan tetap tersimpan setelah reload.')}</p>
+    <h2>{tr('Free room Package', 'Package gratis di ruangan')}</h2><p>{tr('Each first clear of a multiple of', 'Setiap clear pertama kelipatan')} <Num v={wiki.tuning.PackageEveryStages} /> {tr('stages in the run offers a free Package with one Common gear. This is separate from the Shop’s owned Package meter.', 'stage dalam run menawarkan Package gratis berisi satu gear Common. Ini terpisah dari meter Package milikmu di Toko.')}</p>
+    <h2>{tr('Daily check-in', 'Check-in harian')}</h2><p className="muted">{tr('One claim per local calendar day. A missed day does not wipe progress; the seven-day cycle waits and then repeats.', 'Satu klaim per hari kalender lokal. Melewatkan satu hari tidak mereset progres; siklus tujuh hari menunggu lalu berulang.')}</p>
+    <div className="daily-grid">{[...e.daily, 0].map((reward, i) => <div key={i} className="shop-card"><small>{tr('Day', 'Hari')} {i + 1}</small><Icon src={i === 6 ? wiki.gear[0].tiers[3].icon : wiki.icons.ecash} size={40} />{i === 6 ? <strong>{tr('Random Epic gear', 'Gear Epic acak')}</strong> : <Currency kind="ecash" value={reward} />}</div>)}</div>
+    <h2>{tr('Rewarded ad boost', 'Boost iklan reward')}</h2><p>{tr('The intended native ad reward doubles Cash per Task for', 'Reward iklan native yang direncanakan menggandakan Cash per Task selama')} {e.adDuration / 3600} {tr('hour per completed ad, up to', 'jam tiap iklan selesai, hingga')} {e.adLimit} {tr('ads per day. Extra ads extend the time; Shop Double Cash can stack with it for ×4 stage Cash.', 'iklan per hari. Iklan tambahan memperpanjang durasi; Double Cash Toko bisa bertumpuk menjadi Cash stage ×4.')}</p>
+    <p className="muted">{tr('Ad SDK integration is still under development. WebGL has no ad SDK; the quota and buff rules exist in the prototype.', 'Integrasi SDK iklan masih dikembangkan. WebGL tidak punya SDK iklan; aturan kuota dan buff sudah ada di prototipe.')}</p>
+  </>
 }
