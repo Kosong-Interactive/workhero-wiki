@@ -20,8 +20,7 @@ export default function Home() {
     <>
       <div className="hero-intro">
         <div>
-          <span className="eyebrow">WorkHero: Idle RPG</span>
-          <h1>{tr('Build. Release. Ascend.', 'Coding. Release. Ascend.')}</h1>
+          <h1>Build. Release. Repeat.</h1>
           <p className="lead">{tr('The guide to WorkHero’s new idle RPG loop. Write code automatically, clear tasks and bosses, collect gear, and turn each run into permanent Fame.', 'Panduan mekanik idle RPG baru WorkHero. Tulis kode otomatis, selesaikan task dan boss, kumpulkan gear, lalu ubah hasil setiap run menjadi Fame permanen.')}</p>
           <PlayButton big>▶ {tr('Play WorkHero', 'Main WorkHero')}</PlayButton>
         </div>

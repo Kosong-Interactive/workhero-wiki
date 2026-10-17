@@ -69,6 +69,6 @@ export default function App() {
         <Route path="*" element={<><h1>{tr('Page not found', 'Halaman tidak ditemukan')}</h1><NavLink to="/">{tr('Back to Home', 'Kembali ke Beranda')}</NavLink></>} />
       </Routes>
     </main>
-    <footer className="wiki-footer"><span>WorkHero: Idle RPG</span><p>{tr('Prototype mechanics · balance values may change during development.', 'Mekanik prototipe · angka balance bisa berubah selama pengembangan.')}</p></footer>
+    <footer className="wiki-footer"><p>{tr('Prototype mechanics · balance values may change during development.', 'Mekanik prototipe · angka balance bisa berubah selama pengembangan.')}</p></footer>
   </>
 }
