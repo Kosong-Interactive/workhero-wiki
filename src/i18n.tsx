@@ -11,18 +11,18 @@ interface Ctx {
 
 const META: Record<Lang, { title: string; description: string; ogDescription: string }> = {
   en: {
-    title: 'WorkHero Wiki — Idle RPG, Gear, Packages & Ascension',
+    title: 'WorkHero Wiki — Idle RPG, Gear, Packages & Promote',
     description:
       'Explore WorkHero: Idle RPG — stages, bosses, Core Stats, Fame upgrades, gear, Packages, missions, offices, and calculators in English and Indonesian.',
     ogDescription:
-      'WorkHero: Idle RPG guide — stages, bosses, upgrades, gear, Packages, missions, offices, and Ascension. English & Indonesian.',
+      'WorkHero: Idle RPG guide — stages, bosses, upgrades, gear, Packages, missions, offices, and Promote. English & Indonesian.',
   },
   id: {
-    title: 'WorkHero Wiki — Idle RPG, Gear, Package & Ascension',
+    title: 'WorkHero Wiki — Idle RPG, Gear, Package & Promote',
     description:
       'Panduan WorkHero: Idle RPG — stage, boss, Core Stat, upgrade Fame, gear, Package, misi, office, dan kalkulator dalam bahasa Indonesia dan Inggris.',
     ogDescription:
-      'Panduan WorkHero: Idle RPG — stage, boss, upgrade, gear, Package, misi, office, dan Ascension. Bahasa Indonesia & Inggris.',
+      'Panduan WorkHero: Idle RPG — stage, boss, upgrade, gear, Package, misi, office, dan Promote. Bahasa Indonesia & Inggris.',
   },
 }
 

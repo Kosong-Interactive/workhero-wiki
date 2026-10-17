@@ -10,6 +10,7 @@ export default function Packages() {
   return <>
     <h1>Packages</h1>
     <p className="lead">{tr('Buy a Common Package in the Shop, then open owned Packages from the Package panel. Each gives one gear piece from a random slot.', 'Beli Package Common di Toko, lalu buka Package yang dimiliki dari panel Package. Masing-masing memberi satu gear dari slot acak.')}</p>
+    <p>{tr('Package gear goes into the Bag, not straight into an equipment slot. Open Bag → choose the gear → Equip to activate its bonus. Room Package and check-in gear also need to be equipped manually.', 'Gear dari Package masuk Bag, bukan langsung dipakai. Buka Bag → pilih gear → Equip untuk mengaktifkan bonusnya. Gear dari Package ruangan dan check-in juga perlu dipakai manual.')}</p>
     <div className="summary"><Icon src={p.tiers[0].icon} size={56} /><div><strong>{tr('Common Package', 'Package Common')}</strong><p className="muted"><Currency kind="ecash" value={p.cost} /> · {tr('Only Common can be purchased. Higher tiers come from the meter.', 'Hanya Common yang bisa dibeli. Tier lebih tinggi didapat dari meter.')}</p></div></div>
     <h2>{tr('Gear drop odds', 'Peluang drop gear')}</h2>
     <p className="muted">{tr('Each of the four slots has an equal 25% chance. The Package tier determines the gear tier using the odds below.', 'Keempat slot memiliki peluang sama, masing-masing 25%. Tier Package menentukan tier gear berdasarkan peluang berikut.')}</p>

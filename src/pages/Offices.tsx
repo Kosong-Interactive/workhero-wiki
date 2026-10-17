@@ -15,7 +15,7 @@ export default function Offices() {
   return <>
     <h1>{selected ? selected.name : tr('Career offices', 'Office karier')}</h1>
     <p className="lead">{tr('Offices replace the old workplaces. Buy them with Current Fame and keep them forever. Only the equipped office’s Auto LoC and Cash per Task multipliers apply.', 'Office menggantikan tempat kerja lama. Beli dengan Current Fame dan miliki selamanya. Hanya multiplier Auto LoC dan Cash per Task office yang sedang dipakai yang aktif.')}</p>
-    <div className="callout"><h2>{tr('Changing office triggers Ascension', 'Mengganti office memicu Ascension')}</h2><p>{tr('A office change pays the current run’s Fame and restarts the run. Cash, stage progress, Core Stat levels, and Stress reset; gear, Bag, ECash, Fame, missions, owned offices, and permanent upgrades stay.', 'Ganti office membayar Fame run saat ini lalu memulai run baru. Cash, progres stage, level Core Stat, dan Stress direset; gear, Bag, ECash, Fame, misi, office milikmu, dan upgrade permanen tetap.')}</p></div>
+    <div className="callout"><h2>{tr('Changing office triggers Promote', 'Mengganti office memicu Promote')}</h2><p>{tr('An office change pays the current run’s Fame and restarts the run. Cash, stage progress, Core Stat levels, and Stress reset; gear, Bag, ECash, Fame, missions, owned offices, and permanent upgrades stay.', 'Ganti office membayar Fame run saat ini lalu memulai run baru. Cash, progres stage, level Core Stat, dan Stress direset; gear, Bag, ECash, Fame, misi, office milikmu, dan upgrade permanen tetap.')}</p></div>
     <NumberLegend />
     <div className="card-grid">
       {(selected ? [selected] : wiki.offices).map(s => <Link className="wp-card" key={s.id} to={'/offices/' + s.id}>

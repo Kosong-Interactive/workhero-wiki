@@ -12,7 +12,8 @@ export default function Missions() {
   const lines = wiki.missions.filter(m => (m.name + ' ' + m.nameId + ' ' + m.description + ' ' + m.descriptionId).toLowerCase().includes(query.trim().toLowerCase()))
   return <>
     <h1>{tr('Missions', 'Misi')}</h1>
-    <p className="lead">{tr('Eight lifetime mission lines. Each step pays ECash once and progress survives Ascension. Claim the current step to reveal the next.', 'Delapan rangkaian misi sepanjang permainan. Tiap langkah memberi ECash sekali dan progres bertahan setelah Ascension. Klaim langkah aktif untuk membuka langkah berikutnya.')}</p>
+    <p className="lead">{tr('Eight lifetime mission lines. Each step pays ECash once and progress survives Promote. Claim the current step to reveal the next.', 'Delapan rangkaian misi sepanjang permainan. Tiap langkah memberi ECash sekali dan progres bertahan setelah Promote. Klaim langkah aktif untuk membuka langkah berikutnya.')}</p>
+    <p>{tr('Every step pays the same', 'Setiap langkah memberi reward yang sama, yaitu')} <Currency kind="ecash" value={wiki.missions[0].steps[0].reward} />. {tr('Only clears while playing count toward clear missions, including manual farming; offline farming does not count.', 'Hanya clear saat bermain yang dihitung untuk misi clear, termasuk farming manual; farming offline tidak dihitung.')}</p>
     <NumberLegend />
     <div className="filters"><label className="field">{tr('Search missions', 'Cari misi')}<input value={query} onChange={e => setQuery(e.target.value)} placeholder={tr('Name or description', 'Nama atau deskripsi')} /></label></div>
     {lines.length === 0 ? <p>{tr('No missions match.', 'Tidak ada misi yang cocok.')}</p> : lines.map(m => <section key={m.id}>

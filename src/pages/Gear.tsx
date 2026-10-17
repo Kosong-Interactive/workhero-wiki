@@ -7,7 +7,7 @@ export default function Gear() {
   const { tr } = useLang()
   return <>
     <h1>{tr('Gear & Bag', 'Gear & Bag')}</h1>
-    <p className="lead">{tr('Gear adds persistent bonuses and changes your room’s equipment. Every slot starts empty. A first piece or a better piece is equipped automatically; other drops go into the Bag.', 'Gear memberi bonus permanen dan mengubah perlengkapan ruangan. Semua slot mulai kosong. Gear pertama atau gear yang lebih bagus otomatis dipakai; drop lainnya masuk Bag.')}</p>
+    <p className="lead">{tr('Gear adds persistent bonuses and changes your room’s equipment. Every slot starts empty. All new gear goes into the Bag, even your first piece or a better piece. Open the Bag, choose a piece, and press Equip to use its bonus.', 'Gear memberi bonus permanen dan mengubah perlengkapan ruangan. Semua slot mulai kosong. Semua gear baru masuk Bag, termasuk gear pertama atau yang lebih bagus. Buka Bag, pilih gear, lalu tekan Equip untuk memakai bonusnya.')}</p>
     <div className="flow">{tr('Common → Uncommon → Rare → Epic → Legendary', 'Common → Uncommon → Rare → Epic → Legendary')}</div>
     <p className="muted">{tr('Merge two pieces of the same slot and tier into one piece of the next tier. Legendary is the top tier. Uncommon shares Common artwork, with a green tier marker.', 'Merge dua gear dengan slot dan tier yang sama menjadi satu gear tier berikutnya. Legendary adalah tier tertinggi. Uncommon memakai gambar Common dengan penanda tier hijau.')}</p>
     <NumberLegend />
@@ -17,8 +17,8 @@ export default function Gear() {
     <h2>{tr('Equipping, merging, and selling', 'Memakai, merge, dan menjual')}</h2>
     <ul className="bullets">
       <li>{tr('The Bag stores unlimited stacks by slot and tier. Equipped gear is stored separately.', 'Bag menyimpan stack tanpa batas berdasarkan slot dan tier. Gear yang sedang dipakai disimpan terpisah.')}</li>
-      <li>{tr('A better drop swaps in automatically and puts the old gear into the Bag. You can equip a Bag item yourself; the old piece returns to the Bag.', 'Drop lebih bagus otomatis menggantikan gear lama dan memindahkannya ke Bag. Kamu bisa memakai gear dari Bag; gear lama kembali ke Bag.')}</li>
-      <li>{tr('Gear survives Ascension and office changes. Laptop and Outfit add to the shared bonus pools; Desk adds to the Boss Timer stat.', 'Gear bertahan setelah Ascension dan ganti office. Laptop dan Outfit menambah pool bonus bersama; Desk menambah stat Boss Timer.')}</li>
+      <li>{tr('Equipping a Bag item returns the old equipped piece to the Bag, even when both pieces have the same tier. Drops and merge results never replace your equipped gear automatically.', 'Memakai gear dari Bag mengembalikan gear lama ke Bag, termasuk saat kedua gear memiliki tier yang sama. Drop dan hasil merge tidak pernah otomatis mengganti gear yang sedang dipakai.')}</li>
+      <li>{tr('Gear survives Promote and office changes. Laptop and Outfit add to the shared bonus pools; Desk adds to the Timer multiplier for every stage, including Tasks.', 'Gear bertahan setelah Promote dan ganti office. Laptop dan Outfit menambah pool bonus bersama; Desk menambah multiplier Timer untuk semua stage, termasuk Task.')}</li>
       <li>{tr('Chair reduces the Stress rate, with a gear floor of', 'Chair menurunkan kenaikan Stress, dengan batas minimum gear')} {wiki.tuning.GearStressFloorPerSecond}%/s. {tr('A Core Stat already below that rate stays below it.', 'Core Stat yang sudah di bawah batas itu tetap dipertahankan.')}</li>
       <li>{tr('Only spare gear in the Bag can be sold. Rare and above ask for confirmation.', 'Hanya gear cadangan di Bag yang bisa dijual. Rare ke atas meminta konfirmasi.')}</li>
     </ul>

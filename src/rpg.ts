@@ -32,6 +32,10 @@ export function effectText(id: string, level: number) {
   const v = coreValue(id, level)
   return id === 'StressResistance' ? compact(v) + '%/s' : id === 'RecoverySpeed' ? compact(v) + 's' : '×' + compact(v)
 }
+/** Timer applies to Tasks and both boss types; gear is excluded from this reference calculator. */
+export function stageTimeLimit(stage: number, timerLevel: number) {
+  return stageInfo(stage).time * coreValue('BossTimer', timerLevel)
+}
 export function nextCost(item: CoreStat | FameUpgrade, level: number, fame: boolean) {
   const value = item.baseCost * item.costGrowth ** level
   return fame ? Math.ceil(value - 1e-9) : value

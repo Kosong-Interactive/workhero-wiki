@@ -6,13 +6,13 @@
     "HpGrowth": 1.03,
     "CashBase": 6,
     "CashGrowth": 1.03,
-    "ReleaseHpMultiplier": 3,
-    "MajorHpMultiplier": 10,
+    "ReleaseHpMultiplier": 4,
+    "MajorHpMultiplier": 6,
     "ReleaseCashMultiplier": 5,
     "MajorCashMultiplier": 20,
-    "PatchTimeLimitSeconds": 60,
-    "ReleaseTimeLimitSeconds": 50,
-    "MajorTimeLimitSeconds": 200,
+    "PatchTimeLimitSeconds": 30,
+    "ReleaseTimeLimitSeconds": 60,
+    "MajorTimeLimitSeconds": 90,
     "RetreatStages": 1,
     "FarmClearsAfterRetreat": 3,
     "PackageEveryStages": 500,
@@ -34,17 +34,17 @@
     "RecoverySpeedPerLevel": 0.03,
     "BossDamagePerLevel": 0.02,
     "BossTimerPerLevel": 0.005,
-    "AutoLocCostBase": 80,
+    "AutoLocCostBase": 10,
     "AutoLocCostGrowth": 1.11,
-    "CashPerTaskCostBase": 80,
+    "CashPerTaskCostBase": 10,
     "CashPerTaskCostGrowth": 1.11,
-    "StressResistanceCostBase": 480,
+    "StressResistanceCostBase": 60,
     "StressResistanceCostGrowth": 1.12,
-    "RecoverySpeedCostBase": 480,
+    "RecoverySpeedCostBase": 60,
     "RecoverySpeedCostGrowth": 1.12,
-    "BossDamageCostBase": 960,
+    "BossDamageCostBase": 120,
     "BossDamageCostGrowth": 1.12,
-    "BossTimerCostBase": 960,
+    "BossTimerCostBase": 120,
     "BossTimerCostGrowth": 1.12,
     "SubStepSeconds": 0.25
   },
@@ -56,7 +56,7 @@
       "description": "Damage per second to a stage.",
       "descriptionId": "Damage per detik ke stage.",
       "icon": "/icons/icon-effect-auto-loc-flat.png",
-      "baseCost": 80,
+      "baseCost": 10,
       "costGrowth": 1.11
     },
     {
@@ -66,7 +66,7 @@
       "description": "More Cash for each stage cleared.",
       "descriptionId": "Lebih banyak Cash tiap stage selesai.",
       "icon": "/icons/icon-stat-cash-per-task.png",
-      "baseCost": 80,
+      "baseCost": 10,
       "costGrowth": 1.11
     },
     {
@@ -76,7 +76,7 @@
       "description": "Slows the rate at which Stress rises.",
       "descriptionId": "Memperlambat kenaikan Stress.",
       "icon": "/icons/icon-effect-stress-resistance.png",
-      "baseCost": 480,
+      "baseCost": 60,
       "costGrowth": 1.12
     },
     {
@@ -86,7 +86,7 @@
       "description": "Shortens Recovery after the fixed Burnout lock.",
       "descriptionId": "Memperpendek Recovery setelah lock Burnout tetap.",
       "icon": "/icons/icon-effect-recovery-speed.png",
-      "baseCost": 480,
+      "baseCost": 60,
       "costGrowth": 1.12
     },
     {
@@ -96,17 +96,17 @@
       "description": "Extra damage against Releases and Major Releases.",
       "descriptionId": "Damage tambahan ke Release dan Major Release.",
       "icon": "/icons/icon-stat-boss-damage.png",
-      "baseCost": 960,
+      "baseCost": 120,
       "costGrowth": 1.12
     },
     {
       "id": "BossTimer",
-      "name": "Boss Timer",
-      "nameId": "Boss Timer",
-      "description": "More time to finish a boss.",
-      "descriptionId": "Lebih banyak waktu untuk menyelesaikan boss.",
+      "name": "Timer",
+      "nameId": "Timer",
+      "description": "More time to finish any stage, including Tasks and bosses.",
+      "descriptionId": "Lebih banyak waktu untuk menyelesaikan semua stage, termasuk Task dan boss.",
       "icon": "/icons/icon-stat-boss-timer.png",
-      "baseCost": 960,
+      "baseCost": 120,
       "costGrowth": 1.12
     }
   ],
@@ -300,8 +300,8 @@
       "id": "Desk",
       "name": "Desk",
       "nameId": "Meja",
-      "effect": "Boss time",
-      "effectId": "Waktu boss",
+      "effect": "All-stage time limit",
+      "effectId": "Batas waktu semua stage",
       "icon": "/icons/icon-gear-desk.png",
       "tiers": [
         {
@@ -403,33 +403,33 @@
       "id": "ClearTasks",
       "name": "Clear Tasks",
       "nameId": "Selesaikan Task",
-      "description": "Lifetime patch-stage clears, including farming.",
-      "descriptionId": "Total clear patch stage sepanjang permainan, termasuk farming.",
+      "description": "Lifetime patch-stage clears while playing, including farming. Offline clears do not count.",
+      "descriptionId": "Total clear patch stage saat bermain, termasuk farming. Clear offline tidak dihitung.",
       "icon": "/icons/icon-mission-stat.png",
       "steps": [
         {
           "goal": 10,
-          "reward": 305
+          "reward": 25
         },
         {
           "goal": 100,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 1000,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 10000,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 100000,
-          "reward": 40
+          "reward": 25
         },
         {
           "goal": 1000000,
-          "reward": 10
+          "reward": 25
         }
       ],
       "moreSteps": false
@@ -444,27 +444,27 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 5,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 25,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 100,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 500,
-          "reward": 40
+          "reward": 25
         },
         {
           "goal": 2500,
-          "reward": 80
+          "reward": 25
         }
       ],
       "moreSteps": false
@@ -479,27 +479,27 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 2,
-          "reward": 15
+          "reward": 25
         },
         {
           "goal": 5,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 10,
-          "reward": 30
+          "reward": 25
         },
         {
           "goal": 25,
-          "reward": 50
+          "reward": 25
         },
         {
           "goal": 50,
-          "reward": 100
+          "reward": 25
         }
       ],
       "moreSteps": false
@@ -514,27 +514,27 @@
       "steps": [
         {
           "goal": 10,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 50,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 250,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 1000,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 5000,
-          "reward": 40
+          "reward": 25
         },
         {
           "goal": 25000,
-          "reward": 80
+          "reward": 25
         }
       ],
       "moreSteps": false
@@ -549,15 +549,15 @@
       "steps": [
         {
           "goal": 3,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 10,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 25,
-          "reward": 15
+          "reward": 25
         },
         {
           "goal": 50,
@@ -565,7 +565,7 @@
         },
         {
           "goal": 100,
-          "reward": 30
+          "reward": 25
         }
       ],
       "moreSteps": false
@@ -580,11 +580,11 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 3,
-          "reward": 30
+          "reward": 25
         }
       ],
       "moreSteps": true
@@ -599,58 +599,58 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 5
+          "reward": 25
         },
         {
           "goal": 10,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 50,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 250,
-          "reward": 40
+          "reward": 25
         },
         {
           "goal": 1000,
-          "reward": 10
+          "reward": 25
         }
       ],
       "moreSteps": false
     },
     {
       "id": "Ascend",
-      "name": "Ascend",
-      "nameId": "Ascend",
-      "description": "Total Ascensions completed.",
-      "descriptionId": "Total Ascension yang dilakukan.",
+      "name": "Promote",
+      "nameId": "Promote",
+      "description": "Total times promoted.",
+      "descriptionId": "Total Promote yang dilakukan.",
       "icon": "/icons/icon-retry.png",
       "steps": [
         {
           "goal": 1,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 5,
-          "reward": 10
+          "reward": 25
         },
         {
           "goal": 10,
-          "reward": 20
+          "reward": 25
         },
         {
           "goal": 25,
-          "reward": 40
+          "reward": 25
         },
         {
           "goal": 50,
-          "reward": 60
+          "reward": 25
         },
         {
           "goal": 100,
-          "reward": 100
+          "reward": 25
         }
       ],
       "moreSteps": false
