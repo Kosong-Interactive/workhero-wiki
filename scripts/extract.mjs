@@ -8,7 +8,6 @@ const unity = resolve(process.argv[2] || resolve(root, '../Workhero'))
 const gameplay = resolve(unity, 'Assets/Scripts/Gameplay/Game')
 const assets = resolve(unity, 'Assets/ScriptableObjects')
 const kit = resolve(unity, 'Assets/Art/UI/Kit/icons')
-const officeIds = ['freelance', 'compas-news', 'farmhub', 'brexa']
 const read = name => readFileSync(resolve(gameplay, name + '.cs'), 'utf8')
 const code = source => source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')
 const requireMatch = (source, regex) => {
@@ -89,6 +88,12 @@ const missionWords = {
   BuyShopItems: ['Buy Shop Items', 'Beli Item Toko', 'Purchases of boosts and Common Packages.', 'Pembelian boost dan Package Common.', 'shop-light'],
   Ascend: ['Promote', 'Promote', 'Total times promoted.', 'Total Promote yang dilakukan.', 'retry'],
 }
+// Only released offices are exported (the game's OfficeCatalog `Released` flag; the basic office always is). No unreleased name or the catalog's
+// size reaches the browser. A hidden office keeps its place in the catalog, so price and multiplier come from that place, not from this list.
+const officeCatalog = [...readFileSync(resolve(assets, 'Game/Offices.asset'), 'utf8').matchAll(/^  - Id: (.+)\r?\n    DisplayName: (.+)\r?\n    Released: ([01])$/gm)]
+if (officeCatalog.length === 0) throw new Error('Office catalog changed: no Id / DisplayName / Released entries')
+const releasedOffices = officeCatalog.map((entry, index) => ({ id: entry[1].trim(), name: entry[2].trim(), index })).filter((office, n) => n === 0 || officeCatalog[n][3] === '1')
+
 const missionSource = read('MissionCatalog')
 const missionReward = constant(missionSource, 'StepECash')
 const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+), new long\[\] \{([^}]+)\}\);/g)].map(m => {
@@ -96,8 +101,8 @@ const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+
   const goals = m[2].split(',').map(v => number(v.trim()))
   if (goals.length === 0 || goals.some(goal => !Number.isFinite(goal) || goal <= 0)) throw new Error('Invalid mission goals')
   const allSteps = goals.map(goal => ({ goal, reward: missionReward }))
-  // Future Office purchase targets would reveal the size of the unreleased catalog.
-  const steps = m[1] === 'BuySkins' ? allSteps.filter(step => step.goal <= officeIds.length - 1) : allSteps
+  // The game stops the offices line at the offices that can be owned (TASKS D11); later targets would also reveal the size of the unreleased catalog.
+  const steps = m[1] === 'BuySkins' ? allSteps.filter(step => step.goal <= releasedOffices.length - 1) : allSteps
   return { id: m[1], name, nameId, description, descriptionId, icon: icon(artwork), steps, moreSteps: steps.length < allSteps.length }
 })
 if (missions.length !== 8) throw new Error('Mission catalog changed')
@@ -111,14 +116,9 @@ const shop = [
 
 const pricesSource = read('OfficePrices')
 const officePricing = Object.fromEntries(['FirstSkinFame', 'PriceFactor', 'MultiplierFactor'].map(k => [k, constant(pricesSource, k)]))
-// Only previously public offices are exported. No unreleased names or catalog count reach the browser.
-const officeCatalog = [...readFileSync(resolve(assets, 'Game/Offices.asset'), 'utf8').matchAll(/^  - Id: (.+)\r?\n    DisplayName: (.+)$/gm)]
-const offices = officeIds.map((id, index) => {
-  const entry = officeCatalog.find(entry => entry[1].trim() === id)
-  if (!entry || officeCatalog[index]?.[1].trim() !== id) throw new Error(`Public Office missing or reordered: ${id}`)
-  const name = entry[2].trim()
-  return { id, name, icon: icon('workplace-' + id), image: `/workplaces/${id}.png`, price: index === 0 ? 0 : Math.round(officePricing.FirstSkinFame * officePricing.PriceFactor ** (index - 1)), multiplier: officePricing.MultiplierFactor ** index }
-})
+const offices = releasedOffices.map(({ id, name, index }) => (
+  { id, name, icon: icon('workplace-' + id), image: `/workplaces/${id}.png`, price: index === 0 ? 0 : Math.round(officePricing.FirstSkinFame * officePricing.PriceFactor ** (index - 1)), multiplier: officePricing.MultiplierFactor ** index }
+))
 const catSource = read('VisitingCat'), adSource = read('AdBoost'), bossSource = read('BossRewards')
 const events = { catInterval: constant(catSource, 'IntervalSeconds'), catChance: constant(catSource, 'ECashChancePercent'), catReward: constant(catSource, 'ECashReward'), catCashClears: constant(catSource, 'CashClears'), releaseReward: constant(bossSource, 'Release'), majorReward: constant(bossSource, 'MajorRelease'), adLimit: constant(adSource, 'MaxAdsPerDay'), adDuration: constant(adSource, 'SecondsPerAd'), adMultiplier: constant(adSource, 'Multiplier'), daily: array(read('DailyCheckIn'), 'ECashDays') }
 const currencyIcons = { cash: icon('cash-banknote-green'), ecash: icon('ecash-credit-card-blue'), fame: icon('fame-star'), code: icon('code'), stress: icon('stress-brain'), ascend: icon('retry'), bag: icon('bag'), missions: icon('missions'), daily: icon('daily-checkin') }

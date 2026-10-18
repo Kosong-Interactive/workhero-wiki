@@ -581,10 +581,6 @@
         {
           "goal": 1,
           "reward": 25
-        },
-        {
-          "goal": 3,
-          "reward": 25
         }
       ],
       "moreSteps": true
@@ -696,22 +692,6 @@
       "image": "/workplaces/freelance.png",
       "price": 0,
       "multiplier": 1
-    },
-    {
-      "id": "compas-news",
-      "name": "Compas News",
-      "icon": "/icons/icon-workplace-compas-news.png",
-      "image": "/workplaces/compas-news.png",
-      "price": 300,
-      "multiplier": 2
-    },
-    {
-      "id": "farmhub",
-      "name": "FarmHub",
-      "icon": "/icons/icon-workplace-farmhub.png",
-      "image": "/workplaces/farmhub.png",
-      "price": 360,
-      "multiplier": 4
     },
     {
       "id": "brexa",
