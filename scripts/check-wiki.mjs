@@ -41,6 +41,12 @@ try {
     else if (value && typeof value === 'object') Object.values(value).forEach(checkAssets)
   }
   checkAssets(wiki)
+  assert.equal(wiki.gear.length, 4)
+  assert.equal(new Set(wiki.gear.flatMap(slot => slot.tiers.map(tier => tier.icon))).size, 20, 'All slot/tier icons must be distinct paths')
+  for (const slot of wiki.gear) {
+    assert.deepEqual(slot.tiers.map(tier => tier.name), ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'])
+    for (const tier of slot.tiers) assert.ok(tier.icon.endsWith(`-${tier.name.toLowerCase()}.png`), `${slot.id} ${tier.name}: own tier artwork`)
+  }
 
   const { default: App } = await server.ssrLoadModule('/src/App.tsx')
   const { LangProvider } = await server.ssrLoadModule('/src/i18n.tsx')
@@ -57,7 +63,12 @@ try {
         assert.equal((html.match(lang === 'en' ? /Coming soon/g : /Segera hadir/g) ?? []).length, 1, `${route}: one Coming Soon`)
       }
       if (route === '/mechanics') assert.match(html, lang === 'en' ? /There is no automatic retry/ : /Tidak ada retry otomatis/)
-      if (route === '/gear') assert.match(html, lang === 'en' ? /All new gear goes into the Bag/ : /Semua gear baru masuk Bag/)
+      if (route === '/gear') {
+        assert.match(html, lang === 'en' ? /All new gear goes into the Bag/ : /Semua gear baru masuk Bag/)
+        assert.doesNotMatch(html, /Uncommon shares Common artwork|Uncommon memakai gambar Common/)
+        assert.match(html, lang === 'en' ? /Every tier has its own gear icons and room models/ : /Setiap tier memiliki ikon gear dan model ruangan tersendiri/)
+        assert.match(html, lang === 'en' ? /keeps the Bag count unchanged/ : /tidak mengubah jumlah di Bag/)
+      }
       if (route === '/missions') assert.match(html, lang === 'en' ? /Every step pays the same/ : /Setiap langkah memberi reward yang sama/)
       if (route === '/') assert.match(html, lang === 'en' ? /Your first run/ : /Run pertamamu/)
     }

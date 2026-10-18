@@ -25,7 +25,7 @@ Their room images remain square reference renders from the earlier EnvironmentPr
 not proof that per-office rooms/previews have shipped. Names and ordering come from `Game/Offices.asset`; Office bonuses come from `OfficePrices`,
 not old workplace revenue or ITEM catalogs.
 
-The gameplay reference uses the actual prototype code as of 2026-10-17. Balance remains in
+The gameplay reference uses the actual prototype code as of 2026-10-18. All four gear slots have five distinct tier icons and room models, including Uncommon; extraction copies all twenty icons directly without Common fallback. Same-tier Equip remains available with Bag stock and conserves the Bag count. Simplified Desk icons represent accessories, not exact room layouts. Balance remains in
 development. Design proposals are not presented as implemented rules; in particular Head Start
 banks starting Cash and does not skip stages. The calculator excludes gear, boosts, and the
 runtime timing/state machine and clearly labels uninterrupted clear-time estimates. Timer applies

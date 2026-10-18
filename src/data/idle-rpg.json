@@ -194,7 +194,7 @@
           "name": "Uncommon",
           "bonus": 14,
           "sellClears": 0.7,
-          "icon": "/icons/icon-gear-laptop-common.png"
+          "icon": "/icons/icon-gear-laptop-uncommon.png"
         },
         {
           "name": "Rare",
@@ -234,7 +234,7 @@
           "name": "Uncommon",
           "bonus": 14,
           "sellClears": 0.7,
-          "icon": "/icons/icon-gear-outfit-common.png"
+          "icon": "/icons/icon-gear-outfit-uncommon.png"
         },
         {
           "name": "Rare",
@@ -274,7 +274,7 @@
           "name": "Uncommon",
           "bonus": -7,
           "sellClears": 0.7,
-          "icon": "/icons/icon-gear-chair-common.png"
+          "icon": "/icons/icon-gear-chair-uncommon.png"
         },
         {
           "name": "Rare",
@@ -314,7 +314,7 @@
           "name": "Uncommon",
           "bonus": 7,
           "sellClears": 0.7,
-          "icon": "/icons/icon-gear-desk-common.png"
+          "icon": "/icons/icon-gear-desk-uncommon.png"
         },
         {
           "name": "Rare",

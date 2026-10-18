@@ -72,7 +72,7 @@ const gear = [
   ['Outfit', 'Outfit', 'Outfit', 'Cash per Task', 'Cash per Task', 'outfit', percent, 1],
   ['Chair', 'Chair', 'Kursi', 'Stress rate', 'Kenaikan Stress', 'chair', reduction, -1],
   ['Desk', 'Desk', 'Meja', 'All-stage time limit', 'Batas waktu semua stage', 'desk', bossTime, 1],
-].map(([id, name, nameId, effect, effectId, artwork, bonuses, sign]) => ({ id, name, nameId, effect, effectId, icon: icon('gear-' + artwork), tiers: tierNames.map((tier, index) => ({ name: tier, bonus: Math.round(bonuses[index] * 10000) / 100 * sign, sellClears: gearSales[index], icon: icon(`gear/icon-gear-${artwork}-${(index === 1 ? 'Common' : tier).toLowerCase()}`) })) }))
+].map(([id, name, nameId, effect, effectId, artwork, bonuses, sign]) => ({ id, name, nameId, effect, effectId, icon: icon('gear-' + artwork), tiers: tierNames.map((tier, index) => ({ name: tier, bonus: Math.round(bonuses[index] * 10000) / 100 * sign, sellClears: gearSales[index], icon: icon(`gear/icon-gear-${artwork}-${tier.toLowerCase()}`) })) }))
 
 const chestSource = read('Chests')
 const odds = [...requireMatch(code(chestSource), /OddsByTier\s*=\s*\{([\s\S]*?)\};/)[1].matchAll(/new\[\]\s*\{([^}]+)\}/g)].map(m => m[1].split(',').map(Number))
