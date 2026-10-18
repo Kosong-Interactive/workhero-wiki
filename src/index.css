@@ -162,7 +162,6 @@ section h2 { display: flex; align-items: center; gap: 8px; }
 .tier-rare { color: #75b8f5; }
 .tier-epic { color: #bd99ef; }
 .tier-legendary { color: #f5bc62; }
-.gear-cell.tier-uncommon img { outline: 2px solid #83cba1; border-radius: 8px; }
 .daily-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
 .daily-grid .shop-card { padding: 12px; }
 .wiki-footer { max-width: 1100px; margin: 0 auto; padding: 20px 16px 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
