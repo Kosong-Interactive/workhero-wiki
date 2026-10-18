@@ -698,8 +698,8 @@
       "name": "Brexa",
       "icon": "/icons/icon-workplace-brexa.png",
       "image": "/workplaces/brexa.png",
-      "price": 432,
-      "multiplier": 8
+      "price": 300,
+      "multiplier": 2
     }
   ],
   "officePricing": {
