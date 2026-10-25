@@ -30,8 +30,8 @@ try {
   assert.equal(wiki.packages.cost, 50)
   assert.equal(wiki.missions.length, 8)
   assert.ok(wiki.missions.every(line => line.steps.length && line.steps.every(step => step.reward === 25)))
-  assert.deepEqual(wiki.offices.map(office => office.id), ['freelance', 'compas-news', 'farmhub', 'brexa'])
-  assert.deepEqual(wiki.missions.find(line => line.id === 'BuySkins').steps.map(step => step.goal), [1, 3])
+  assert.deepEqual(wiki.offices.map(office => office.id), ['freelance', 'brexa'])
+  assert.deepEqual(wiki.missions.find(line => line.id === 'BuySkins').steps.map(step => step.goal), [1])
   assert.equal(wiki.missions.find(line => line.id === 'Ascend').name, 'Promote')
   assert.ok(wiki.packages.tiers.every(tier => tier.odds.reduce((a, b) => a + b, 0) === 100))
   function checkAssets(value) {

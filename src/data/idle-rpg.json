@@ -660,7 +660,7 @@
       "description": "Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.",
       "descriptionId": "Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.",
       "icon": "/icons/icon-coffee.png",
-      "cost": 15,
+      "cost": 2,
       "duration": 60
     },
     {
@@ -670,7 +670,7 @@
       "description": "Cash from stage clears ×2.",
       "descriptionId": "Cash dari clear stage ×2.",
       "icon": "/icons/icon-cash-banknote-green.png",
-      "cost": 15,
+      "cost": 2,
       "duration": 60
     },
     {
@@ -680,7 +680,7 @@
       "description": "Auto LoC damage ×2.",
       "descriptionId": "Damage Auto LoC ×2.",
       "icon": "/icons/icon-code-monitor.png",
-      "cost": 15,
+      "cost": 2,
       "duration": 60
     }
   ],
@@ -717,6 +717,8 @@
     "adLimit": 4,
     "adDuration": 3600,
     "adMultiplier": 2,
+    "ecashAdLimit": 5,
+    "ecashPerAd": 10,
     "daily": [
       5,
       5,
