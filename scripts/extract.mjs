@@ -44,6 +44,7 @@ const stats = [
   ['RecoverySpeed', 'Recovery Speed', 'Kecepatan Pemulihan', 'Shortens Recovery after the fixed Burnout lock.', 'Memperpendek Recovery setelah lock Burnout tetap.', 'effect-recovery-speed'],
   ['BossDamage', 'Boss Damage', 'Boss Damage', 'Extra damage against Releases and Major Releases.', 'Damage tambahan ke Release dan Major Release.', 'stat-boss-damage'],
   ['BossTimer', 'Timer', 'Timer', 'More time to finish any stage, including Tasks and bosses.', 'Lebih banyak waktu untuk menyelesaikan semua stage, termasuk Task dan boss.', 'stat-boss-timer'],
+  ['CritDamage', 'Crit Damage', 'Crit Damage', 'Makes every crit hit harder. Worth more as your crit rate rises.', 'Membuat setiap crit lebih kuat. Makin berguna saat peluang crit naik.', 'target'],
 ].map(([id, name, nameId, description, descriptionId, artwork]) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork), baseCost: tuning[id + 'CostBase'], costGrowth: tuning[id + 'CostGrowth'] }))
 
 const permanentSource = read('PermanentUpgrades')
@@ -66,13 +67,26 @@ const gearSales = array(read('GearSales'), 'ClearsByTier')
 const tierNames = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary']
 const percent = array(gearEffects, 'PercentByTier')
 const reduction = array(gearEffects, 'ReductionByTier')
-const bossTime = array(gearEffects, 'BossTimeByTier')
+const critRate = array(gearEffects, 'CritRateByTier')
 const gear = [
   ['LaptopSetup', 'Laptop Setup', 'Laptop Setup', 'Auto LoC', 'Auto LoC', 'laptop', percent, 1],
   ['Outfit', 'Outfit', 'Outfit', 'Cash per Task', 'Cash per Task', 'outfit', percent, 1],
   ['Chair', 'Chair', 'Kursi', 'Stress rate', 'Kenaikan Stress', 'chair', reduction, -1],
-  ['Desk', 'Desk', 'Meja', 'All-stage time limit', 'Batas waktu semua stage', 'desk', bossTime, 1],
+  ['Desk', 'Desk', 'Meja', 'Crit rate', 'Peluang crit', 'desk', critRate, 1],
 ].map(([id, name, nameId, effect, effectId, artwork, bonuses, sign]) => ({ id, name, nameId, effect, effectId, icon: icon('gear-' + artwork), tiers: tierNames.map((tier, index) => ({ name: tier, bonus: Math.round(bonuses[index] * 10000) / 100 * sign, sellClears: gearSales[index], icon: icon(`gear/icon-gear-${artwork}-${tier.toLowerCase()}`) })) }))
+
+// Gear series: the per-tier numbers of the 2/3/4-piece bonuses, read from GearSets.
+const setsSource = read('GearSets')
+const gearSets = {
+  pool: array(setsSource, 'PoolByTier').map(v => Math.round(v * 10000) / 100),
+  critRate: array(setsSource, 'CritRateByTier').map(v => Math.round(v * 10000) / 100),
+  critDamage: array(setsSource, 'CritDamageByTier').map(v => Math.round(v * 10000) / 100),
+  doubleChance: array(setsSource, 'DoubleChanceByTier').map(v => Math.round(v * 10000) / 100),
+  series: [
+    { id: 'Hustler', icon: icon('gear/emblem-hustler') },
+    { id: 'Grinder', icon: icon('gear/emblem-grinder') },
+  ],
+}
 
 const chestSource = read('Chests')
 const odds = [...requireMatch(code(chestSource), /OddsByTier\s*=\s*\{([\s\S]*?)\};/)[1].matchAll(/new\[\]\s*\{([^}]+)\}/g)].map(m => m[1].split(',').map(Number))
@@ -147,7 +161,7 @@ const offices = releasedOffices.map(({ id, name, index }) => (
 const catSource = read('VisitingCat'), adSource = read('AdBoost'), bossSource = read('BossRewards')
 const events = { catInterval: constant(catSource, 'IntervalSeconds'), catChance: constant(catSource, 'ECashChancePercent'), catReward: constant(catSource, 'ECashReward'), catCashClears: constant(catSource, 'CashClears'), releaseReward: constant(bossSource, 'Release'), majorReward: constant(bossSource, 'MajorRelease'), adLimit: constant(adSource, 'MaxAdsPerDay'), adDuration: constant(adSource, 'SecondsPerAd'), adMultiplier: constant(adSource, 'Multiplier'), ecashAdLimit: constant(adSource, 'MaxECashAdsPerDay'), ecashPerAd: constant(adSource, 'ECashPerAd'), daily: array(read('DailyCheckIn'), 'ECashDays') }
 const currencyIcons = { cash: icon('cash-banknote-green'), ecash: icon('ecash-credit-card-blue'), fame: icon('fame-star'), code: icon('code'), stress: icon('stress-brain'), ascend: icon('retry'), bag: icon('bag'), missions: icon('missions'), daily: icon('daily-checkin') }
-const output = { tuning, stats, permanent, permanentNumbers, gear, packages, missions, shop, projects, offices, officePricing, events, icons: { ...currencyIcons, projects: icon('event') } }
+const output = { tuning, stats, permanent, permanentNumbers, gear, gearSets, packages, missions, shop, projects, offices, officePricing, events, icons: { ...currencyIcons, projects: icon('event') } }
 mkdirSync(resolve(root, 'src/data'), { recursive: true })
 mkdirSync(resolve(root, 'public/icons'), { recursive: true })
 writeFileSync(resolve(root, 'src/data/idle-rpg.json'), JSON.stringify(output, null, 2) + '\n')

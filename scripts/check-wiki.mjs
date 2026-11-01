@@ -14,7 +14,15 @@ const wiki = JSON.parse(readFileSync(resolve(root, 'src/data/idle-rpg.json'), 'u
 const server = await createServer({ root, server: { middlewareMode: true, hmr: { server: createHttpServer() } }, appType: 'custom' })
 try {
   const { stageInfo, stageTimeLimit, nextCost, coreValue } = await server.ssrLoadModule('/src/rpg.ts')
-  assert.deepEqual(wiki.stats.map(stat => stat.baseCost), [10, 10, 60, 60, 120, 120])
+  assert.deepEqual(wiki.stats.map(stat => stat.baseCost), [10, 10, 60, 60, 120, 120, 120])
+  assert.equal(wiki.stats.at(-1).id, 'CritDamage')
+  assert.equal(coreValue('CritDamage', 0), 0.4)
+  assert.ok(Math.abs(coreValue('CritDamage', 100) - 1.4) < 1e-9)
+  assert.deepEqual(wiki.gear.find(slot => slot.id === 'Desk').tiers.map(tier => tier.bonus), [3, 5, 10, 15, 20])
+  assert.deepEqual(wiki.gearSets.pool, [3, 4, 5, 9, 15])
+  assert.deepEqual(wiki.gearSets.critRate, [1, 2, 4, 6, 8])
+  assert.deepEqual(wiki.gearSets.critDamage, [5, 7, 10, 15, 25])
+  assert.deepEqual(wiki.gearSets.doubleChance, [3, 5, 7, 10, 15])
   assert.equal(nextCost(wiki.stats[0], 0, false), 10)
   assert.ok(Math.abs(nextCost(wiki.stats[0], 1, false) - 11.1) < 1e-9)
   const autoTotal = Array.from({ length: 10 }, (_, level) => nextCost(wiki.stats[0], level, false)).reduce((a, b) => a + b, 0)
@@ -70,11 +78,16 @@ try {
         assert.equal((html.match(lang === 'en' ? /Coming soon/g : /Segera hadir/g) ?? []).length, 1, `${route}: one Coming Soon`)
       }
       if (route === '/mechanics') assert.match(html, lang === 'en' ? /There is no automatic retry/ : /Tidak ada retry otomatis/)
+      if (route === '/mechanics' || route === '/upgrades') assert.doesNotMatch(html, /Desk bonuses extend|Desk adds its bonus to the same multiplier/)
+      if (route === '/upgrades') assert.match(html, /Crit Damage/)
       if (route === '/gear') {
         assert.match(html, lang === 'en' ? /All new gear goes into the Bag/ : /Semua gear baru masuk Bag/)
         assert.doesNotMatch(html, /Uncommon shares Common artwork|Uncommon memakai gambar Common/)
         assert.match(html, lang === 'en' ? /Every tier has its own gear icons and room models/ : /Setiap tier memiliki ikon gear dan model ruangan tersendiri/)
         assert.match(html, lang === 'en' ? /keeps the Bag count unchanged/ : /tidak mengubah jumlah di Bag/)
+        assert.match(html, /Hustler/)
+        assert.match(html, /Grinder/)
+        assert.doesNotMatch(html, /Desk adds to the Timer|Desk menambah multiplier Timer/)
       }
       if (route === '/missions') assert.match(html, lang === 'en' ? /Rewards grow along each line/ : /Reward naik di sepanjang setiap rangkaian/)
       if (route === '/projects') assert.match(html, lang === 'en' ? /A finished project never expires/ : /Project yang sudah selesai tidak pernah hangus/)

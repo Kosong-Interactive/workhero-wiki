@@ -25,12 +25,16 @@ export function coreValue(id: string, level: number) {
     case 'RecoverySpeed': return Math.max(t.RecoveryFloorSeconds, t.RecoveryBaseSeconds / (1 + t.RecoverySpeedPerLevel * level))
     case 'BossDamage': return 1 + t.BossDamagePerLevel * level
     case 'BossTimer': return 1 + t.BossTimerPerLevel * level
+    case 'CritDamage': return t.BaseCritDamage + t.CritDamagePerLevel * level
     default: throw new Error('Unknown Core Stat: ' + id)
   }
 }
 export function effectText(id: string, level: number) {
   const v = coreValue(id, level)
-  return id === 'StressResistance' ? compact(v) + '%/s' : id === 'RecoverySpeed' ? compact(v) + 's' : '×' + compact(v)
+  if (id === 'StressResistance') return compact(v) + '%/s'
+  if (id === 'RecoverySpeed') return compact(v) + 's'
+  if (id === 'CritDamage') return '+' + compact(v * 100) + '%'
+  return '×' + compact(v)
 }
 /** Timer applies to Tasks and both boss types; gear is excluded from this reference calculator. */
 export function stageTimeLimit(stage: number, timerLevel: number) {
@@ -59,6 +63,7 @@ export function coreFormula(id: string) {
     case 'RecoverySpeed': return `max(${t.RecoveryFloorSeconds}, ${t.RecoveryBaseSeconds} / (1 + ${t.RecoverySpeedPerLevel} × L))`
     case 'BossDamage': return `1 + ${t.BossDamagePerLevel} × L`
     case 'BossTimer': return `1 + ${t.BossTimerPerLevel} × L`
+    case 'CritDamage': return `${t.BaseCritDamage} + ${t.CritDamagePerLevel} × L`
     default: return ''
   }
 }

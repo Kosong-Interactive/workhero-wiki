@@ -24,6 +24,9 @@
     "FameStageScale": 20,
     "FameExponent": 1.3,
     "BaseAutoLocPerSecond": 1,
+    "BaseCritRate": 0.01,
+    "BaseCritDamage": 0.4,
+    "CritDamagePerLevel": 0.01,
     "MaxStress": 100,
     "StressPerSecond": 8,
     "BurnoutLockSeconds": 2,
@@ -51,6 +54,8 @@
     "BossDamageCostGrowth": 1.12,
     "BossTimerCostBase": 120,
     "BossTimerCostGrowth": 1.12,
+    "CritDamageCostBase": 120,
+    "CritDamageCostGrowth": 1.12,
     "SubStepSeconds": 0.25
   },
   "stats": [
@@ -111,6 +116,16 @@
       "description": "More time to finish any stage, including Tasks and bosses.",
       "descriptionId": "Lebih banyak waktu untuk menyelesaikan semua stage, termasuk Task dan boss.",
       "icon": "/icons/icon-stat-boss-timer.png",
+      "baseCost": 120,
+      "costGrowth": 1.12
+    },
+    {
+      "id": "CritDamage",
+      "name": "Crit Damage",
+      "nameId": "Crit Damage",
+      "description": "Makes every crit hit harder. Worth more as your crit rate rises.",
+      "descriptionId": "Membuat setiap crit lebih kuat. Makin berguna saat peluang crit naik.",
+      "icon": "/icons/icon-target.png",
       "baseCost": 120,
       "costGrowth": 1.12
     }
@@ -305,25 +320,25 @@
       "id": "Desk",
       "name": "Desk",
       "nameId": "Meja",
-      "effect": "All-stage time limit",
-      "effectId": "Batas waktu semua stage",
+      "effect": "Crit rate",
+      "effectId": "Peluang crit",
       "icon": "/icons/icon-gear-desk.png",
       "tiers": [
         {
           "name": "Common",
-          "bonus": 5,
+          "bonus": 3,
           "sellClears": 0.3,
           "icon": "/icons/icon-gear-desk-common.png"
         },
         {
           "name": "Uncommon",
-          "bonus": 7,
+          "bonus": 5,
           "sellClears": 0.7,
           "icon": "/icons/icon-gear-desk-uncommon.png"
         },
         {
           "name": "Rare",
-          "bonus": 9,
+          "bonus": 10,
           "sellClears": 1.5,
           "icon": "/icons/icon-gear-desk-rare.png"
         },
@@ -335,13 +350,53 @@
         },
         {
           "name": "Legendary",
-          "bonus": 25,
+          "bonus": 20,
           "sellClears": 7.5,
           "icon": "/icons/icon-gear-desk-legendary.png"
         }
       ]
     }
   ],
+  "gearSets": {
+    "pool": [
+      3,
+      4,
+      5,
+      9,
+      15
+    ],
+    "critRate": [
+      1,
+      2,
+      4,
+      6,
+      8
+    ],
+    "critDamage": [
+      5,
+      7,
+      10,
+      15,
+      25
+    ],
+    "doubleChance": [
+      3,
+      5,
+      7,
+      10,
+      15
+    ],
+    "series": [
+      {
+        "id": "Hustler",
+        "icon": "/icons/emblem-hustler.png"
+      },
+      {
+        "id": "Grinder",
+        "icon": "/icons/emblem-grinder.png"
+      }
+    ]
+  },
   "packages": {
     "cost": 50,
     "meterSize": 10,
