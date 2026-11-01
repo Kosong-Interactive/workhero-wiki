@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { wiki } from '../data'
 import { useLang } from '../i18n'
 import Icon from '../components/Icon'
@@ -10,8 +11,8 @@ export default function Economy() {
   const currency = [
     ['cash', 'Cash', 'Cash', 'Earned on stage clears and spent on Core Stats. Global to the run; resets on Promote.', 'Didapat saat stage selesai dan dipakai membeli Core Stat. Berlaku untuk satu run; direset saat Promote.'],
     ['fame', 'Current Fame', 'Current Fame', 'Spendable balance earned by Promote. Buys offices and permanent upgrades; survives resets.', 'Saldo yang bisa dibelanjakan, didapat dari Promote. Membeli office dan upgrade permanen; bertahan setelah reset.'],
-    ['fame', 'Total Fame', 'Total Fame', 'Lifetime Fame earned. Only rises and is unaffected by purchases or refunds. Intended for ranking; score submission is not enabled yet.', 'Total Fame sepanjang permainan. Hanya naik dan tidak terpengaruh pembelian atau refund. Direncanakan untuk ranking; pengiriman skor belum diaktifkan.'],
-    ['ecash', 'ECash', 'ECash', 'Buys Packages and Shop boosts. Earned from missions, boss first clears, some Cat visits, and daily check-ins. Survives Promote.', 'Membeli Package dan boost Toko. Didapat dari misi, clear boss pertama, sebagian kunjungan Cat, dan check-in harian. Bertahan setelah Promote.'],
+    ['fame', 'Total Fame', 'Total Fame', 'Lifetime Fame earned. Only rises and is unaffected by purchases or refunds. It orders the Ranking.', 'Total Fame sepanjang permainan. Hanya naik dan tidak terpengaruh pembelian atau refund. Menjadi urutan Ranking.'],
+    ['ecash', 'ECash', 'ECash', 'Buys Packages and boost items. Earned from missions, Projects, boss first clears, some Cat visits, daily check-ins, and the ECash ad. Survives Promote.', 'Membeli Package dan item boost. Didapat dari misi, Projects, clear boss pertama, sebagian kunjungan Cat, check-in harian, dan iklan ECash. Bertahan setelah Promote.'],
   ] as const
   return <>
     <h1>{tr('Currencies & rewards', 'Mata uang & reward')}</h1>
@@ -24,6 +25,7 @@ export default function Economy() {
     <h2>{tr('Daily check-in', 'Check-in harian')}</h2><p className="muted">{tr('One claim per local calendar day. A missed day does not wipe progress; the seven-day cycle waits and then repeats.', 'Satu klaim per hari kalender lokal. Melewatkan satu hari tidak mereset progres; siklus tujuh hari menunggu lalu berulang.')}</p>
     <div className="daily-grid">{[...e.daily, 0].map((reward, i) => <div key={i} className="shop-card"><small>{tr('Day', 'Hari')} {i + 1}</small><Icon src={i === 6 ? wiki.gear[0].tiers[3].icon : wiki.icons.ecash} size={40} />{i === 6 ? <strong>{tr('Random Epic gear', 'Gear Epic acak')}</strong> : <Currency kind="ecash" value={reward} />}</div>)}</div>
     <h2>{tr('Rewarded ad boost', 'Boost iklan reward')}</h2><p>{tr('The intended native ad reward doubles Cash per Task for', 'Reward iklan native yang direncanakan menggandakan Cash per Task selama')} {e.adDuration / 3600} {tr('hour per completed ad, up to', 'jam tiap iklan selesai, hingga')} {e.adLimit} {tr('ads per day. Extra ads extend the time; Shop Double Cash can stack with it for ×4 stage Cash.', 'iklan per hari. Iklan tambahan memperpanjang durasi; Double Cash Toko bisa bertumpuk menjadi Cash stage ×4.')}</p>
+    <h2>Projects</h2><p>{tr('Timed side jobs, one at a time, pay ECash or a small boost item and can be repeated without a daily cap.', 'Kerja sampingan berbatas waktu, satu per satu, memberi ECash atau item boost kecil dan bisa diulang tanpa batas harian.')} <Link to="/projects">{tr('See Projects →', 'Lihat Projects →')}</Link></p>
     <h2>{tr('Rewarded ad for ECash', 'Iklan reward untuk ECash')}</h2><p>{tr('A second rewarded ad pays', 'Iklan reward kedua memberi')} <Currency kind="ecash" value={e.ecashPerAd} /> {tr('each time it is watched to the end, up to', 'setiap kali ditonton sampai habis, hingga')} {e.ecashAdLimit} {tr('ads per day. Its daily count resets together with the Cash ad.', 'iklan per hari. Hitungan hariannya direset bersama iklan Cash.')}</p>
     <p className="muted">{tr('Ad SDK integration is still under development. WebGL has no ad SDK; the quota and buff rules exist in the prototype.', 'Integrasi SDK iklan masih dikembangkan. WebGL tidak punya SDK iklan; aturan kuota dan buff sudah ada di prototipe.')}</p>
   </>

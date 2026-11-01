@@ -18,6 +18,7 @@ const requireMatch = (source, regex) => {
 const number = value => Number(value.replace(/[_dLf]/g, ''))
 const constant = (source, key) => number(requireMatch(code(source), new RegExp(`\\b${key}\\s*=\\s*([\\d._]+[dLf]?)\\s*;`))[1])
 const array = (source, key) => requireMatch(code(source), new RegExp(`\\b${key}\\s*=\\s*\\{([^}]+)\\}`))[1].split(',').map(v => number(v.trim()))
+const strings = (source, key) => [...requireMatch(code(source), new RegExp(`\\b${key}\\s*=\\s*\\{([^}]+)\\}`))[1].matchAll(/"([^"]*)"/g)].map(m => m[1])
 const icons = new Map()
 const icon = name => {
   const filename = name.includes('/') ? `${name}.png` : `icon-${name}.png`
@@ -29,7 +30,7 @@ const icon = name => {
   return `/icons/${dest}`
 }
 
-const tuning = Object.fromEntries([...code(read('GameTuning')).matchAll(/public (?:int|double) (\w+)\s*=\s*([\d._]+[d]?)\s*;/g)].map(m => [m[1], number(m[2])]))
+const tuning = Object.fromEntries([...code(read('GameTuning')).matchAll(/public (?:int|long|double) (\w+)\s*=\s*([\d._]+[d]?)\s*;/g)].map(m => [m[1], number(m[2])]))
 if (Object.keys(tuning).length === 0) throw new Error('No game tuning fields found')
 const tuningAsset = readFileSync(resolve(assets, 'Game/GameTuning.asset'), 'utf8')
 for (const m of tuningAsset.matchAll(/^    (\w+): ([\d.e+-]+)$/gm)) {
@@ -95,24 +96,48 @@ if (officeCatalog.length === 0) throw new Error('Office catalog changed: no Id /
 const releasedOffices = officeCatalog.map((entry, index) => ({ id: entry[1].trim(), name: entry[2].trim(), index })).filter((office, n) => n === 0 || officeCatalog[n][3] === '1')
 
 const missionSource = read('MissionCatalog')
-const missionReward = constant(missionSource, 'StepECash')
-const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+), new long\[\] \{([^}]+)\}\);/g)].map(m => {
+// Each line lists its targets, then one ECash reward per step.
+const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+), new long\[\]\s*\{([^}]+)\}, new long\[\]\s*\{([^}]+)\}\);/g)].map(m => {
   const [name, nameId, description, descriptionId, artwork] = missionWords[m[1]]
   const goals = m[2].split(',').map(v => number(v.trim()))
+  const rewards = m[3].split(',').map(v => number(v.trim()))
   if (goals.length === 0 || goals.some(goal => !Number.isFinite(goal) || goal <= 0)) throw new Error('Invalid mission goals')
-  const allSteps = goals.map(goal => ({ goal, reward: missionReward }))
+  if (rewards.length !== goals.length || rewards.some(reward => !Number.isFinite(reward) || reward <= 0)) throw new Error('Invalid mission rewards')
+  const allSteps = goals.map((goal, index) => ({ goal, reward: rewards[index] }))
   // The game stops the offices line at the offices that can be owned (TASKS D11); later targets would also reveal the size of the unreleased catalog.
   const steps = m[1] === 'BuySkins' ? allSteps.filter(step => step.goal <= releasedOffices.length - 1) : allSteps
   return { id: m[1], name, nameId, description, descriptionId, icon: icon(artwork), steps, moreSteps: steps.length < allSteps.length }
 })
 if (missions.length !== 8) throw new Error('Mission catalog changed')
 
-const boostsSource = read('ShopBoosts')
+// Boost items: three families (ShopBoost order), each in five sizes shown as the gear tiers. A purchase is stored in the Bag; USE adds its time.
+const itemsSource = read('BoostItems')
+const itemNames = strings(itemsSource, 'Names'), itemDescriptions = strings(itemsSource, 'Descriptions'), itemDurations = array(itemsSource, 'Durations')
+const itemPrices = tierNames.map(tier => tuning[`Boost${tier}Price`])
+if (itemNames.length !== 15 || itemDescriptions.length !== 15 || itemDurations.length !== 5 || itemPrices.some(price => !(price > 0))) throw new Error('Boost item catalog changed')
 const shop = [
-  ['Coffee', 'Coffee', 'Kopi', 'Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.', 'Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.', 'coffee'],
-  ['DoubleCash', 'Double Cash', 'Double Cash', 'Cash from stage clears ×2.', 'Cash dari clear stage ×2.', 'cash-banknote-green'],
-  ['Overclock', 'Overclock', 'Overclock', 'Auto LoC damage ×2.', 'Damage Auto LoC ×2.', 'code-monitor'],
-].map(([id, name, nameId, description, descriptionId, artwork]) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork), cost: constant(boostsSource, 'Cost'), duration: constant(boostsSource, 'DurationSeconds') }))
+  ['Coffee', 'Coffee', 'Kopi', 'Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.', 'Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.', 'coffee', 'coffee'],
+  ['DoubleCash', 'Double Cash', 'Double Cash', 'Cash from stage clears ×2.', 'Cash dari clear stage ×2.', 'cash-banknote-green', 'cash'],
+  ['Overclock', 'Overclock', 'Overclock', 'Auto LoC damage ×2.', 'Damage Auto LoC ×2.', 'code-monitor', 'overclock'],
+].map(([id, name, nameId, description, descriptionId, artwork, family], boost) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork),
+  sizes: tierNames.map((tier, index) => ({ tier, name: itemNames[boost * 5 + index], description: itemDescriptions[boost * 5 + index], duration: itemDurations[index], cost: itemPrices[index], icon: icon(`boost/icon-boost-${family}-${tier.toLowerCase()}`) })) }))
+
+// Projects: side jobs on a board of three offers (Small, Medium, Large); one runs at a time on real time.
+const projectsSource = read('Projects')
+const projectTargets = [...requireMatch(code(projectsSource), /Targets\s*=\s*\{([\s\S]*?)\};/)[1].matchAll(/\{([^}]+)\}/g)].map(m => m[1].split(',').map(v => number(v.trim())))
+const projectMinutes = requireMatch(code(projectsSource), /DurationsMs\s*=\s*\{([^}]+)\}/)[1].split(',').map(v => Number(requireMatch(v, /(\d+)L\s*\*\s*MinuteMs/)[1]))
+const projectItemTiers = requireMatch(code(projectsSource), /ItemTiers\s*=\s*\{([^}]+)\}/)[1].split(',').map(v => tierNames.indexOf(requireMatch(v, /BoostTier\.(\w+)/)[1]))
+const minECash = array(projectsSource, 'MinECash'), maxECash = array(projectsSource, 'MaxECash')
+if (projectTargets.length !== 3 || projectTargets.some(row => row.length !== 3) || projectMinutes.length !== 3 || projectItemTiers.some(tier => tier < 0)) throw new Error('Projects catalog changed')
+const projects = {
+  freeRerolls: constant(projectsSource, 'FreeRerollsPerDay'), adRerolls: constant(projectsSource, 'AdRerollsPerDay'), itemChance: constant(projectsSource, 'ItemChancePercent'),
+  goals: [
+    ['ClearTasks', 'Bugfix Sprint', 'Clear Tasks', 'Selesaikan Task', true, 'stage-patch'],
+    ['ClearReleases', 'Ship It', 'Clear Releases', 'Selesaikan Release', false, 'stage-release'],
+    ['UpgradeStats', 'Refactor', 'Buy Core Stat levels', 'Beli level Core Stat', false, 'mission-stat'],
+  ].map(([id, name, goal, goalId, countsOffline, artwork], index) => ({ id, name, goal, goalId, countsOffline, icon: icon(artwork), targets: projectTargets[index] })),
+  sizes: ['Small', 'Medium', 'Large'].map((name, index) => ({ name, minutes: projectMinutes[index], minECash: minECash[index], maxECash: maxECash[index], itemTier: tierNames[projectItemTiers[index]], itemDuration: itemDurations[projectItemTiers[index]] })),
+}
 
 const pricesSource = read('OfficePrices')
 const officePricing = Object.fromEntries(['FirstSkinFame', 'PriceFactor', 'MultiplierFactor'].map(k => [k, constant(pricesSource, k)]))
@@ -122,7 +147,7 @@ const offices = releasedOffices.map(({ id, name, index }) => (
 const catSource = read('VisitingCat'), adSource = read('AdBoost'), bossSource = read('BossRewards')
 const events = { catInterval: constant(catSource, 'IntervalSeconds'), catChance: constant(catSource, 'ECashChancePercent'), catReward: constant(catSource, 'ECashReward'), catCashClears: constant(catSource, 'CashClears'), releaseReward: constant(bossSource, 'Release'), majorReward: constant(bossSource, 'MajorRelease'), adLimit: constant(adSource, 'MaxAdsPerDay'), adDuration: constant(adSource, 'SecondsPerAd'), adMultiplier: constant(adSource, 'Multiplier'), ecashAdLimit: constant(adSource, 'MaxECashAdsPerDay'), ecashPerAd: constant(adSource, 'ECashPerAd'), daily: array(read('DailyCheckIn'), 'ECashDays') }
 const currencyIcons = { cash: icon('cash-banknote-green'), ecash: icon('ecash-credit-card-blue'), fame: icon('fame-star'), code: icon('code'), stress: icon('stress-brain'), ascend: icon('retry'), bag: icon('bag'), missions: icon('missions'), daily: icon('daily-checkin') }
-const output = { tuning, stats, permanent, permanentNumbers, gear, packages, missions, shop, offices, officePricing, events, icons: currencyIcons }
+const output = { tuning, stats, permanent, permanentNumbers, gear, packages, missions, shop, projects, offices, officePricing, events, icons: { ...currencyIcons, projects: icon('event') } }
 mkdirSync(resolve(root, 'src/data'), { recursive: true })
 mkdirSync(resolve(root, 'public/icons'), { recursive: true })
 writeFileSync(resolve(root, 'src/data/idle-rpg.json'), JSON.stringify(output, null, 2) + '\n')

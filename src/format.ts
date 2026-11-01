@@ -27,6 +27,11 @@ export function full(n: number): string {
   return n.toLocaleString('en-US', { maximumFractionDigits: 2 })
 }
 
+/** A boost or project length as the game shows it: 1 min, 30 min, 2 h. */
+export function duration(seconds: number): string {
+  return seconds < 3600 ? `${seconds / 60} min` : `${seconds / 3600} h`
+}
+
 export function perLevel(kind: 'flat' | 'percent', magnitude: number, unit: string): string {
   return kind === 'flat' ? `+${compact(magnitude)} ${unit}` : `+${magnitude}%`
 }

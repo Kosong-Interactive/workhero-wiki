@@ -29,7 +29,14 @@ try {
   assert.equal(nextCost(wiki.permanent[0], 1, true), 3)
   assert.equal(wiki.packages.cost, 50)
   assert.equal(wiki.missions.length, 8)
-  assert.ok(wiki.missions.every(line => line.steps.length && line.steps.every(step => step.reward === 25)))
+  assert.ok(wiki.missions.every(line => line.steps.length && line.steps.every(step => step.reward > 0)))
+  assert.deepEqual(wiki.missions.find(line => line.id === 'ClearTasks').steps.slice(0, 2).map(step => step.reward), [5, 5])
+  assert.deepEqual(wiki.shop.map(boost => boost.sizes.map(size => size.cost)), Array(3).fill([2, 18, 48, 90, 240]))
+  assert.deepEqual(wiki.shop[0].sizes.map(size => size.duration), [60, 600, 1800, 3600, 10800])
+  assert.equal(new Set(wiki.shop.flatMap(boost => boost.sizes.map(size => size.icon))).size, 15, 'Each boost item has its own icon')
+  assert.deepEqual(wiki.projects.goals.map(goal => goal.targets), [[20, 60, 150], [1, 3, 6], [10, 30, 75]])
+  assert.deepEqual(wiki.projects.sizes.map(size => size.minutes), [30, 120, 360])
+  assert.deepEqual(wiki.projects.goals.map(goal => goal.countsOffline), [true, false, false])
   assert.deepEqual(wiki.offices.map(office => office.id), ['freelance', 'brexa'])
   assert.deepEqual(wiki.missions.find(line => line.id === 'BuySkins').steps.map(step => step.goal), [1])
   assert.equal(wiki.missions.find(line => line.id === 'Ascend').name, 'Promote')
@@ -50,7 +57,7 @@ try {
 
   const { default: App } = await server.ssrLoadModule('/src/App.tsx')
   const { LangProvider } = await server.ssrLoadModule('/src/i18n.tsx')
-  const routes = ['/', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/offices',
+  const routes = ['/', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/projects', '/offices',
     ...wiki.offices.map(office => '/offices/' + office.id), '/shop', '/calculator', '/economy', '/glossary']
   for (const lang of ['en', 'id']) {
     globalThis.localStorage = { getItem: () => lang }
@@ -69,7 +76,9 @@ try {
         assert.match(html, lang === 'en' ? /Every tier has its own gear icons and room models/ : /Setiap tier memiliki ikon gear dan model ruangan tersendiri/)
         assert.match(html, lang === 'en' ? /keeps the Bag count unchanged/ : /tidak mengubah jumlah di Bag/)
       }
-      if (route === '/missions') assert.match(html, lang === 'en' ? /Every step pays the same/ : /Setiap langkah memberi reward yang sama/)
+      if (route === '/missions') assert.match(html, lang === 'en' ? /Rewards grow along each line/ : /Reward naik di sepanjang setiap rangkaian/)
+      if (route === '/projects') assert.match(html, lang === 'en' ? /A finished project never expires/ : /Project yang sudah selesai tidak pernah hangus/)
+      if (route === '/shop') assert.match(html, /Espresso Machine/)
       if (route === '/') assert.match(html, lang === 'en' ? /Your first run/ : /Run pertamamu/)
     }
   }

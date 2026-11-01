@@ -1,5 +1,10 @@
 {
   "tuning": {
+    "BoostCommonPrice": 2,
+    "BoostUncommonPrice": 18,
+    "BoostRarePrice": 48,
+    "BoostEpicPrice": 90,
+    "BoostLegendaryPrice": 240,
     "StepsPerRelease": 10,
     "ReleasesPerMajor": 25,
     "HpBase": 10,
@@ -409,27 +414,203 @@
       "steps": [
         {
           "goal": 10,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 25,
+          "reward": 5
+        },
+        {
+          "goal": 50,
+          "reward": 5
         },
         {
           "goal": 100,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 250,
+          "reward": 5
+        },
+        {
+          "goal": 500,
+          "reward": 5
         },
         {
           "goal": 1000,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 2200,
+          "reward": 5
+        },
+        {
+          "goal": 2201,
+          "reward": 5
+        },
+        {
+          "goal": 3100,
+          "reward": 5
+        },
+        {
+          "goal": 4000,
+          "reward": 5
+        },
+        {
+          "goal": 5500,
+          "reward": 5
+        },
+        {
+          "goal": 7000,
+          "reward": 5
+        },
+        {
+          "goal": 8500,
+          "reward": 5
         },
         {
           "goal": 10000,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 12000,
+          "reward": 5
+        },
+        {
+          "goal": 13000,
+          "reward": 5
+        },
+        {
+          "goal": 15000,
+          "reward": 5
+        },
+        {
+          "goal": 19000,
+          "reward": 5
+        },
+        {
+          "goal": 22000,
+          "reward": 5
+        },
+        {
+          "goal": 25000,
+          "reward": 10
+        },
+        {
+          "goal": 29000,
+          "reward": 10
+        },
+        {
+          "goal": 32000,
+          "reward": 10
+        },
+        {
+          "goal": 35000,
+          "reward": 10
+        },
+        {
+          "goal": 39000,
+          "reward": 10
+        },
+        {
+          "goal": 42000,
+          "reward": 10
+        },
+        {
+          "goal": 45000,
+          "reward": 10
+        },
+        {
+          "goal": 50000,
+          "reward": 10
+        },
+        {
+          "goal": 55000,
+          "reward": 10
+        },
+        {
+          "goal": 59000,
+          "reward": 10
+        },
+        {
+          "goal": 65000,
+          "reward": 20
+        },
+        {
+          "goal": 70000,
+          "reward": 20
+        },
+        {
+          "goal": 75000,
+          "reward": 20
+        },
+        {
+          "goal": 80000,
+          "reward": 20
+        },
+        {
+          "goal": 85000,
+          "reward": 20
+        },
+        {
+          "goal": 90000,
+          "reward": 20
+        },
+        {
+          "goal": 96000,
+          "reward": 20
         },
         {
           "goal": 100000,
-          "reward": 25
+          "reward": 20
         },
         {
-          "goal": 1000000,
-          "reward": 25
+          "goal": 110000,
+          "reward": 20
+        },
+        {
+          "goal": 110001,
+          "reward": 20
+        },
+        {
+          "goal": 120000,
+          "reward": 50
+        },
+        {
+          "goal": 130000,
+          "reward": 50
+        },
+        {
+          "goal": 130001,
+          "reward": 50
+        },
+        {
+          "goal": 140000,
+          "reward": 50
+        },
+        {
+          "goal": 150000,
+          "reward": 50
+        },
+        {
+          "goal": 150001,
+          "reward": 50
+        },
+        {
+          "goal": 160000,
+          "reward": 50
+        },
+        {
+          "goal": 170000,
+          "reward": 50
+        },
+        {
+          "goal": 170001,
+          "reward": 50
+        },
+        {
+          "goal": 180000,
+          "reward": 200
         }
       ],
       "moreSteps": false
@@ -444,27 +625,103 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 25
+          "reward": 5
         },
         {
-          "goal": 5,
-          "reward": 25
+          "goal": 61,
+          "reward": 5
         },
         {
-          "goal": 25,
-          "reward": 25
+          "goal": 150,
+          "reward": 5
         },
         {
-          "goal": 100,
-          "reward": 25
+          "goal": 190,
+          "reward": 5
         },
         {
-          "goal": 500,
-          "reward": 25
+          "goal": 280,
+          "reward": 5
         },
         {
-          "goal": 2500,
-          "reward": 25
+          "goal": 480,
+          "reward": 10
+        },
+        {
+          "goal": 800,
+          "reward": 10
+        },
+        {
+          "goal": 1100,
+          "reward": 10
+        },
+        {
+          "goal": 1500,
+          "reward": 10
+        },
+        {
+          "goal": 2100,
+          "reward": 10
+        },
+        {
+          "goal": 2800,
+          "reward": 20
+        },
+        {
+          "goal": 3500,
+          "reward": 20
+        },
+        {
+          "goal": 4300,
+          "reward": 20
+        },
+        {
+          "goal": 5000,
+          "reward": 20
+        },
+        {
+          "goal": 6100,
+          "reward": 20
+        },
+        {
+          "goal": 7200,
+          "reward": 40
+        },
+        {
+          "goal": 8300,
+          "reward": 40
+        },
+        {
+          "goal": 9400,
+          "reward": 40
+        },
+        {
+          "goal": 11000,
+          "reward": 40
+        },
+        {
+          "goal": 12000,
+          "reward": 40
+        },
+        {
+          "goal": 13000,
+          "reward": 100
+        },
+        {
+          "goal": 15000,
+          "reward": 100
+        },
+        {
+          "goal": 16000,
+          "reward": 100
+        },
+        {
+          "goal": 18000,
+          "reward": 100
+        },
+        {
+          "goal": 19000,
+          "reward": 250
         }
       ],
       "moreSteps": false
@@ -482,24 +739,40 @@
           "reward": 25
         },
         {
-          "goal": 2,
-          "reward": 25
+          "goal": 3,
+          "reward": 30
         },
         {
-          "goal": 5,
-          "reward": 25
+          "goal": 11,
+          "reward": 40
         },
         {
-          "goal": 10,
-          "reward": 25
+          "goal": 42,
+          "reward": 50
         },
         {
-          "goal": 25,
-          "reward": 25
+          "goal": 110,
+          "reward": 60
         },
         {
-          "goal": 50,
-          "reward": 25
+          "goal": 180,
+          "reward": 75
+        },
+        {
+          "goal": 280,
+          "reward": 100
+        },
+        {
+          "goal": 390,
+          "reward": 125
+        },
+        {
+          "goal": 510,
+          "reward": 150
+        },
+        {
+          "goal": 640,
+          "reward": 250
         }
       ],
       "moreSteps": false
@@ -514,27 +787,203 @@
       "steps": [
         {
           "goal": 10,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 25,
+          "reward": 5
         },
         {
           "goal": 50,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 100,
+          "reward": 5
+        },
+        {
+          "goal": 150,
+          "reward": 5
         },
         {
           "goal": 250,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 500,
+          "reward": 5
         },
         {
           "goal": 1000,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 2500,
+          "reward": 5
         },
         {
           "goal": 5000,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 11000,
+          "reward": 5
+        },
+        {
+          "goal": 16000,
+          "reward": 5
+        },
+        {
+          "goal": 20000,
+          "reward": 5
         },
         {
           "goal": 25000,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 30000,
+          "reward": 5
+        },
+        {
+          "goal": 35000,
+          "reward": 5
+        },
+        {
+          "goal": 39000,
+          "reward": 5
+        },
+        {
+          "goal": 46000,
+          "reward": 5
+        },
+        {
+          "goal": 55000,
+          "reward": 5
+        },
+        {
+          "goal": 65000,
+          "reward": 5
+        },
+        {
+          "goal": 75000,
+          "reward": 10
+        },
+        {
+          "goal": 86000,
+          "reward": 10
+        },
+        {
+          "goal": 96000,
+          "reward": 10
+        },
+        {
+          "goal": 110000,
+          "reward": 10
+        },
+        {
+          "goal": 120000,
+          "reward": 10
+        },
+        {
+          "goal": 130000,
+          "reward": 10
+        },
+        {
+          "goal": 140000,
+          "reward": 10
+        },
+        {
+          "goal": 150000,
+          "reward": 10
+        },
+        {
+          "goal": 160000,
+          "reward": 10
+        },
+        {
+          "goal": 180000,
+          "reward": 10
+        },
+        {
+          "goal": 200000,
+          "reward": 20
+        },
+        {
+          "goal": 210000,
+          "reward": 20
+        },
+        {
+          "goal": 230000,
+          "reward": 20
+        },
+        {
+          "goal": 240000,
+          "reward": 20
+        },
+        {
+          "goal": 260000,
+          "reward": 20
+        },
+        {
+          "goal": 270000,
+          "reward": 20
+        },
+        {
+          "goal": 290000,
+          "reward": 20
+        },
+        {
+          "goal": 310000,
+          "reward": 20
+        },
+        {
+          "goal": 330000,
+          "reward": 20
+        },
+        {
+          "goal": 350000,
+          "reward": 20
+        },
+        {
+          "goal": 370000,
+          "reward": 50
+        },
+        {
+          "goal": 390000,
+          "reward": 50
+        },
+        {
+          "goal": 410000,
+          "reward": 50
+        },
+        {
+          "goal": 420000,
+          "reward": 50
+        },
+        {
+          "goal": 450000,
+          "reward": 50
+        },
+        {
+          "goal": 470000,
+          "reward": 50
+        },
+        {
+          "goal": 490000,
+          "reward": 50
+        },
+        {
+          "goal": 510000,
+          "reward": 50
+        },
+        {
+          "goal": 530000,
+          "reward": 50
+        },
+        {
+          "goal": 550000,
+          "reward": 200
         }
       ],
       "moreSteps": false
@@ -549,23 +998,103 @@
       "steps": [
         {
           "goal": 3,
-          "reward": 25
+          "reward": 20
         },
         {
-          "goal": 10,
-          "reward": 25
+          "goal": 12,
+          "reward": 20
         },
         {
-          "goal": 25,
-          "reward": 25
+          "goal": 23,
+          "reward": 20
         },
         {
-          "goal": 50,
-          "reward": 25
+          "goal": 27,
+          "reward": 20
         },
         {
-          "goal": 100,
-          "reward": 25
+          "goal": 32,
+          "reward": 20
+        },
+        {
+          "goal": 33,
+          "reward": 20
+        },
+        {
+          "goal": 41,
+          "reward": 20
+        },
+        {
+          "goal": 48,
+          "reward": 20
+        },
+        {
+          "goal": 53,
+          "reward": 20
+        },
+        {
+          "goal": 59,
+          "reward": 20
+        },
+        {
+          "goal": 64,
+          "reward": 30
+        },
+        {
+          "goal": 67,
+          "reward": 30
+        },
+        {
+          "goal": 71,
+          "reward": 30
+        },
+        {
+          "goal": 73,
+          "reward": 30
+        },
+        {
+          "goal": 76,
+          "reward": 30
+        },
+        {
+          "goal": 78,
+          "reward": 50
+        },
+        {
+          "goal": 81,
+          "reward": 50
+        },
+        {
+          "goal": 83,
+          "reward": 50
+        },
+        {
+          "goal": 84,
+          "reward": 50
+        },
+        {
+          "goal": 86,
+          "reward": 50
+        },
+        {
+          "goal": 88,
+          "reward": 100
+        },
+        {
+          "goal": 89,
+          "reward": 100
+        },
+        {
+          "goal": 91,
+          "reward": 100
+        },
+        {
+          "goal": 92,
+          "reward": 100
+        },
+        {
+          "goal": 93,
+          "reward": 250
         }
       ],
       "moreSteps": false
@@ -580,7 +1109,7 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 25
+          "reward": 150
         }
       ],
       "moreSteps": true
@@ -595,23 +1124,203 @@
       "steps": [
         {
           "goal": 1,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 8,
+          "reward": 5
         },
         {
           "goal": 10,
-          "reward": 25
+          "reward": 5
+        },
+        {
+          "goal": 12,
+          "reward": 5
+        },
+        {
+          "goal": 14,
+          "reward": 5
+        },
+        {
+          "goal": 16,
+          "reward": 5
+        },
+        {
+          "goal": 18,
+          "reward": 5
+        },
+        {
+          "goal": 20,
+          "reward": 5
+        },
+        {
+          "goal": 22,
+          "reward": 5
+        },
+        {
+          "goal": 29,
+          "reward": 5
+        },
+        {
+          "goal": 34,
+          "reward": 5
+        },
+        {
+          "goal": 40,
+          "reward": 5
         },
         {
           "goal": 50,
-          "reward": 25
+          "reward": 5
         },
         {
-          "goal": 250,
-          "reward": 25
+          "goal": 62,
+          "reward": 5
         },
         {
-          "goal": 1000,
-          "reward": 25
+          "goal": 67,
+          "reward": 5
+        },
+        {
+          "goal": 68,
+          "reward": 5
+        },
+        {
+          "goal": 76,
+          "reward": 5
+        },
+        {
+          "goal": 78,
+          "reward": 5
+        },
+        {
+          "goal": 84,
+          "reward": 5
+        },
+        {
+          "goal": 91,
+          "reward": 5
+        },
+        {
+          "goal": 97,
+          "reward": 5
+        },
+        {
+          "goal": 104,
+          "reward": 5
+        },
+        {
+          "goal": 107,
+          "reward": 5
+        },
+        {
+          "goal": 108,
+          "reward": 5
+        },
+        {
+          "goal": 109,
+          "reward": 5
+        },
+        {
+          "goal": 112,
+          "reward": 5
+        },
+        {
+          "goal": 113,
+          "reward": 5
+        },
+        {
+          "goal": 115,
+          "reward": 5
+        },
+        {
+          "goal": 119,
+          "reward": 5
+        },
+        {
+          "goal": 120,
+          "reward": 5
+        },
+        {
+          "goal": 121,
+          "reward": 10
+        },
+        {
+          "goal": 132,
+          "reward": 10
+        },
+        {
+          "goal": 133,
+          "reward": 10
+        },
+        {
+          "goal": 134,
+          "reward": 10
+        },
+        {
+          "goal": 136,
+          "reward": 10
+        },
+        {
+          "goal": 137,
+          "reward": 10
+        },
+        {
+          "goal": 144,
+          "reward": 10
+        },
+        {
+          "goal": 145,
+          "reward": 10
+        },
+        {
+          "goal": 146,
+          "reward": 10
+        },
+        {
+          "goal": 148,
+          "reward": 10
+        },
+        {
+          "goal": 156,
+          "reward": 10
+        },
+        {
+          "goal": 157,
+          "reward": 10
+        },
+        {
+          "goal": 158,
+          "reward": 10
+        },
+        {
+          "goal": 168,
+          "reward": 10
+        },
+        {
+          "goal": 169,
+          "reward": 10
+        },
+        {
+          "goal": 170,
+          "reward": 10
+        },
+        {
+          "goal": 172,
+          "reward": 10
+        },
+        {
+          "goal": 180,
+          "reward": 10
+        },
+        {
+          "goal": 181,
+          "reward": 10
+        },
+        {
+          "goal": 182,
+          "reward": 50
         }
       ],
       "moreSteps": false
@@ -626,27 +1335,43 @@
       "steps": [
         {
           "goal": 1,
+          "reward": 5
+        },
+        {
+          "goal": 8,
+          "reward": 10
+        },
+        {
+          "goal": 24,
+          "reward": 15
+        },
+        {
+          "goal": 56,
           "reward": 25
         },
         {
-          "goal": 5,
-          "reward": 25
+          "goal": 120,
+          "reward": 40
         },
         {
-          "goal": 10,
-          "reward": 25
+          "goal": 190,
+          "reward": 60
         },
         {
-          "goal": 25,
-          "reward": 25
+          "goal": 290,
+          "reward": 90
         },
         {
-          "goal": 50,
-          "reward": 25
+          "goal": 400,
+          "reward": 125
         },
         {
-          "goal": 100,
-          "reward": 25
+          "goal": 530,
+          "reward": 175
+        },
+        {
+          "goal": 660,
+          "reward": 300
         }
       ],
       "moreSteps": false
@@ -660,8 +1385,48 @@
       "description": "Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.",
       "descriptionId": "Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.",
       "icon": "/icons/icon-coffee.png",
-      "cost": 2,
-      "duration": 60
+      "sizes": [
+        {
+          "tier": "Common",
+          "name": "Instant Coffee",
+          "description": "A quick cup between tasks.",
+          "duration": 60,
+          "cost": 2,
+          "icon": "/icons/icon-boost-coffee-common.png"
+        },
+        {
+          "tier": "Uncommon",
+          "name": "Iced Latte",
+          "description": "A cool sip for a busy day.",
+          "duration": 600,
+          "cost": 18,
+          "icon": "/icons/icon-boost-coffee-uncommon.png"
+        },
+        {
+          "tier": "Rare",
+          "name": "Cold Brew",
+          "description": "Slow brewed for long workdays.",
+          "duration": 1800,
+          "cost": 48,
+          "icon": "/icons/icon-boost-coffee-rare.png"
+        },
+        {
+          "tier": "Epic",
+          "name": "Coffee Jug",
+          "description": "Keep your favorite brew within reach.",
+          "duration": 3600,
+          "cost": 90,
+          "icon": "/icons/icon-boost-coffee-epic.png"
+        },
+        {
+          "tier": "Legendary",
+          "name": "Espresso Machine",
+          "description": "Your own coffee corner at work.",
+          "duration": 10800,
+          "cost": 240,
+          "icon": "/icons/icon-boost-coffee-legendary.png"
+        }
+      ]
     },
     {
       "id": "DoubleCash",
@@ -670,8 +1435,48 @@
       "description": "Cash from stage clears ×2.",
       "descriptionId": "Cash dari clear stage ×2.",
       "icon": "/icons/icon-cash-banknote-green.png",
-      "cost": 2,
-      "duration": 60
+      "sizes": [
+        {
+          "tier": "Common",
+          "name": "Side Gig",
+          "description": "A little extra outside your day job.",
+          "duration": 60,
+          "cost": 2,
+          "icon": "/icons/icon-boost-cash-common.png"
+        },
+        {
+          "tier": "Uncommon",
+          "name": "Overtime Pay",
+          "description": "Make those extra hours count.",
+          "duration": 600,
+          "cost": 18,
+          "icon": "/icons/icon-boost-cash-uncommon.png"
+        },
+        {
+          "tier": "Rare",
+          "name": "Bonus Check",
+          "description": "A little recognition for your hard work.",
+          "duration": 1800,
+          "cost": 48,
+          "icon": "/icons/icon-boost-cash-rare.png"
+        },
+        {
+          "tier": "Epic",
+          "name": "Payday",
+          "description": "The best day on the calendar.",
+          "duration": 3600,
+          "cost": 90,
+          "icon": "/icons/icon-boost-cash-epic.png"
+        },
+        {
+          "tier": "Legendary",
+          "name": "Annual Bonus",
+          "description": "A big thank-you for a year of effort.",
+          "duration": 10800,
+          "cost": 240,
+          "icon": "/icons/icon-boost-cash-legendary.png"
+        }
+      ]
     },
     {
       "id": "Overclock",
@@ -680,10 +1485,122 @@
       "description": "Auto LoC damage ×2.",
       "descriptionId": "Damage Auto LoC ×2.",
       "icon": "/icons/icon-code-monitor.png",
-      "cost": 2,
-      "duration": 60
+      "sizes": [
+        {
+          "tier": "Common",
+          "name": "Quick Fix",
+          "description": "A small patch to keep things moving.",
+          "duration": 60,
+          "cost": 2,
+          "icon": "/icons/icon-boost-overclock-common.png"
+        },
+        {
+          "tier": "Uncommon",
+          "name": "Code Snippet",
+          "description": "Keep your favorite shortcuts handy.",
+          "duration": 600,
+          "cost": 18,
+          "icon": "/icons/icon-boost-overclock-uncommon.png"
+        },
+        {
+          "tier": "Rare",
+          "name": "Auto Complete",
+          "description": "Less typing, more creating.",
+          "duration": 1800,
+          "cost": 48,
+          "icon": "/icons/icon-boost-overclock-rare.png"
+        },
+        {
+          "tier": "Epic",
+          "name": "Deep Focus",
+          "description": "Headphones on. Distractions off.",
+          "duration": 3600,
+          "cost": 90,
+          "icon": "/icons/icon-boost-overclock-epic.png"
+        },
+        {
+          "tier": "Legendary",
+          "name": "All-Nighter",
+          "description": "One laptop. One very long night.",
+          "duration": 10800,
+          "cost": 240,
+          "icon": "/icons/icon-boost-overclock-legendary.png"
+        }
+      ]
     }
   ],
+  "projects": {
+    "freeRerolls": 2,
+    "adRerolls": 3,
+    "itemChance": 50,
+    "goals": [
+      {
+        "id": "ClearTasks",
+        "name": "Bugfix Sprint",
+        "goal": "Clear Tasks",
+        "goalId": "Selesaikan Task",
+        "countsOffline": true,
+        "icon": "/icons/icon-stage-patch.png",
+        "targets": [
+          20,
+          60,
+          150
+        ]
+      },
+      {
+        "id": "ClearReleases",
+        "name": "Ship It",
+        "goal": "Clear Releases",
+        "goalId": "Selesaikan Release",
+        "countsOffline": false,
+        "icon": "/icons/icon-stage-release.png",
+        "targets": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "id": "UpgradeStats",
+        "name": "Refactor",
+        "goal": "Buy Core Stat levels",
+        "goalId": "Beli level Core Stat",
+        "countsOffline": false,
+        "icon": "/icons/icon-mission-stat.png",
+        "targets": [
+          10,
+          30,
+          75
+        ]
+      }
+    ],
+    "sizes": [
+      {
+        "name": "Small",
+        "minutes": 30,
+        "minECash": 2,
+        "maxECash": 5,
+        "itemTier": "Common",
+        "itemDuration": 60
+      },
+      {
+        "name": "Medium",
+        "minutes": 120,
+        "minECash": 6,
+        "maxECash": 12,
+        "itemTier": "Uncommon",
+        "itemDuration": 600
+      },
+      {
+        "name": "Large",
+        "minutes": 360,
+        "minECash": 12,
+        "maxECash": 25,
+        "itemTier": "Rare",
+        "itemDuration": 1800
+      }
+    ]
+  },
   "offices": [
     {
       "id": "freelance",
@@ -737,6 +1654,7 @@
     "ascend": "/icons/icon-retry.png",
     "bag": "/icons/icon-bag.png",
     "missions": "/icons/icon-missions.png",
-    "daily": "/icons/icon-daily-checkin.png"
+    "daily": "/icons/icon-daily-checkin.png",
+    "projects": "/icons/icon-event.png"
   }
 }

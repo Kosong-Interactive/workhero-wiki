@@ -2,7 +2,7 @@
 
 React + Vite reference for **WorkHero: Idle RPG**. English and Indonesian, with compact numbers,
 stage/upgrade calculators, Core Stats, Fame upgrades, gear, Packages, missions, Shop boosts, offices,
-currencies, and a glossary. Play behavior follows `GAME_PLAYABLE` in `src/config.ts`;
+currencies, Projects, and a glossary. Play behavior follows `GAME_PLAYABLE` in `src/config.ts`;
 the current setting opens the game, while `false` shows the under-development popup.
 
 - `npm run dev` — start the wiki.
@@ -31,7 +31,9 @@ banks starting Cash and does not skip stages. The calculator excludes gear, boos
 runtime timing/state machine and clearly labels uninterrupted clear-time estimates. Timer applies
 to Tasks as well as bosses. New gear always enters the Bag and requires manual Equip; retreat
 holds a stage until Next. Offline repeats a reached Task instead of progressing, and offline clears
-do not advance missions. Every mission step pays the shared `MissionCatalog.StepECash` reward.
+do not advance missions. Each mission step pays its own reward from `MissionCatalog` (rising along a line).
+Boost items come from `BoostItems` (five sizes per family, prices from `GameTuning`), and Projects from `Projects`
+(goals, targets, time limits, rewards, rerolls); the Projects page replaces the old Event tab (`/events` redirects there).
 
 Old `/skins` and `/workplaces` links redirect to `/offices`; `/servers` redirects to `/mechanics`, `/effects`
 to `/upgrades`, and `/compare` to `/offices`. The retired Career Idle catalogs are no longer imported.

@@ -9,6 +9,7 @@ import Upgrades from './pages/Upgrades'
 import Gear from './pages/Gear'
 import Packages from './pages/Packages'
 import Missions from './pages/Missions'
+import Projects from './pages/Projects'
 import Calculator from './pages/Calculator'
 import Economy from './pages/Economy'
 import Mechanics from './pages/Mechanics'
@@ -29,6 +30,7 @@ export default function App() {
     ['/gear', 'Gear & Bag'],
     ['/packages', 'Package'],
     ['/missions', tr('Missions', 'Misi')],
+    ['/projects', 'Projects'],
     ['/offices', tr('Offices', 'Office')],
     ['/shop', tr('Shop', 'Toko')],
     ['/calculator', tr('Calculator', 'Kalkulator')],
@@ -53,6 +55,8 @@ export default function App() {
         <Route path="/gear" element={<Gear />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/missions" element={<Missions />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/events" element={<Navigate to="/projects" replace />} />
         <Route path="/offices" element={<Offices />} />
         <Route path="/offices/:id" element={<Offices />} />
         <Route path="/shop" element={<Shop />} />

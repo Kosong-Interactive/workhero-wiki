@@ -13,6 +13,7 @@ export default function Home() {
     ['/gear', 'Gear & Bag', 'Gear & Bag', wiki.icons.bag, 'Four slots, five tiers. Equip, merge, or sell spare gear.', 'Empat slot, lima tier. Pakai, merge, atau jual gear cadangan.'],
     ['/packages', 'Packages', 'Package', wiki.packages.tiers[0].icon, 'Open gear Packages and earn free higher-tier Packages.', 'Buka Package gear dan dapatkan Package gratis dengan tier lebih tinggi.'],
     ['/missions', 'Missions', 'Misi', wiki.icons.missions, 'Lifetime goals pay ECash once per step.', 'Target sepanjang permainan memberi ECash sekali tiap langkah.'],
+    ['/projects', 'Projects', 'Projects', wiki.icons.projects, 'Side jobs on a timer that pay ECash or a boost item.', 'Kerja sampingan berbatas waktu yang memberi ECash atau item boost.'],
     ['/offices', 'Offices', 'Office', wiki.offices[0].icon, 'Choose a career look with Auto LoC and Cash bonuses.', 'Pilih tampilan karier dengan bonus Auto LoC dan Cash.'],
     ['/calculator', 'Calculator', 'Kalkulator', wiki.icons.fame, 'Compare upgrade prices, stage HP, and Promote rewards.', 'Bandingkan biaya upgrade, HP stage, dan reward Promote.'],
   ]
@@ -36,7 +37,7 @@ export default function Home() {
           <h2>{tr('Your first run', 'Run pertamamu')}</h2>
           <ol className="bullets">
             <li>{tr('Let Auto LoC finish Tasks and earn Cash. Open Upgrade and buy your first Auto LoC level.', 'Biarkan Auto LoC menyelesaikan Task dan menghasilkan Cash. Buka Upgrade dan beli level Auto LoC pertamamu.')}</li>
-            <li>{tr('Open Missions and claim completed goals. Each step pays', 'Buka Missions dan klaim target yang selesai. Setiap langkah memberi')} {wiki.missions[0].steps[0].reward} ECash. {tr('Two claims fund your first Common Package.', 'Dua klaim cukup untuk Package Common pertamamu.')}</li>
+            <li>{tr('Open Missions and claim completed goals; each step pays ECash, more on later steps. Start a Project too: a side job that pays ECash or a boost item.', 'Buka Missions dan klaim target yang selesai; setiap langkah memberi ECash, lebih banyak di langkah berikutnya. Mulai juga sebuah Project: kerja sampingan yang memberi ECash atau item boost.')}</li>
             <li>{tr('Buy a Common Package in Shop for', 'Beli Package Common di Shop seharga')} {wiki.packages.cost} ECash, {tr('open it from the Package panel, then go to Bag → choose the gear → Equip. New gear is not equipped automatically.', 'buka dari panel Package, lalu masuk Bag → pilih gear → Equip. Gear baru tidak dipakai otomatis.')}</li>
             <li>{tr('If a stage times out, upgrade while farming and press Next when ready to try moving forward again.', 'Jika waktu stage habis, beli upgrade sambil farming lalu tekan Next saat siap mencoba maju lagi.')}</li>
           </ol>
