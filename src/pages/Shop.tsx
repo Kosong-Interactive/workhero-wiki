@@ -11,7 +11,7 @@ export default function Shop() {
     <h1>{tr('Shop', 'Toko')}</h1>
     <p className="lead">{tr('Spend ECash on boost items and Common Packages. Spend Current Fame on offices and permanent upgrades.', 'Belanjakan ECash untuk item boost dan Package Common. Gunakan Current Fame untuk office dan upgrade permanen.')}</p>
     <h2>{tr('Boost items', 'Item boost')}</h2>
-    <p>{tr('Three boosts, each sold in five sizes shown as the gear tiers. A purchase goes into Bag → Items and is not used straight away: press USE there when you want it. Using one adds its time to that boost; a running boost is extended, never stacked.', 'Tiga boost, masing-masing dijual dalam lima ukuran yang ditandai seperti tier gear. Item yang dibeli masuk ke Bag → Items dan tidak langsung terpakai: tekan USE di sana saat kamu mau. Memakai item menambah durasi boost itu; boost yang sedang berjalan diperpanjang, tidak ditumpuk.')}</p>
+    <p>{tr('Four boosts, each sold in five sizes shown as the gear tiers. A purchase goes into Bag → Items and is not used straight away: press USE there when you want it. Using one adds its time to that boost; a running boost is extended, never stacked.', 'Empat boost, masing-masing dijual dalam lima ukuran yang ditandai seperti tier gear. Item yang dibeli masuk ke Bag → Items dan tidak langsung terpakai: tekan USE di sana saat kamu mau. Memakai item menambah durasi boost itu; boost yang sedang berjalan diperpanjang, tidak ditumpuk.')}</p>
     {wiki.shop.map(boost => <section key={boost.id}>
       <h3><Icon src={boost.icon} size={28} /> {tr(boost.name, boost.nameId)}</h3>
       <p className="muted">{tr(boost.description, boost.descriptionId)}</p>

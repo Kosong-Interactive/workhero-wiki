@@ -1582,6 +1582,56 @@
           "icon": "/icons/icon-boost-overclock-legendary.png"
         }
       ]
+    },
+    {
+      "id": "RapidFire",
+      "name": "Rapid Fire",
+      "nameId": "Rapid Fire",
+      "description": "Two hits a second instead of one, each as strong, so Auto LoC damage ×2. Stacks with Overclock to ×4.",
+      "descriptionId": "Dua pukulan per detik, bukan satu, masing-masing sama kuat, jadi damage Auto LoC ×2. Bisa ditumpuk dengan Overclock jadi ×4.",
+      "icon": "/icons/icon-boost-rapidfire-common.png",
+      "sizes": [
+        {
+          "tier": "Common",
+          "name": "Energy Drink",
+          "description": "One can, and your fingers fly.",
+          "duration": 60,
+          "cost": 2,
+          "icon": "/icons/icon-boost-rapidfire-common.png"
+        },
+        {
+          "tier": "Uncommon",
+          "name": "Power Nap",
+          "description": "Twenty minutes down, twice the pace up.",
+          "duration": 600,
+          "cost": 18,
+          "icon": "/icons/icon-boost-rapidfire-uncommon.png"
+        },
+        {
+          "tier": "Rare",
+          "name": "Flow State",
+          "description": "Everything clicks into place.",
+          "duration": 1800,
+          "cost": 48,
+          "icon": "/icons/icon-boost-rapidfire-rare.png"
+        },
+        {
+          "tier": "Epic",
+          "name": "Hyperfocus",
+          "description": "The world goes quiet. The keys do not.",
+          "duration": 3600,
+          "cost": 90,
+          "icon": "/icons/icon-boost-rapidfire-epic.png"
+        },
+        {
+          "tier": "Legendary",
+          "name": "Battle Station",
+          "description": "Two screens, zero waiting.",
+          "duration": 10800,
+          "cost": 240,
+          "icon": "/icons/icon-boost-rapidfire-legendary.png"
+        }
+      ]
     }
   ],
   "projects": {

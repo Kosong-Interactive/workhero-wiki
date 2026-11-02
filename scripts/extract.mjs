@@ -124,15 +124,16 @@ const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+
 })
 if (missions.length !== 8) throw new Error('Mission catalog changed')
 
-// Boost items: three families (ShopBoost order), each in five sizes shown as the gear tiers. A purchase is stored in the Bag; USE adds its time.
+// Boost items: four families (ShopBoost order), each in five sizes shown as the gear tiers. A purchase is stored in the Bag; USE adds its time.
 const itemsSource = read('BoostItems')
 const itemNames = strings(itemsSource, 'Names'), itemDescriptions = strings(itemsSource, 'Descriptions'), itemDurations = array(itemsSource, 'Durations')
 const itemPrices = tierNames.map(tier => tuning[`Boost${tier}Price`])
-if (itemNames.length !== 15 || itemDescriptions.length !== 15 || itemDurations.length !== 5 || itemPrices.some(price => !(price > 0))) throw new Error('Boost item catalog changed')
+if (itemNames.length !== 20 || itemDescriptions.length !== 20 || itemDurations.length !== 5 || itemPrices.some(price => !(price > 0))) throw new Error('Boost item catalog changed')
 const shop = [
   ['Coffee', 'Coffee', 'Kopi', 'Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.', 'Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.', 'coffee', 'coffee'],
   ['DoubleCash', 'Double Cash', 'Double Cash', 'Cash from stage clears ×2.', 'Cash dari clear stage ×2.', 'cash-banknote-green', 'cash'],
   ['Overclock', 'Overclock', 'Overclock', 'Auto LoC damage ×2.', 'Damage Auto LoC ×2.', 'code-monitor', 'overclock'],
+  ['RapidFire', 'Rapid Fire', 'Rapid Fire', 'Two hits a second instead of one, each as strong, so Auto LoC damage ×2. Stacks with Overclock to ×4.', 'Dua pukulan per detik, bukan satu, masing-masing sama kuat, jadi damage Auto LoC ×2. Bisa ditumpuk dengan Overclock jadi ×4.', 'boost/icon-boost-rapidfire-common', 'rapidfire'],
 ].map(([id, name, nameId, description, descriptionId, artwork, family], boost) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork),
   sizes: tierNames.map((tier, index) => ({ tier, name: itemNames[boost * 5 + index], description: itemDescriptions[boost * 5 + index], duration: itemDurations[index], cost: itemPrices[index], icon: icon(`boost/icon-boost-${family}-${tier.toLowerCase()}`) })) }))
 
