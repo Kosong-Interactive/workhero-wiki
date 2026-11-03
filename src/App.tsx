@@ -3,6 +3,7 @@ import { NavLink, Navigate, Route, Routes, useLocation, useParams } from 'react-
 import PlayButton from './components/PlayButton'
 import { useLang } from './i18n'
 import Home from './pages/Home'
+import Play from './pages/Play'
 import Offices from './pages/Offices'
 import Shop from './pages/Shop'
 import Upgrades from './pages/Upgrades'
@@ -50,6 +51,7 @@ export default function App() {
     <main>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/play" element={<Play />} />
         <Route path="/mechanics" element={<Mechanics />} />
         <Route path="/upgrades" element={<Upgrades />} />
         <Route path="/gear" element={<Gear />} />

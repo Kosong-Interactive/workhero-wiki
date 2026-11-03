@@ -67,7 +67,8 @@ try {
 
   const { default: App } = await server.ssrLoadModule('/src/App.tsx')
   const { LangProvider } = await server.ssrLoadModule('/src/i18n.tsx')
-  const routes = ['/', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/projects', '/offices',
+  const { PLAY_URL, GAME_PLAYABLE, ANDROID_APK_URL } = await server.ssrLoadModule('/src/config.ts')
+  const routes = ['/', '/play', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/projects', '/offices',
     ...wiki.offices.map(office => '/offices/' + office.id), '/shop', '/calculator', '/economy', '/glossary']
   for (const lang of ['en', 'id']) {
     globalThis.localStorage = { getItem: () => lang }
@@ -76,6 +77,18 @@ try {
         createElement(LangProvider, null, createElement(App))))
       assert.match(html, /<h1[ >]/, `${lang} ${route}: missing title`)
       assert.doesNotMatch(html, /Ascend|Ascension|NaN|Infinity|undefined|Shopedia|OpenEye/, `${lang} ${route}: stale or invalid content`)
+      assert.equal((html.match(/href="\/play"/g) ?? []).length, route === '/' ? 2 : 1, `${lang} ${route}: Play buttons use the platform picker`)
+      if (route === '/play') {
+        assert.match(html, /Unity WebGL/)
+        assert.match(html, /Android · APK/)
+        if (GAME_PLAYABLE) assert.ok(html.includes(`href="${PLAY_URL}" target="_blank" rel="noopener noreferrer"`), 'Unity Play opens the configured game safely')
+        if (ANDROID_APK_URL) assert.ok(html.includes(`href="${ANDROID_APK_URL}"`))
+        else {
+          assert.match(html, /<button[^>]*disabled=""[^>]*aria-describedby="android-download-note"/)
+          assert.match(html, lang === 'en' ? /Coming soon/ : /Segera hadir/)
+          assert.doesNotMatch(html, /href="#"|href="null"/)
+        }
+      }
       if (route === '/' || route === '/offices') {
         assert.equal((html.match(lang === 'en' ? /Coming soon/g : /Segera hadir/g) ?? []).length, 1, `${route}: one Coming Soon`)
       }
