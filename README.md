@@ -21,13 +21,13 @@ odds, mission thresholds/rewards, permanent upgrade costs, daily rewards, office
 and event constants come from the C# catalogs. Extraction fails if required fields or artwork
 are missing; it does not silently use old Career Idle data.
 
-Only the four previously public offices are exported; future offices appear as one Coming Soon card.
+Only released offices are exported (currently Freelance and BRexa); future offices appear as one Coming Soon card.
 Office-purchase mission targets beyond that public catalog are withheld until further Offices are announced.
 Their room images remain square reference renders from the earlier EnvironmentPreview gallery,
 not proof that per-office rooms/previews have shipped. Names and ordering come from `Game/Offices.asset`; Office bonuses come from `OfficePrices`,
 not old workplace revenue or ITEM catalogs.
 
-The gameplay reference uses the actual prototype code as of 2026-10-18. All four gear slots have five distinct tier icons and room models, including Uncommon; extraction copies all twenty icons directly without Common fallback. Same-tier Equip remains available with Bag stock and conserves the Bag count. Simplified Desk icons represent accessories, not exact room layouts. Balance remains in
+The gameplay reference uses the actual prototype code as of 2026-11-04. All four gear slots have five distinct tier icons and room models, including Uncommon; extraction copies all twenty icons directly without Common fallback. Same-tier Equip remains available with Bag stock and conserves the Bag count. Simplified Desk icons represent accessories, not exact room layouts. Balance remains in
 development. Design proposals are not presented as implemented rules; in particular Head Start
 banks starting Cash and does not skip stages. The calculator excludes gear, boosts, and the
 runtime timing/state machine and clearly labels uninterrupted clear-time estimates. Timer applies
@@ -49,3 +49,9 @@ VITE_SITE_URL=https://your-domain.example npm run build
 ```
 
 Routes are real paths (`/offices`), so the host must serve `index.html` for unknown paths. `vercel.json` already does that; old `/#/…` links are redirected to the path form on load.
+
+## Gameplay sync — 2026-11-04
+
+Source: sibling Workhero `prototype/idle-rpg`, commit `9052dd68`. Merge requires four unequipped pieces matching slot, tier and series; `gearRules.mergeCount` is extracted from `GearLoadout`. Worn set groups match both series and tier. Bag guidance covers individual cards, primary-stat deltas, `MERGE n/4`, repeated merging and the always-visible stats card (Show Stats is retired in the current layout).
+
+Mission steps and rewards are re-extracted from `MissionCatalog`, preserving the released-Office filter. Current endpoints: Tasks150,000, Releases16,000, Majors350, Stats550,000, Fame upgrades122, Shop purchases280, Promote660. Public steps pay6,665 ECash; unreleased Office goals are excluded. No mission-completion date is promised by the wiki.

@@ -35,6 +35,21 @@ try {
   assert.deepEqual([1, 10, 250].map(stage => stageTimeLimit(stage, 100)), [45, 90, 135])
   assert.equal(coreValue('BossDamage', 100), 3)
   assert.equal(nextCost(wiki.permanent[0], 1, true), 3)
+  assert.equal(wiki.gearRules.mergeCount, 4)
+  // When the sibling game checkout is available, also compare every public mission step.
+  // Standalone wiki clones still validate the exported endpoints, totals and route content below.
+  const missionPath = resolve(root, '../Workhero/Assets/Scripts/Gameplay/Game/MissionCatalog.cs')
+  const missionSource = existsSync(missionPath) ? readFileSync(missionPath, 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '') : ''
+  for (const match of missionSource.matchAll(/Add\(lines, MissionKind\.(\w+), new long\[\]\s*\{([^}]+)\}, new long\[\]\s*\{([^}]+)\}\);/g)) {
+    const goals = match[2].split(',').map(Number), rewards = match[3].split(',').map(Number)
+    const steps = goals.map((goal, index) => ({ goal, reward: rewards[index] }))
+      .filter(step => match[1] !== 'BuySkins' || step.goal <= wiki.offices.length - 1)
+    assert.deepEqual(wiki.missions.find(line => line.id === match[1]).steps, steps, `${match[1]}: stale mission catalog`)
+  }
+  assert.deepEqual(wiki.missions.filter(line => line.id !== 'BuySkins').map(line => line.steps.at(-1).goal),
+    [150000, 16000, 350, 550000, 122, 280, 660])
+  assert.equal(wiki.missions.reduce((sum, line) => sum + line.steps.reduce((total, step) => total + step.reward, 0), 0), 6665)
   assert.equal(wiki.packages.cost, 50)
   assert.equal(wiki.missions.length, 8)
   assert.ok(wiki.missions.every(line => line.steps.length && line.steps.every(step => step.reward > 0)))
@@ -100,6 +115,12 @@ try {
         assert.doesNotMatch(html, /Uncommon shares Common artwork|Uncommon memakai gambar Common/)
         assert.match(html, lang === 'en' ? /Every tier has its own gear icons and room models/ : /Setiap tier memiliki ikon gear dan model ruangan tersendiri/)
         assert.match(html, lang === 'en' ? /keeps the Bag count unchanged/ : /tidak mengubah jumlah di Bag/)
+        assert.match(html, lang === 'en' ? /Merge 4 unequipped pieces/ : /Merge 4 gear yang belum dipakai/)
+        assert.match(html, /MERGE n\/4/)
+        assert.match(html, lang === 'en' ? /same series AND tier/ : /seri DAN tier yang sama/)
+        assert.match(html, lang === 'en' ? /primary-stat delta/ : /Delta stat utama/)
+        assert.match(html, lang === 'en' ? /always-visible stats card/ : /card stats yang selalu terlihat/)
+        assert.doesNotMatch(html, /Merge two|Merge dua|lowest tier|tier terendah|info button|Tombol info/)
         assert.match(html, /Hustler/)
         assert.match(html, /Grinder/)
         assert.doesNotMatch(html, /Desk adds to the Timer|Desk menambah multiplier Timer/)

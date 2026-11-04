@@ -357,6 +357,9 @@
       ]
     }
   ],
+  "gearRules": {
+    "mergeCount": 4
+  },
   "gearSets": {
     "pool": [
       3,
@@ -496,19 +499,23 @@
           "reward": 5
         },
         {
+          "goal": 1600,
+          "reward": 5
+        },
+        {
+          "goal": 1800,
+          "reward": 5
+        },
+        {
           "goal": 2200,
           "reward": 5
         },
         {
-          "goal": 2201,
+          "goal": 2900,
           "reward": 5
         },
         {
-          "goal": 3100,
-          "reward": 5
-        },
-        {
-          "goal": 4000,
+          "goal": 4100,
           "reward": 5
         },
         {
@@ -516,19 +523,19 @@
           "reward": 5
         },
         {
-          "goal": 7000,
+          "goal": 7100,
           "reward": 5
         },
         {
-          "goal": 8500,
+          "goal": 8100,
           "reward": 5
         },
         {
-          "goal": 10000,
+          "goal": 9400,
           "reward": 5
         },
         {
-          "goal": 12000,
+          "goal": 11000,
           "reward": 5
         },
         {
@@ -540,15 +547,19 @@
           "reward": 5
         },
         {
-          "goal": 19000,
+          "goal": 18000,
           "reward": 5
         },
         {
-          "goal": 22000,
-          "reward": 5
+          "goal": 21000,
+          "reward": 10
         },
         {
-          "goal": 25000,
+          "goal": 23000,
+          "reward": 10
+        },
+        {
+          "goal": 26000,
           "reward": 10
         },
         {
@@ -564,11 +575,11 @@
           "reward": 10
         },
         {
-          "goal": 39000,
+          "goal": 37000,
           "reward": 10
         },
         {
-          "goal": 42000,
+          "goal": 41000,
           "reward": 10
         },
         {
@@ -576,23 +587,27 @@
           "reward": 10
         },
         {
-          "goal": 50000,
+          "goal": 49000,
           "reward": 10
         },
         {
-          "goal": 55000,
-          "reward": 10
-        },
-        {
-          "goal": 59000,
-          "reward": 10
-        },
-        {
-          "goal": 65000,
+          "goal": 54000,
           "reward": 20
         },
         {
-          "goal": 70000,
+          "goal": 58000,
+          "reward": 20
+        },
+        {
+          "goal": 62000,
+          "reward": 20
+        },
+        {
+          "goal": 66000,
+          "reward": 20
+        },
+        {
+          "goal": 71000,
           "reward": 20
         },
         {
@@ -600,11 +615,11 @@
           "reward": 20
         },
         {
-          "goal": 80000,
+          "goal": 79000,
           "reward": 20
         },
         {
-          "goal": 85000,
+          "goal": 84000,
           "reward": 20
         },
         {
@@ -612,31 +627,35 @@
           "reward": 20
         },
         {
-          "goal": 96000,
+          "goal": 95000,
           "reward": 20
         },
         {
-          "goal": 100000,
-          "reward": 20
-        },
-        {
-          "goal": 110000,
-          "reward": 20
-        },
-        {
-          "goal": 110001,
-          "reward": 20
-        },
-        {
-          "goal": 120000,
+          "goal": 101000,
           "reward": 50
         },
         {
-          "goal": 130000,
+          "goal": 106000,
           "reward": 50
         },
         {
-          "goal": 130001,
+          "goal": 111000,
+          "reward": 50
+        },
+        {
+          "goal": 117000,
+          "reward": 50
+        },
+        {
+          "goal": 122000,
+          "reward": 50
+        },
+        {
+          "goal": 128000,
+          "reward": 50
+        },
+        {
+          "goal": 134000,
           "reward": 50
         },
         {
@@ -644,27 +663,11 @@
           "reward": 50
         },
         {
+          "goal": 145000,
+          "reward": 50
+        },
+        {
           "goal": 150000,
-          "reward": 50
-        },
-        {
-          "goal": 150001,
-          "reward": 50
-        },
-        {
-          "goal": 160000,
-          "reward": 50
-        },
-        {
-          "goal": 170000,
-          "reward": 50
-        },
-        {
-          "goal": 170001,
-          "reward": 50
-        },
-        {
-          "goal": 180000,
           "reward": 200
         }
       ],
@@ -683,83 +686,91 @@
           "reward": 5
         },
         {
-          "goal": 61,
+          "goal": 25,
           "reward": 5
         },
         {
-          "goal": 150,
+          "goal": 100,
           "reward": 5
         },
         {
-          "goal": 190,
+          "goal": 130,
           "reward": 5
         },
         {
-          "goal": 280,
+          "goal": 200,
           "reward": 5
         },
         {
-          "goal": 480,
+          "goal": 350,
           "reward": 10
         },
         {
-          "goal": 800,
+          "goal": 630,
           "reward": 10
         },
         {
-          "goal": 1100,
+          "goal": 910,
           "reward": 10
         },
         {
-          "goal": 1500,
+          "goal": 1200,
           "reward": 10
         },
         {
-          "goal": 2100,
+          "goal": 1700,
           "reward": 10
         },
         {
-          "goal": 2800,
+          "goal": 2300,
           "reward": 20
         },
         {
-          "goal": 3500,
+          "goal": 2900,
           "reward": 20
         },
         {
-          "goal": 4300,
+          "goal": 3600,
           "reward": 20
         },
         {
-          "goal": 5000,
+          "goal": 4200,
           "reward": 20
         },
         {
-          "goal": 6100,
+          "goal": 5100,
           "reward": 20
         },
         {
-          "goal": 7200,
+          "goal": 6000,
           "reward": 40
         },
         {
-          "goal": 8300,
+          "goal": 6900,
           "reward": 40
         },
         {
-          "goal": 9400,
+          "goal": 7900,
+          "reward": 40
+        },
+        {
+          "goal": 8900,
+          "reward": 40
+        },
+        {
+          "goal": 10000,
           "reward": 40
         },
         {
           "goal": 11000,
-          "reward": 40
+          "reward": 100
         },
         {
           "goal": 12000,
-          "reward": 40
+          "reward": 100
         },
         {
-          "goal": 13000,
+          "goal": 14000,
           "reward": 100
         },
         {
@@ -768,14 +779,6 @@
         },
         {
           "goal": 16000,
-          "reward": 100
-        },
-        {
-          "goal": 18000,
-          "reward": 100
-        },
-        {
-          "goal": 19000,
           "reward": 250
         }
       ],
@@ -794,39 +797,39 @@
           "reward": 25
         },
         {
-          "goal": 3,
+          "goal": 2,
           "reward": 30
         },
         {
-          "goal": 11,
+          "goal": 10,
           "reward": 40
         },
         {
-          "goal": 42,
+          "goal": 25,
           "reward": 50
         },
         {
-          "goal": 110,
+          "goal": 60,
           "reward": 60
         },
         {
-          "goal": 180,
+          "goal": 95,
           "reward": 75
         },
         {
-          "goal": 280,
+          "goal": 150,
           "reward": 100
         },
         {
-          "goal": 390,
+          "goal": 200,
           "reward": 125
         },
         {
-          "goal": 510,
+          "goal": 270,
           "reward": 150
         },
         {
-          "goal": 640,
+          "goal": 350,
           "reward": 250
         }
       ],
@@ -1056,99 +1059,99 @@
           "reward": 20
         },
         {
-          "goal": 12,
+          "goal": 10,
           "reward": 20
         },
         {
-          "goal": 23,
+          "goal": 15,
           "reward": 20
         },
         {
-          "goal": 27,
+          "goal": 20,
           "reward": 20
         },
         {
-          "goal": 32,
+          "goal": 25,
           "reward": 20
         },
         {
-          "goal": 33,
+          "goal": 30,
           "reward": 20
         },
         {
-          "goal": 41,
+          "goal": 35,
           "reward": 20
         },
         {
-          "goal": 48,
+          "goal": 40,
           "reward": 20
         },
         {
-          "goal": 53,
+          "goal": 45,
           "reward": 20
         },
         {
-          "goal": 59,
+          "goal": 50,
           "reward": 20
         },
         {
-          "goal": 64,
+          "goal": 55,
           "reward": 30
         },
         {
-          "goal": 67,
+          "goal": 60,
           "reward": 30
         },
         {
-          "goal": 71,
+          "goal": 65,
           "reward": 30
         },
         {
-          "goal": 73,
+          "goal": 70,
           "reward": 30
         },
         {
-          "goal": 76,
+          "goal": 75,
           "reward": 30
         },
         {
-          "goal": 78,
+          "goal": 80,
           "reward": 50
         },
         {
-          "goal": 81,
+          "goal": 85,
           "reward": 50
         },
         {
-          "goal": 83,
+          "goal": 90,
           "reward": 50
         },
         {
-          "goal": 84,
+          "goal": 95,
           "reward": 50
         },
         {
-          "goal": 86,
+          "goal": 100,
           "reward": 50
         },
         {
-          "goal": 88,
+          "goal": 105,
           "reward": 100
         },
         {
-          "goal": 89,
+          "goal": 110,
           "reward": 100
         },
         {
-          "goal": 91,
+          "goal": 115,
           "reward": 100
         },
         {
-          "goal": 92,
+          "goal": 120,
           "reward": 100
         },
         {
-          "goal": 93,
+          "goal": 122,
           "reward": 250
         }
       ],
@@ -1182,7 +1185,35 @@
           "reward": 5
         },
         {
+          "goal": 2,
+          "reward": 5
+        },
+        {
+          "goal": 3,
+          "reward": 5
+        },
+        {
+          "goal": 4,
+          "reward": 5
+        },
+        {
+          "goal": 5,
+          "reward": 5
+        },
+        {
+          "goal": 6,
+          "reward": 5
+        },
+        {
+          "goal": 7,
+          "reward": 5
+        },
+        {
           "goal": 8,
+          "reward": 5
+        },
+        {
+          "goal": 9,
           "reward": 5
         },
         {
@@ -1190,19 +1221,7 @@
           "reward": 5
         },
         {
-          "goal": 12,
-          "reward": 5
-        },
-        {
-          "goal": 14,
-          "reward": 5
-        },
-        {
-          "goal": 16,
-          "reward": 5
-        },
-        {
-          "goal": 18,
+          "goal": 15,
           "reward": 5
         },
         {
@@ -1210,15 +1229,15 @@
           "reward": 5
         },
         {
-          "goal": 22,
+          "goal": 25,
           "reward": 5
         },
         {
-          "goal": 29,
+          "goal": 30,
           "reward": 5
         },
         {
-          "goal": 34,
+          "goal": 35,
           "reward": 5
         },
         {
@@ -1226,103 +1245,83 @@
           "reward": 5
         },
         {
+          "goal": 45,
+          "reward": 5
+        },
+        {
           "goal": 50,
           "reward": 5
         },
         {
-          "goal": 62,
+          "goal": 55,
           "reward": 5
         },
         {
-          "goal": 67,
+          "goal": 60,
           "reward": 5
         },
         {
-          "goal": 68,
+          "goal": 65,
           "reward": 5
         },
         {
-          "goal": 76,
+          "goal": 70,
           "reward": 5
         },
         {
-          "goal": 78,
+          "goal": 75,
           "reward": 5
         },
         {
-          "goal": 84,
+          "goal": 80,
           "reward": 5
         },
         {
-          "goal": 91,
+          "goal": 85,
           "reward": 5
         },
         {
-          "goal": 97,
+          "goal": 90,
           "reward": 5
         },
         {
-          "goal": 104,
+          "goal": 95,
           "reward": 5
         },
         {
-          "goal": 107,
+          "goal": 100,
           "reward": 5
         },
         {
-          "goal": 108,
+          "goal": 105,
           "reward": 5
         },
         {
-          "goal": 109,
-          "reward": 5
-        },
-        {
-          "goal": 112,
-          "reward": 5
-        },
-        {
-          "goal": 113,
+          "goal": 110,
           "reward": 5
         },
         {
           "goal": 115,
-          "reward": 5
-        },
-        {
-          "goal": 119,
-          "reward": 5
+          "reward": 10
         },
         {
           "goal": 120,
-          "reward": 5
-        },
-        {
-          "goal": 121,
           "reward": 10
         },
         {
-          "goal": 132,
+          "goal": 125,
           "reward": 10
         },
         {
-          "goal": 133,
+          "goal": 130,
           "reward": 10
         },
         {
-          "goal": 134,
+          "goal": 135,
           "reward": 10
         },
         {
-          "goal": 136,
-          "reward": 10
-        },
-        {
-          "goal": 137,
-          "reward": 10
-        },
-        {
-          "goal": 144,
+          "goal": 140,
           "reward": 10
         },
         {
@@ -1330,31 +1329,15 @@
           "reward": 10
         },
         {
-          "goal": 146,
+          "goal": 150,
           "reward": 10
         },
         {
-          "goal": 148,
+          "goal": 155,
           "reward": 10
         },
         {
-          "goal": 156,
-          "reward": 10
-        },
-        {
-          "goal": 157,
-          "reward": 10
-        },
-        {
-          "goal": 158,
-          "reward": 10
-        },
-        {
-          "goal": 168,
-          "reward": 10
-        },
-        {
-          "goal": 169,
+          "goal": 160,
           "reward": 10
         },
         {
@@ -1362,19 +1345,39 @@
           "reward": 10
         },
         {
-          "goal": 172,
+          "goal": 175,
           "reward": 10
         },
         {
-          "goal": 180,
+          "goal": 185,
           "reward": 10
         },
         {
-          "goal": 181,
+          "goal": 195,
           "reward": 10
         },
         {
-          "goal": 182,
+          "goal": 205,
+          "reward": 10
+        },
+        {
+          "goal": 220,
+          "reward": 10
+        },
+        {
+          "goal": 230,
+          "reward": 10
+        },
+        {
+          "goal": 235,
+          "reward": 10
+        },
+        {
+          "goal": 250,
+          "reward": 10
+        },
+        {
+          "goal": 280,
           "reward": 50
         }
       ],
@@ -1397,11 +1400,11 @@
           "reward": 10
         },
         {
-          "goal": 24,
+          "goal": 25,
           "reward": 15
         },
         {
-          "goal": 56,
+          "goal": 55,
           "reward": 25
         },
         {

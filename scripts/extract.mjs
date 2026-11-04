@@ -62,6 +62,7 @@ const permanent = [
   ['OfflineHoursCap', 'Offline Hours Cap', 'Batas Waktu Offline', 'Extends the time credited while away.', 'Memperpanjang waktu yang dihitung saat offline.', 'clock'],
 ].map(([id, name, nameId, description, descriptionId, artwork]) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork), ...permanentPrice(id), maxLevel: id === 'OfflineHoursCap' ? permanentNumbers.OfflineMaxLevel : null }))
 
+const gearRules = { mergeCount: constant(read('GearLoadout'), 'MergeCount') }
 const gearEffects = read('GearEffects')
 const gearSales = array(read('GearSales'), 'ClearsByTier')
 const tierNames = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary']
@@ -162,7 +163,7 @@ const offices = releasedOffices.map(({ id, name, index }) => (
 const catSource = read('VisitingCat'), adSource = read('AdBoost'), bossSource = read('BossRewards')
 const events = { catInterval: constant(catSource, 'IntervalSeconds'), catChance: constant(catSource, 'ECashChancePercent'), catReward: constant(catSource, 'ECashReward'), catCashClears: constant(catSource, 'CashClears'), releaseReward: constant(bossSource, 'Release'), majorReward: constant(bossSource, 'MajorRelease'), adLimit: constant(adSource, 'MaxAdsPerDay'), adDuration: constant(adSource, 'SecondsPerAd'), adMultiplier: constant(adSource, 'Multiplier'), ecashAdLimit: constant(adSource, 'MaxECashAdsPerDay'), ecashPerAd: constant(adSource, 'ECashPerAd'), daily: array(read('DailyCheckIn'), 'ECashDays') }
 const currencyIcons = { cash: icon('cash-banknote-green'), ecash: icon('ecash-credit-card-blue'), fame: icon('fame-star'), code: icon('code'), stress: icon('stress-brain'), ascend: icon('retry'), bag: icon('bag'), missions: icon('missions'), daily: icon('daily-checkin') }
-const output = { tuning, stats, permanent, permanentNumbers, gear, gearSets, packages, missions, shop, projects, offices, officePricing, events, icons: { ...currencyIcons, projects: icon('event') } }
+const output = { tuning, stats, permanent, permanentNumbers, gear, gearRules, gearSets, packages, missions, shop, projects, offices, officePricing, events, icons: { ...currencyIcons, projects: icon('event') } }
 mkdirSync(resolve(root, 'src/data'), { recursive: true })
 mkdirSync(resolve(root, 'public/icons'), { recursive: true })
 writeFileSync(resolve(root, 'src/data/idle-rpg.json'), JSON.stringify(output, null, 2) + '\n')
