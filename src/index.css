@@ -222,8 +222,3 @@ td code { display: inline-block; margin-top: 6px; font-size: 12px; overflow-wrap
 .webgl-loading-card .play-btn { font: inherit; cursor: pointer; border: 0; }
 
 .webgl-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.webgl-back { position: absolute; z-index: 3; right: max(12px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 88px; min-height: 48px; padding: 8px 12px; border-radius: 12px; background: rgba(17,20,27,.78); color: #e8ebf2; opacity: 0; transition: opacity .18s; text-decoration: none; }
-.webgl-back:hover, .webgl-back:focus-visible { opacity: 1; text-decoration: none; }
-.webgl-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-@media (hover: none) { .webgl-back { opacity: .32; } .webgl-back:active, .webgl-back:focus { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .webgl-back { transition: none; } }

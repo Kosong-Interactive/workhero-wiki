@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useLang } from '../i18n'
 
 export default function WebGLPlay() {
@@ -31,9 +30,6 @@ export default function WebGLPlay() {
   }
   return <div className="webgl-player">
     <h1 className="webgl-sr-only">WorkHero</h1>
-    <Link className="webgl-back" to="/play" aria-label={tr('Back to play options', 'Kembali ke pilihan bermain')}>
-      <span aria-hidden="true">←</span> {tr('Back', 'Kembali')}
-    </Link>
     <div className="webgl-stage" aria-busy={loading}>
     <iframe key={attempt} ref={frame} className="webgl-frame" src="/workhero-html/index.html" title={tr('Play WorkHero', 'Main WorkHero')}
       allow="autoplay; fullscreen" allowFullScreen />

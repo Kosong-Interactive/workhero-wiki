@@ -92,7 +92,7 @@ try {
         createElement(LangProvider, null, createElement(App))))
       assert.match(html, /<h1[ >]/, `${lang} ${route}: missing title`)
       assert.doesNotMatch(html, /Ascend|Ascension|NaN|Infinity|undefined|Shopedia|OpenEye/, `${lang} ${route}: stale or invalid content`)
-      assert.equal((html.match(/href="\/play"/g) ?? []).length, route === '/' ? 2 : 1, `${lang} ${route}: Play buttons use the platform picker`)
+      assert.equal((html.match(/href="\/play"/g) ?? []).length, route === '/' ? 2 : route === '/play/webgl' ? 0 : 1, `${lang} ${route}: Play buttons use the platform picker`)
       if (route === '/play/webgl') {
         assert.match(html, /src="\/workhero-html\/index.html"/)
         assert.doesNotMatch(html, /class="topbar"|class="wiki-footer"/)
