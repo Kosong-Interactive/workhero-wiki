@@ -4,8 +4,7 @@ React + Vite reference for **WorkHero: Idle RPG**. English and Indonesian, with 
 stage/upgrade calculators, Core Stats, Fame upgrades, gear, Packages, missions, Shop boosts, offices,
 currencies, Projects, and a glossary. Both Play buttons navigate to `/play`, where players choose
 Unity WebGL or Android. The WebGL card opens `/play/webgl` inside this site; availability
-follows `GAME_PLAYABLE` in `src/config.ts`. Android stays disabled with a Coming Soon message until
-`ANDROID_APK_URL` is set to the APK Google Drive link.
+follows `GAME_PLAYABLE` in `src/config.ts`. The Android card opens the APK Google Drive link configured in `ANDROID_APK_URL` in a new tab.
 
 - `npm run dev` — start the wiki.
 - `npm run extract` — read the checked-out `../Workhero` Idle RPG sources and tuning asset into
@@ -58,7 +57,7 @@ Mission steps and rewards are re-extracted from `MissionCatalog`, preserving the
 
 ## Hosted WebGL
 
-`/play/webgl` is a dedicated player page without wiki navigation, a header, footer or floating Back control. Its iframe loads `public/workhero-html/index.html` on this origin. Android remains a placeholder.
+`/play/webgl` is a dedicated player page without wiki navigation, a header, footer or floating Back control. Its iframe loads `public/workhero-html/index.html` on this origin. The Android download is available from the Google Drive link on `/play`.
 
 To replace the published game after a new Unity build:
 
