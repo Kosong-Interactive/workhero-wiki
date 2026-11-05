@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ANDROID_APK_URL, GAME_PLAYABLE, PLAY_URL } from '../config'
 import { useLang } from '../i18n'
 
@@ -13,10 +14,10 @@ export default function Play() {
         </div>
         <span className="badge">Unity WebGL</span>
         <h2 id="browser-title">{tr('Play in your browser', 'Main di browser')}</h2>
-        <p>{tr('Jump into WorkHero on Unity Play. No download needed.', 'Langsung main WorkHero di Unity Play. Tidak perlu download.')}</p>
-        {GAME_PLAYABLE ? <a className="play-btn" href={PLAY_URL} target="_blank" rel="noopener noreferrer">{tr('Play on Unity Play', 'Main di Unity Play')} <span aria-hidden="true">↗</span></a>
+        <p>{tr('Play WorkHero right here. No download needed.', 'Main WorkHero langsung di sini. Tidak perlu download.')}</p>
+        {GAME_PLAYABLE ? <Link className="play-btn" to={PLAY_URL}>{tr('Play now', 'Main sekarang')} <span aria-hidden="true">▶</span></Link>
           : <button className="play-btn" type="button" disabled>{tr('Under development', 'Dalam pengembangan')}</button>}
-        <small className="muted">{tr('Opens Unity Play in a new tab.', 'Membuka Unity Play di tab baru.')}</small>
+        <small className="muted">{tr('Play inside this website.', 'Main langsung di website ini.')}</small>
       </section>
       <section className="shop-card play-platform" aria-labelledby="android-title">
         <div className="platform-symbol" aria-hidden="true">

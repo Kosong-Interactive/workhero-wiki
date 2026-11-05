@@ -3,7 +3,7 @@
 React + Vite reference for **WorkHero: Idle RPG**. English and Indonesian, with compact numbers,
 stage/upgrade calculators, Core Stats, Fame upgrades, gear, Packages, missions, Shop boosts, offices,
 currencies, Projects, and a glossary. Both Play buttons navigate to `/play`, where players choose
-Unity WebGL or Android. The WebGL card opens `PLAY_URL` on Unity Play in a new tab; availability
+Unity WebGL or Android. The WebGL card opens `/play/webgl` inside this site; availability
 follows `GAME_PLAYABLE` in `src/config.ts`. Android stays disabled with a Coming Soon message until
 `ANDROID_APK_URL` is set to the APK Google Drive link.
 
@@ -55,3 +55,24 @@ Routes are real paths (`/offices`), so the host must serve `index.html` for unkn
 Source: sibling Workhero `prototype/idle-rpg`, commit `9052dd68`. Merge requires four unequipped pieces matching slot, tier and series; `gearRules.mergeCount` is extracted from `GearLoadout`. Worn set groups match both series and tier. Bag guidance covers individual cards, primary-stat deltas, `MERGE n/4`, repeated merging and the always-visible stats card (Show Stats is retired in the current layout).
 
 Mission steps and rewards are re-extracted from `MissionCatalog`, preserving the released-Office filter. Current endpoints: Tasks150,000, Releases16,000, Majors350, Stats550,000, Fame upgrades122, Shop purchases280, Promote660. Public steps pay6,665 ECash; unreleased Office goals are excluded. No mission-completion date is promised by the wiki.
+
+## Hosted WebGL
+
+`/play/webgl` is a dedicated player page with Back and Fullscreen controls, without the wiki navigation/footer. Its iframe loads `public/workhero-html/index.html` on this origin. Android remains a placeholder.
+
+To replace the published game after a new Unity build:
+
+```sh
+# In Workhero, first run the mandatory generated-output verification.
+python3 Docs/Audits/WebGlDelivery20261104/verify_html.py ../_build/workhero-html
+# Then in workhero-wiki:
+npm run sync:webgl
+npm test
+npm run build
+```
+
+The sync script copies the entire generated folder, preserving relative Build URLs and checking the compiled iPhone keyboard guard. An explicit source is supported with `npm run sync:webgl -- /absolute/path/workhero-html`. The checked-in public copy is used during deployment; Vercel does not need the Unity project. Brotli `.unityweb` files use Unity's decompression fallback: serve as binary, **without Content-Encoding: br**. Build URLs keep their filenames, so the host revalidates `/workhero-html/*` rather than retaining stale cached versions. Keep the SPA fallback for `/play/webgl` refreshes.
+
+Local profiles belong to this website's origin; Unity Play browser storage is separate. Existing players can use Load Profile with their Player ID to fetch their cloud profile.
+
+Local validation: wiki checks pass for32 EN/ID route renders; TypeScript/Vite production build passes. An isolated desktop Chromium smoke test loaded the copied Unity build through `/play/webgl` to Create Profile, verified direct refresh, runtime keyboard guard, portrait/landscape iframe bounds and Back navigation, without creating a profile. Temporary preview servers and browsers were stopped. Evidence: `docs/webgl-hosting/`. Physical iPhone and production hosting have not been tested.

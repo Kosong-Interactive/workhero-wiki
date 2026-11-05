@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Workhero</title>
+    <style>
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      /* Static fallback for direct hosting. The framework also carries the keyboard guard for hosts that replace this HTML. */
+      input, textarea, select {
+        font-size: 16px !important;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #231F20;
+        touch-action: none;
+        overscroll-behavior: none;
+      }
+
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #unity-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" width=540 height=960 tabindex="-1"></canvas>
+    </div>
+    <script src="Build/workhero-html.loader.js"></script>
+    <script>
+      // Prevent iOS Safari rubber-band scroll / pinch-zoom from fighting the game canvas.
+      document.addEventListener('touchmove', function (event) {
+        event.preventDefault();
+      }, { passive: false });
+
+      // Keyboard/zoom protection is bundled in WorkheroBrowserInput.jspre so hosted wrappers retain it.
+
+      // Browsers start the audio context suspended until a real user gesture. Unity does not
+      // always resume it on its own, and on iOS a sound "started" while suspended never becomes
+      // audible — so resume it explicitly on the first pointer down, then stop listening.
+      document.addEventListener('pointerdown', function resumeAudio() {
+        const context = window.unityInstance
+          && window.unityInstance.Module
+          && window.unityInstance.Module.WEBAudio
+          && window.unityInstance.Module.WEBAudio.audioContext;
+
+        if (context && context.state === 'suspended') {
+          context.resume();
+        }
+
+        document.removeEventListener('pointerdown', resumeAudio);
+      });
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/workhero-html.data.unityweb",
+        frameworkUrl: "Build/workhero-html.framework.js.unityweb",
+        codeUrl: "Build/workhero-html.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Kosong Interactive",
+        productName: "Workhero",
+        productVersion: "0.1.0",
+        // Phones report a pixel ratio of 3 (iPhone) or more, so the game drew every physical pixel: 3D, bloom and colour grading included.
+        // Capped at 2 it draws about 56% fewer pixels there and stays sharp; desktops (1 or 2) are unchanged.
+        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+        // matchWebGLToCanvasSize defaults to true — the canvas's CSS size (100%/100% above)
+        // drives Unity's internal render resolution, so resize/orientation changes on both
+        // desktop and mobile browsers are picked up automatically without extra JS.
+      }).then((unityInstance) => {
+        // Exposed so the audio-unlock listener above can reach the WebAudio context.
+        window.unityInstance = unityInstance;
+      }).catch((message) => {
+        alert(message);
+      });
+    </script>
+  </body>
+</html>

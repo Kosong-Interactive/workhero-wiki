@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "unityInstanceLoaded": true,
+  "runtimeInputGuard": true,
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "iframe": {
+        "x": 0,
+        "y": 51,
+        "width": 390,
+        "height": 793
+      }
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "iframe": {
+        "x": 0,
+        "y": 51,
+        "width": 1280,
+        "height": 669
+      }
+    }
+  ],
+  "errors": []
+}

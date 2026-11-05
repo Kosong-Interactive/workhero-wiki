@@ -1,7 +1,6 @@
-export const PLAY_URL =
-  'https://play.unity.com/en/games/f10d65e6-3072-497e-a08d-9ce86cfe090e/workhero'
+export const PLAY_URL = '/play/webgl'
 
-/** Controls availability of the Unity Play card on /play. */
+/** Controls availability of the browser play card on /play. */
 export const GAME_PLAYABLE = true
 
 /** Add the Android APK Google Drive URL when the download is ready. */

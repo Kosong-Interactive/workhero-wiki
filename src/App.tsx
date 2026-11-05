@@ -4,6 +4,7 @@ import PlayButton from './components/PlayButton'
 import { useLang } from './i18n'
 import Home from './pages/Home'
 import Play from './pages/Play'
+import WebGLPlay from './pages/WebGLPlay'
 import Offices from './pages/Offices'
 import Shop from './pages/Shop'
 import Upgrades from './pages/Upgrades'
@@ -38,6 +39,7 @@ export default function App() {
     ['/economy', tr('Currencies', 'Mata uang')],
     ['/glossary', tr('Glossary', 'Glosarium')],
   ]
+  if (pathname.replace(/\/+$/, '') === '/play/webgl') return <WebGLPlay />
   return <>
     <header className="topbar">
       <NavLink to="/" className="brand"><img src="/workhero-title.png" alt="WorkHero" /><span>Wiki</span></NavLink>

@@ -83,7 +83,7 @@ try {
   const { default: App } = await server.ssrLoadModule('/src/App.tsx')
   const { LangProvider } = await server.ssrLoadModule('/src/i18n.tsx')
   const { PLAY_URL, GAME_PLAYABLE, ANDROID_APK_URL } = await server.ssrLoadModule('/src/config.ts')
-  const routes = ['/', '/play', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/projects', '/offices',
+  const routes = ['/', '/play', '/play/webgl', '/mechanics', '/upgrades', '/gear', '/packages', '/missions', '/projects', '/offices',
     ...wiki.offices.map(office => '/offices/' + office.id), '/shop', '/calculator', '/economy', '/glossary']
   for (const lang of ['en', 'id']) {
     globalThis.localStorage = { getItem: () => lang }
@@ -93,10 +93,16 @@ try {
       assert.match(html, /<h1[ >]/, `${lang} ${route}: missing title`)
       assert.doesNotMatch(html, /Ascend|Ascension|NaN|Infinity|undefined|Shopedia|OpenEye/, `${lang} ${route}: stale or invalid content`)
       assert.equal((html.match(/href="\/play"/g) ?? []).length, route === '/' ? 2 : 1, `${lang} ${route}: Play buttons use the platform picker`)
+      if (route === '/play/webgl') {
+        assert.match(html, /src="\/workhero-html\/index.html"/)
+        assert.doesNotMatch(html, /class="topbar"|class="wiki-footer"/)
+      }
       if (route === '/play') {
         assert.match(html, /Unity WebGL/)
+        assert.doesNotMatch(html, /Play on Unity Play|Main di Unity Play/)
+        if (GAME_PLAYABLE) assert.match(html, lang === 'en' ? /Play now/ : /Main sekarang/)
         assert.match(html, /Android · APK/)
-        if (GAME_PLAYABLE) assert.ok(html.includes(`href="${PLAY_URL}" target="_blank" rel="noopener noreferrer"`), 'Unity Play opens the configured game safely')
+        if (GAME_PLAYABLE) assert.ok(html.includes(`href="${PLAY_URL}"`), 'WebGL opens the internal game page')
         if (ANDROID_APK_URL) assert.ok(html.includes(`href="${ANDROID_APK_URL}"`))
         else {
           assert.match(html, /<button[^>]*disabled=""[^>]*aria-describedby="android-download-note"/)
