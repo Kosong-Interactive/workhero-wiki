@@ -70,7 +70,15 @@
         document.removeEventListener('pointerdown', resumeAudio);
       });
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      // Report real Unity loading progress to the same-origin wiki player.
+      function reportLoading(status, progress) {
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'workhero-load', status: status, progress: progress || 0 }, window.location.origin);
+        }
+      }
+      reportLoading('loading', 0);
+      if (typeof createUnityInstance !== 'function') reportLoading('error', 0);
+      else createUnityInstance(document.querySelector("#unity-canvas"), {
         arguments: [],
         dataUrl: "Build/workhero-html.data.unityweb",
         frameworkUrl: "Build/workhero-html.framework.js.unityweb",
@@ -85,11 +93,14 @@
         // matchWebGLToCanvasSize defaults to true — the canvas's CSS size (100%/100% above)
         // drives Unity's internal render resolution, so resize/orientation changes on both
         // desktop and mobile browsers are picked up automatically without extra JS.
-      }).then((unityInstance) => {
+      }, function (progress) { reportLoading('loading', progress); }).then((unityInstance) => {
         // Exposed so the audio-unlock listener above can reach the WebAudio context.
         window.unityInstance = unityInstance;
+        reportLoading('ready', 1);
       }).catch((message) => {
-        alert(message);
+        reportLoading('error', 0);
+        if (window.parent === window) alert(message);
+        console.error(message);
       });
     </script>
   </body>

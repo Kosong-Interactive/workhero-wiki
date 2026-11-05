@@ -58,7 +58,7 @@ Mission steps and rewards are re-extracted from `MissionCatalog`, preserving the
 
 ## Hosted WebGL
 
-`/play/webgl` is a dedicated player page with Back and Fullscreen controls, without the wiki navigation/footer. Its iframe loads `public/workhero-html/index.html` on this origin. Android remains a placeholder.
+`/play/webgl` is a dedicated player page with a transparent floating Back control on the right, without the wiki navigation/footer. Its iframe loads `public/workhero-html/index.html` on this origin. Android remains a placeholder.
 
 To replace the published game after a new Unity build:
 
@@ -76,3 +76,9 @@ The sync script copies the entire generated folder, preserving relative Build UR
 Local profiles belong to this website's origin; Unity Play browser storage is separate. Existing players can use Load Profile with their Player ID to fetch their cloud profile.
 
 Local validation: wiki checks pass for32 EN/ID route renders; TypeScript/Vite production build passes. An isolated desktop Chromium smoke test loaded the copied Unity build through `/play/webgl` to Create Profile, verified direct refresh, runtime keyboard guard, portrait/landscape iframe bounds and Back navigation, without creating a profile. Temporary preview servers and browsers were stopped. Evidence: `docs/webgl-hosting/`. Physical iPhone and production hosting have not been tested.
+
+The player loading card listens only to its own same-origin iframe. The Responsive Unity template reports real progress, ready and failed states through `workhero-load` messages; sync rejects HTML missing this bridge. It shows download percentage, starting phase, a slow-first-load hint and a retry action. Browser regression covers controlled42%/95% previews, ignored forged parent messages, viewport fit, failed loader/retry and actual compiled Unity startup. See `docs/webgl-hosting/loader-results.json`; preview percentages are test fixtures. No loading-speed improvement or physical iPhone validation is claimed.
+
+Player layout: no wiki header; game fills the viewport. The floating right-edge Back control appears on hover/keyboard focus, and stays faintly visible on touch screens. App icons and favicon now use a newly illustrated recreation of the user-supplied wallpaper crop: rear-view red-hoodie developer typing on a laptop. Browser icon references are versioned to refresh the previous crop.
+
+Full-viewport browser regression passes: iframe starts at0,0 and matches390×844/1280×720 viewport, no page header, transparent Back becomes visible on hover/keyboard focus, touch control remains discoverable, Back navigation works and real Unity initializes. See `docs/webgl-hosting/fullscreen-results.json` and adjacent captures. Existing icon PNG dimensions32/180/192/512 were verified. No profile created; temporary server stopped after checks.
