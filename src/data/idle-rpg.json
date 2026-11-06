@@ -2,9 +2,9 @@
   "tuning": {
     "BoostCommonPrice": 2,
     "BoostUncommonPrice": 18,
-    "BoostRarePrice": 48,
-    "BoostEpicPrice": 90,
-    "BoostLegendaryPrice": 240,
+    "BoostRarePrice": 90,
+    "BoostEpicPrice": 240,
+    "BoostLegendaryPrice": 450,
     "StepsPerRelease": 10,
     "ReleasesPerMajor": 25,
     "HpBase": 10,
@@ -402,6 +402,10 @@
   },
   "packages": {
     "cost": 50,
+    "tenPack": {
+      "count": 10,
+      "cost": 450
+    },
     "meterSize": 10,
     "tiers": [
       {
@@ -1445,43 +1449,27 @@
       "icon": "/icons/icon-coffee.png",
       "sizes": [
         {
-          "tier": "Common",
-          "name": "Instant Coffee",
-          "description": "A quick cup between tasks.",
-          "duration": 60,
-          "cost": 2,
-          "icon": "/icons/icon-boost-coffee-common.png"
-        },
-        {
-          "tier": "Uncommon",
-          "name": "Iced Latte",
-          "description": "A cool sip for a busy day.",
-          "duration": 600,
-          "cost": 18,
-          "icon": "/icons/icon-boost-coffee-uncommon.png"
-        },
-        {
           "tier": "Rare",
           "name": "Cold Brew",
           "description": "Slow brewed for long workdays.",
-          "duration": 1800,
-          "cost": 48,
+          "duration": 3600,
+          "cost": 90,
           "icon": "/icons/icon-boost-coffee-rare.png"
         },
         {
           "tier": "Epic",
           "name": "Coffee Jug",
           "description": "Keep your favorite brew within reach.",
-          "duration": 3600,
-          "cost": 90,
+          "duration": 10800,
+          "cost": 240,
           "icon": "/icons/icon-boost-coffee-epic.png"
         },
         {
           "tier": "Legendary",
           "name": "Espresso Machine",
           "description": "Your own coffee corner at work.",
-          "duration": 10800,
-          "cost": 240,
+          "duration": 21600,
+          "cost": 450,
           "icon": "/icons/icon-boost-coffee-legendary.png"
         }
       ]
@@ -1495,43 +1483,27 @@
       "icon": "/icons/icon-cash-banknote-green.png",
       "sizes": [
         {
-          "tier": "Common",
-          "name": "Side Gig",
-          "description": "A little extra outside your day job.",
-          "duration": 60,
-          "cost": 2,
-          "icon": "/icons/icon-boost-cash-common.png"
-        },
-        {
-          "tier": "Uncommon",
-          "name": "Overtime Pay",
-          "description": "Make those extra hours count.",
-          "duration": 600,
-          "cost": 18,
-          "icon": "/icons/icon-boost-cash-uncommon.png"
-        },
-        {
           "tier": "Rare",
           "name": "Bonus Check",
           "description": "A little recognition for your hard work.",
-          "duration": 1800,
-          "cost": 48,
+          "duration": 3600,
+          "cost": 90,
           "icon": "/icons/icon-boost-cash-rare.png"
         },
         {
           "tier": "Epic",
           "name": "Payday",
           "description": "The best day on the calendar.",
-          "duration": 3600,
-          "cost": 90,
+          "duration": 10800,
+          "cost": 240,
           "icon": "/icons/icon-boost-cash-epic.png"
         },
         {
           "tier": "Legendary",
           "name": "Annual Bonus",
           "description": "A big thank-you for a year of effort.",
-          "duration": 10800,
-          "cost": 240,
+          "duration": 21600,
+          "cost": 450,
           "icon": "/icons/icon-boost-cash-legendary.png"
         }
       ]
@@ -1545,43 +1517,27 @@
       "icon": "/icons/icon-code-monitor.png",
       "sizes": [
         {
-          "tier": "Common",
-          "name": "Quick Fix",
-          "description": "A small patch to keep things moving.",
-          "duration": 60,
-          "cost": 2,
-          "icon": "/icons/icon-boost-overclock-common.png"
-        },
-        {
-          "tier": "Uncommon",
-          "name": "Code Snippet",
-          "description": "Keep your favorite shortcuts handy.",
-          "duration": 600,
-          "cost": 18,
-          "icon": "/icons/icon-boost-overclock-uncommon.png"
-        },
-        {
           "tier": "Rare",
           "name": "Auto Complete",
           "description": "Less typing, more creating.",
-          "duration": 1800,
-          "cost": 48,
+          "duration": 3600,
+          "cost": 90,
           "icon": "/icons/icon-boost-overclock-rare.png"
         },
         {
           "tier": "Epic",
           "name": "Deep Focus",
           "description": "Headphones on. Distractions off.",
-          "duration": 3600,
-          "cost": 90,
+          "duration": 10800,
+          "cost": 240,
           "icon": "/icons/icon-boost-overclock-epic.png"
         },
         {
           "tier": "Legendary",
           "name": "All-Nighter",
           "description": "One laptop. One very long night.",
-          "duration": 10800,
-          "cost": 240,
+          "duration": 21600,
+          "cost": 450,
           "icon": "/icons/icon-boost-overclock-legendary.png"
         }
       ]
@@ -1595,43 +1551,27 @@
       "icon": "/icons/icon-boost-rapidfire-common.png",
       "sizes": [
         {
-          "tier": "Common",
-          "name": "Energy Drink",
-          "description": "One can, and your fingers fly.",
-          "duration": 60,
-          "cost": 2,
-          "icon": "/icons/icon-boost-rapidfire-common.png"
-        },
-        {
-          "tier": "Uncommon",
-          "name": "Power Nap",
-          "description": "Twenty minutes down, twice the pace up.",
-          "duration": 600,
-          "cost": 18,
-          "icon": "/icons/icon-boost-rapidfire-uncommon.png"
-        },
-        {
           "tier": "Rare",
           "name": "Flow State",
           "description": "Everything clicks into place.",
-          "duration": 1800,
-          "cost": 48,
+          "duration": 3600,
+          "cost": 90,
           "icon": "/icons/icon-boost-rapidfire-rare.png"
         },
         {
           "tier": "Epic",
           "name": "Hyperfocus",
           "description": "The world goes quiet. The keys do not.",
-          "duration": 3600,
-          "cost": 90,
+          "duration": 10800,
+          "cost": 240,
           "icon": "/icons/icon-boost-rapidfire-epic.png"
         },
         {
           "tier": "Legendary",
           "name": "Battle Station",
           "description": "Two screens, zero waiting.",
-          "duration": 10800,
-          "cost": 240,
+          "duration": 21600,
+          "cost": 450,
           "icon": "/icons/icon-boost-rapidfire-legendary.png"
         }
       ]
@@ -1688,16 +1628,16 @@
         "minutes": 30,
         "minECash": 2,
         "maxECash": 5,
-        "itemTier": "Common",
-        "itemDuration": 60
+        "itemTier": null,
+        "itemDuration": null
       },
       {
         "name": "Medium",
         "minutes": 120,
         "minECash": 6,
         "maxECash": 12,
-        "itemTier": "Uncommon",
-        "itemDuration": 600
+        "itemTier": null,
+        "itemDuration": null
       },
       {
         "name": "Large",
@@ -1705,7 +1645,7 @@
         "minECash": 12,
         "maxECash": 25,
         "itemTier": "Rare",
-        "itemDuration": 1800
+        "itemDuration": 3600
       }
     ]
   },

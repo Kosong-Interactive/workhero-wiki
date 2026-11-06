@@ -92,7 +92,7 @@ const gearSets = {
 const chestSource = read('Chests')
 const odds = [...requireMatch(code(chestSource), /OddsByTier\s*=\s*\{([\s\S]*?)\};/)[1].matchAll(/new\[\]\s*\{([^}]+)\}/g)].map(m => m[1].split(',').map(Number))
 if (odds.length !== tierNames.length || odds.some(row => row.length !== 5 || row.reduce((a, b) => a + b, 0) !== 100)) throw new Error('Invalid Package odds')
-const packages = { cost: constant(chestSource, 'NormalCost'), meterSize: constant(chestSource, 'MeterSize'), tiers: tierNames.map((name, index) => ({ name, odds: odds[index], icon: icon('package/icon-package-' + name.toLowerCase()) })) }
+const packages = { cost: constant(chestSource, 'NormalCost'), tenPack: { count: constant(chestSource, 'TenPack'), cost: constant(chestSource, 'TenPackCost') }, meterSize: constant(chestSource, 'MeterSize'), tiers: tierNames.map((name, index) => ({ name, odds: odds[index], icon: icon('package/icon-package-' + name.toLowerCase()) })) }
 
 const missionWords = {
   ClearTasks: ['Clear Tasks', 'Selesaikan Task', 'Lifetime patch-stage clears while playing, including farming. Offline clears do not count.', 'Total clear patch stage saat bermain, termasuk farming. Clear offline tidak dihitung.', 'mission-stat'],
@@ -125,24 +125,27 @@ const missions = [...code(missionSource).matchAll(/Add\(lines, MissionKind\.(\w+
 })
 if (missions.length !== 8) throw new Error('Mission catalog changed')
 
-// Boost items: four families (ShopBoost order), each in five sizes shown as the gear tiers. A purchase is stored in the Bag; USE adds its time.
+// Boost items: four families (ShopBoost order), each in five sizes shown as the gear tiers; the Shop sells FirstOffered and up (Rare 1 h, Epic 3 h,
+// Legendary 6 h since 2026-11-06), so only those are listed. A purchase is stored in the Bag; USE adds its time.
 const itemsSource = read('BoostItems')
 const itemNames = strings(itemsSource, 'Names'), itemDescriptions = strings(itemsSource, 'Descriptions'), itemDurations = array(itemsSource, 'Durations')
 const itemPrices = tierNames.map(tier => tuning[`Boost${tier}Price`])
-if (itemNames.length !== 20 || itemDescriptions.length !== 20 || itemDurations.length !== 5 || itemPrices.some(price => !(price > 0))) throw new Error('Boost item catalog changed')
+const firstOffered = tierNames.indexOf(requireMatch(code(itemsSource), /FirstOffered\s*=\s*BoostTier\.(\w+)/)[1])
+if (firstOffered < 0 || itemNames.length !== 20 || itemDescriptions.length !== 20 || itemDurations.length !== 5 || itemPrices.some(price => !(price > 0))) throw new Error('Boost item catalog changed')
 const shop = [
   ['Coffee', 'Coffee', 'Kopi', 'Stress drains to 0% at your Recovery rate, then stays calm while work continues. The fixed Burnout lock is unchanged.', 'Stress turun ke 0% sesuai kecepatan Recovery, lalu tetap tenang saat kerja berlanjut. Lock Burnout tetap berlaku.', 'coffee', 'coffee'],
   ['DoubleCash', 'Double Cash', 'Double Cash', 'Cash from stage clears ×2.', 'Cash dari clear stage ×2.', 'cash-banknote-green', 'cash'],
   ['Overclock', 'Overclock', 'Overclock', 'Auto LoC damage ×2.', 'Damage Auto LoC ×2.', 'code-monitor', 'overclock'],
   ['RapidFire', 'Rapid Fire', 'Rapid Fire', 'Two hits a second instead of one, each as strong, so Auto LoC damage ×2. Stacks with Overclock to ×4.', 'Dua pukulan per detik, bukan satu, masing-masing sama kuat, jadi damage Auto LoC ×2. Bisa ditumpuk dengan Overclock jadi ×4.', 'boost/icon-boost-rapidfire-common', 'rapidfire'],
 ].map(([id, name, nameId, description, descriptionId, artwork, family], boost) => ({ id, name, nameId, description, descriptionId, icon: icon(artwork),
-  sizes: tierNames.map((tier, index) => ({ tier, name: itemNames[boost * 5 + index], description: itemDescriptions[boost * 5 + index], duration: itemDurations[index], cost: itemPrices[index], icon: icon(`boost/icon-boost-${family}-${tier.toLowerCase()}`) })) }))
+  sizes: tierNames.map((tier, index) => ({ tier, name: itemNames[boost * 5 + index], description: itemDescriptions[boost * 5 + index], duration: itemDurations[index], cost: itemPrices[index], icon: icon(`boost/icon-boost-${family}-${tier.toLowerCase()}`) })).filter((_, index) => index >= firstOffered) }))
 
 // Projects: side jobs on a board of three offers (Small, Medium, Large); one runs at a time on real time.
 const projectsSource = read('Projects')
 const projectTargets = [...requireMatch(code(projectsSource), /Targets\s*=\s*\{([\s\S]*?)\};/)[1].matchAll(/\{([^}]+)\}/g)].map(m => m[1].split(',').map(v => number(v.trim())))
 const projectMinutes = requireMatch(code(projectsSource), /DurationsMs\s*=\s*\{([^}]+)\}/)[1].split(',').map(v => Number(requireMatch(v, /(\d+)L\s*\*\s*MinuteMs/)[1]))
 const projectItemTiers = requireMatch(code(projectsSource), /ItemTiers\s*=\s*\{([^}]+)\}/)[1].split(',').map(v => tierNames.indexOf(requireMatch(v, /BoostTier\.(\w+)/)[1]))
+const itemSize = requireMatch(code(projectsSource), /CanPayItem\(ProjectSize size\)\s*=>\s*size\s*==\s*ProjectSize\.(\w+)/)[1]
 const minECash = array(projectsSource, 'MinECash'), maxECash = array(projectsSource, 'MaxECash')
 if (projectTargets.length !== 3 || projectTargets.some(row => row.length !== 3) || projectMinutes.length !== 3 || projectItemTiers.some(tier => tier < 0)) throw new Error('Projects catalog changed')
 const projects = {
@@ -152,7 +155,7 @@ const projects = {
     ['ClearReleases', 'Ship It', 'Clear Releases', 'Selesaikan Release', false, 'stage-release'],
     ['UpgradeStats', 'Refactor', 'Buy Core Stat levels', 'Beli level Core Stat', false, 'mission-stat'],
   ].map(([id, name, goal, goalId, countsOffline, artwork], index) => ({ id, name, goal, goalId, countsOffline, icon: icon(artwork), targets: projectTargets[index] })),
-  sizes: ['Small', 'Medium', 'Large'].map((name, index) => ({ name, minutes: projectMinutes[index], minECash: minECash[index], maxECash: maxECash[index], itemTier: tierNames[projectItemTiers[index]], itemDuration: itemDurations[projectItemTiers[index]] })),
+  sizes: ['Small', 'Medium', 'Large'].map((name, index) => ({ name, minutes: projectMinutes[index], minECash: minECash[index], maxECash: maxECash[index], itemTier: name === itemSize ? tierNames[projectItemTiers[index]] : null, itemDuration: name === itemSize ? itemDurations[projectItemTiers[index]] : null })),
 }
 
 const pricesSource = read('OfficePrices')
