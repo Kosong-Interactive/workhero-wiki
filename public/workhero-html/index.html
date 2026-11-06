@@ -29,15 +29,21 @@
         overscroll-behavior: none;
       }
 
-      /* Desktop shows the game in a phone-shaped column (user, 2026-11-06): the sides are plain page, not drawn by Unity, so a wide window renders
-         far fewer pixels. A portrait phone is narrower than the column and keeps the full screen. */
       #unity-container {
         position: fixed;
         inset: 0;
-        margin: 0 auto;
-        width: min(100%, calc(100vh * 9 / 16));
-        width: min(100%, calc(100dvh * 9 / 16));
+        width: 100%;
         height: 100%;
+      }
+
+      /* A landscape desktop shows the game in a phone-shaped column (user, 2026-11-06): the sides are plain page, not drawn by Unity, so a wide
+         window renders far fewer pixels. Phones and tablets (a coarse pointer, no hover) and portrait screens keep the full screen. */
+      @media (orientation: landscape) and (hover: hover) and (pointer: fine) {
+        #unity-container {
+          margin: 0 auto;
+          width: min(100%, calc(100vh * 9 / 16));
+          width: min(100%, calc(100dvh * 9 / 16));
+        }
       }
 
       #unity-canvas {
