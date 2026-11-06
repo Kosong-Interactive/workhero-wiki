@@ -4,7 +4,7 @@ React + Vite reference for **WorkHero: Idle RPG**. English and Indonesian, with 
 stage/upgrade calculators, Core Stats, Fame upgrades, gear, Packages, missions, Shop boosts, offices,
 currencies, Projects, and a glossary. Both Play buttons navigate to `/play`, where players choose
 Unity WebGL or Android. The WebGL card opens `/play/webgl` inside this site; availability
-follows `GAME_PLAYABLE` in `src/config.ts`. The Android card opens the APK Google Drive link configured in `ANDROID_APK_URL` in a new tab.
+follows `GAME_PLAYABLE` in `src/config.ts`. The Android card opens the Google Drive folder configured in `ANDROID_APK_URL` in a new tab; the developer uploads each new APK there.
 
 - `npm run dev` — start the wiki.
 - `npm run extract` — read the checked-out `../Workhero` Idle RPG sources and tuning asset into
@@ -81,3 +81,18 @@ The player loading card listens only to its own same-origin iframe. The Responsi
 Player layout: no wiki header; game fills the viewport. Use the browser Back button to return to the previous page; there is no floating navigation overlay. App icons and favicon now use a newly illustrated recreation of the user-supplied wallpaper crop: rear-view red-hoodie developer typing on a laptop. Browser icon references are versioned to refresh the previous crop.
 
 Historical full-viewport browser regression (before removing the floating Back control): iframe starts at0,0 and matches390×844/1280×720 viewport, no page header, transparent Back becomes visible on hover/keyboard focus, touch control remains discoverable, Back navigation works and real Unity initializes. See `docs/webgl-hosting/fullscreen-results.json` and adjacent captures. Existing icon PNG dimensions32/180/192/512 were verified. No profile created; temporary server stopped after checks.
+
+## After a game build: copy it here
+
+Every WebGL build of the game is copied into this site so `/play/webgl` serves the newest one. Run these from the Workhero repo after a successful build
+(the full rule is "WebGL delivery" and "Android APK delivery" in `Workhero/.claude/rules/tech-stack.md`):
+
+```sh
+npm --prefix ../workhero-wiki run sync:webgl -- "$PWD/../_build/workhero-html"        # WebGL: replaces public/workhero-html (/play/webgl)
+npm --prefix ../workhero-wiki test
+npm --prefix ../workhero-wiki run build
+```
+
+The sync replaces the previous copy and keeps the original build. **The Android APK is not copied here** (user, 2026-11-06): the developer uploads it
+to the Google Drive folder that `ANDROID_APK_URL` opens, replacing the old file. GitHub refuses files over 100 MB, so never add an APK to this repo.
+Commit, push and deploy only when asked.

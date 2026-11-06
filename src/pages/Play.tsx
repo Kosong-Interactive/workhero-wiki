@@ -30,7 +30,7 @@ export default function Play() {
           : tr('The Android APK download will be available here soon.', 'Link download APK Android akan tersedia di sini. Nantikan segera!')}</p>
         {ANDROID_APK_URL ? <a className="play-btn" href={ANDROID_APK_URL} target="_blank" rel="noopener noreferrer">{tr('Download APK', 'Unduh APK')} <span aria-hidden="true">↓</span></a>
           : <button className="play-btn" type="button" disabled aria-describedby="android-download-note">{tr('Download APK', 'Unduh APK')}</button>}
-        <small id="android-download-note" className="muted">{ANDROID_APK_URL ? tr('Opens the APK download in a new tab.', 'Membuka download APK di tab baru.') : tr('Coming soon', 'Segera hadir')}</small>
+        <small id="android-download-note" className="muted">{ANDROID_APK_URL ? tr('Opens the APK download folder in a new tab.', 'Membuka folder download APK di tab baru.') : tr('Coming soon', 'Segera hadir')}</small>
       </section>
     </div>
   </>
