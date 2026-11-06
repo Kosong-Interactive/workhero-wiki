@@ -36,14 +36,14 @@ export default function WebGLPlay() {
     {loading && <div className="webgl-loading">
       <section className="shop-card webgl-loading-card">
         <img src="/workhero-title.png" alt="WorkHero" />
-        <h2 role={failed ? 'alert' : 'status'}>{failed ? tr('Could not load the game', 'Game gagal dimuat') : tr('Loading WorkHero', 'Memuat WorkHero')}</h2>
         {failed ? <>
+          <h2 role="alert">{tr('Could not load the game', 'Game gagal dimuat')}</h2>
           <p>{tr('Check your connection and try again.', 'Periksa koneksimu lalu coba lagi.')}</p>
           <button className="play-btn" type="button" onClick={retry}>{tr('Try again', 'Coba lagi')}</button>
         </> : <>
           <progress max="1" value={progress} aria-label={tr('Game loading progress', 'Progres memuat game')} />
           <strong>{Math.floor(progress * 100)}%</strong>
-          <p>{progress >= .9 ? tr('Starting the game…', 'Menyiapkan game…') : tr('Downloading game files…', 'Mengunduh file game…')}</p>
+          <p role="status">{progress >= .9 ? tr('Starting the game…', 'Menyiapkan game…') : tr('Downloading game files…', 'Mengunduh file game…')}</p>
           {slow && <small>{tr('The first load can take longer. Keep this page open.', 'Loading pertama bisa lebih lama. Tetap buka halaman ini.')}</small>}
         </>}
       </section>
