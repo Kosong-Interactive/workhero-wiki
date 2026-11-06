@@ -21,15 +21,22 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background: #231F20;
+        /* The page beside the game column on a desktop: the loader's dark grey with the WorkHero watermark on a diagonal (the same tile the engine's
+           PortraitColumn bars use), a sixth of the screen's height. */
+        background: #11141B url('TemplateData/watermark.png') center / 16.667vh repeat;
+        background-size: 16.667dvh;
         touch-action: none;
         overscroll-behavior: none;
       }
 
+      /* Desktop shows the game in a phone-shaped column (user, 2026-11-06): the sides are plain page, not drawn by Unity, so a wide window renders
+         far fewer pixels. A portrait phone is narrower than the column and keeps the full screen. */
       #unity-container {
         position: fixed;
         inset: 0;
-        width: 100%;
+        margin: 0 auto;
+        width: min(100%, calc(100vh * 9 / 16));
+        width: min(100%, calc(100dvh * 9 / 16));
         height: 100%;
       }
 
