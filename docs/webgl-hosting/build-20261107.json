@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-07",
+  "gameCommit": "d2c13a124c4f0ec74e05771853634d917ab5fdc3",
+  "builtFromWorkingTree": true,
+  "unrelatedLocalEditsPreserved": true,
+  "webgl": {
+    "result": "Succeeded",
+    "platform": "WebGL",
+    "totalErrors": 0,
+    "totalWarnings": 10,
+    "buildTimeMs": 345625,
+    "warnings": [
+      {
+        "message": "Property (_AdditionalShadowParams) exceeds previous array size (256 vs 32). Cap to previous size. Restart Unity to recreate the arrays."
+      },
+      {
+        "message": "Property (_AdditionalShadowParams) exceeds previous array size (256 vs 32). Cap to previous size. Restart Unity to recreate the arrays."
+      },
+      {
+        "message": "Property (_AdditionalShadowParams) exceeds previous array size (256 vs 32). Cap to previous size. Restart Unity to recreate the arrays."
+      },
+      {
+        "message": "VideoClip assets are not supported in WebGL. Please use the Video Player component's URL option."
+      },
+      {
+        "message": "Shader Graph at Assets/ThirdParty/IndieCat Animals/_Common/LowPoly/Shaders/LowPoly_Base.shadergraph has 5 warning(s), the first is: There is a newer version of this node available. Inspect node for details."
+      },
+      {
+        "message": "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds."
+      },
+      {
+        "message": "warning CS0618: 'MobileAds.RaiseAdEventsOnUnityMainThread' is obsolete: 'Use MobileAdsEventExecutor.ExecuteInUpdate() instead.'",
+        "file": "Assets/Scripts/Core/AdMobBootstrap.cs"
+      },
+      {
+        "message": "warning CS0414: The field 'AmbientLifeController._headlightHeight' is assigned but its value is never used",
+        "file": "Assets/Scripts/Gameplay/Ambient/AmbientLifeController.Headlights.cs"
+      },
+      {
+        "message": "VideoClip assets are not supported in WebGL. Please use the Video Player component's URL option."
+      },
+      {
+        "message": "Shader Graph at Assets/ThirdParty/IndieCat Animals/_Common/LowPoly/Shaders/LowPoly_Base.shadergraph has 5 warning(s), the first is: There is a newer version of this node available. Inspect node for details."
+      }
+    ]
+  },
+  "htmlVerification": {
+    "output": "/Users/pasa/Projects/KosongInteractive/_build/workhero-html",
+    "updated": [],
+    "indexBytes": 5817,
+    "indexSha256": "c380b58806b23658e03594c495d0f00f80d40679e66466d10b224dba2c717609",
+    "templateSha256": "9817a54df00039bcf9341e989987cb65110e68daf9f694ad57386bb7257dbe12",
+    "runtimeGuardSha256": "106dc58ccec0549f6e6fead9c29ae837e7c5f577a5dca1014a1a0c5973f265ff",
+    "inputFontAtLeast16px": true,
+    "dynamicKeyboardGuard": true,
+    "runtimeGuardBundled": true,
+    "viewportGuard": true,
+    "inlineAndLoaderSyntax": "passed",
+    "inlineScriptCount": 2,
+    "files": {
+      "Build/workhero-html.data.unityweb": {
+        "bytes": 25507297,
+        "sha256": "749977cebea02c857c1e999bf2d37a3742bd6c05e4b1873770dc2e60fd2fd201"
+      },
+      "Build/workhero-html.framework.js.unityweb": {
+        "bytes": 81675,
+        "sha256": "960b6f6f518bcb3a92ea4defef1c901c6172570d2a074a49c12a9a99d97a566e"
+      },
+      "Build/workhero-html.loader.js": {
+        "bytes": 117894,
+        "sha256": "29dd3b2ce9e5f4af10506fcb28e5653185f0cf99d3d16798fac99d304a3d08a6"
+      },
+      "Build/workhero-html.wasm.unityweb": {
+        "bytes": 10002133,
+        "sha256": "9dd1bf8cbae4f2d81551ad5376eb866f8f4bd477ae6160c96c806538097a6ad2"
+      }
+    },
+    "physicalIPhoneVerified": false
+  },
+  "android": {
+    "result": "Succeeded",
+    "platform": "Android",
+    "outputPath": "/Users/pasa/Projects/KosongInteractive/_build/workhero-android.apk",
+    "totalErrors": 0,
+    "totalWarnings": 5,
+    "buildTimeMs": 324782,
+    "warnings": [
+      {
+        "message": "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds."
+      },
+      {
+        "message": "Diagnostics Data is enabled, and it requires Debug Symbols to be either SymbolTable or Full to resolve stacktraces in crash reports. Consider selecting Full to receive fully-detailed crash reports."
+      },
+      {
+        "message": "warning CS0618: 'MobileAds.RaiseAdEventsOnUnityMainThread' is obsolete: 'Use MobileAdsEventExecutor.ExecuteInUpdate() instead.'",
+        "file": "Assets/Scripts/Core/AdMobBootstrap.cs"
+      },
+      {
+        "message": "warning CS0414: The field 'AmbientLifeController._headlightHeight' is assigned but its value is never used",
+        "file": "Assets/Scripts/Gameplay/Ambient/AmbientLifeController.Headlights.cs"
+      },
+      {
+        "message": "Plugin 'Packages/com.google.ads.mobile/Plugins/iOS/unity-plugin-library.xcframework' is not supported on Android, please deselect it in Plugin Inspector"
+      }
+    ],
+    "bytes": 148729093,
+    "sha256": "49068039793daa0218558ce5b9bc93055adb80e34b2ae3cf13527925e4aa62cc",
+    "development": true,
+    "zipValid": true,
+    "delivery": "Manual Google Drive upload by user"
+  },
+  "wikiTests": "passed: 32 bilingual route renders and game-data checks",
+  "wikiProductionBuild": "passed",
+  "exactWikiCopy": true,
+  "fileCount": 11,
+  "physicalDeviceTested": false,
+  "browserSmoke": {
+    "passed": true,
+    "progress42": true,
+    "spoofedParentMessageIgnored": true,
+    "startingAt95": true,
+    "portraitLandscapeFit": true,
+    "errorAndRetry": true,
+    "actualUnityStartup": true,
+    "pageErrors": []
+  },
+  "temporaryServerStopped": true
+}
