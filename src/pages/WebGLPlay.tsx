@@ -9,6 +9,15 @@ export default function WebGLPlay() {
   const [progress, setProgress] = useState(0)
   const [failed, setFailed] = useState(false)
   const [slow, setSlow] = useState(false)
+  // A browser offers to install only the top page, never an iframe: while the game plays here the page points at the game's own manifest, so
+  // the install prompt installs the game (opening /workhero-html full screen) instead of the wiki.
+  useEffect(() => {
+    const link = document.querySelector<HTMLLinkElement>('link[rel="manifest"]')
+    if (!link) return
+    const wiki = link.getAttribute('href')
+    link.setAttribute('href', '/workhero-html/manifest.json')
+    return () => { if (wiki) link.setAttribute('href', wiki) }
+  }, [])
   useEffect(() => {
     function receive(event: MessageEvent) {
       if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return
